@@ -1,4 +1,11 @@
 MedialOperations::Application.routes.draw do
+  root to: "info#home"
+  match 'syllabus' => 'info#syllabus'
+
+  ActiveAdmin.routes(self)
+
+  devise_for :admin_users, ActiveAdmin::Devise.config
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

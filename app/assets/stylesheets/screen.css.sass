@@ -1,0 +1,132 @@
+// Imports -------------------------------------------------------------------
+
+@import base
+@import "compass"
+@import "compass/reset"
+@import "compass/utilities"
+
+/* Layout ------------------------------------------------------------------
+
+
+// General
+.page
+  +container($total-columns)
+  +establish-baseline
+
+  width: 100%
+  // +susy-grid-background
+  font-family: "museo-sans-1","museo-sans-2",sans-serif
+  padding-top: 0
+  font-style: normal
+  font-weight: 200
+  text-align: justify
+  +accentize($red)
+  h1, h2, h3, h4, h5, h6
+    text-align: left
+    font-family: "museo-slab-1","museo-slab-2",serif
+
+// Header
+
+#page_header
+  // Navigation 
+  #main_nav
+    margin: 0 0  
+    background-color: $base01
+    +padding-trailer
+    +adjust-font-size-to(12px)
+    +adjust-leading-to(2)
+    +border-radius(0 0 0 0.5em)
+    font-weight: 700
+    ul
+      li
+        text-align: left
+        padding: 0 $grid-padding
+        &:nth-child(2n)
+          background-color: $base1
+        a
+          +unstyled-link
+          color: $base03
+        &:hover
+          background-color: $base3
+          a 
+            color: $red
+
+  // Logo
+  #logo
+    +leader(0)
+    float: right
+    +span-columns(2 omega)
+    padding: 0.25em 0em 0.25em 0em
+    +border-radius(0 0 0.5em 0.5em)
+    // +single-box-shadow(inset, black, 0em, -0.1em, 0.2em)
+    background-color: $base01
+    font-family: "museo-slab-1","museo-slab-2",serif
+    +adjust-font-size-to(16px)
+    letter-spacing: -0.05em
+    font-weight: 500
+    +trailer(0.5)
+    text-align: center
+    a      
+      +unstyled-link
+      span#medial
+        color: $base3
+        vertical-align: 30%
+      span#slash
+        color: $red
+        +adjust-font-size-to(22px)
+        margin: 0 -0.3em 0 -0.2em
+      span#operations
+        color: $base3
+        vertical-align: -5%
+    &:hover
+      span#medial
+        color: $red
+      span#slash
+        color: $base3
+      span#operations
+        color: $red
+   
+// Content
+
+.content
+  clear: both
+  // +baseline-grid-background($base-line-height, $base01)
+  h1
+    font-family: "museo-sans-1","museo-sans-2",sans-serif
+    font-weight: 700
+    +adjust-font-size-to(18px)
+    color: $yellow
+
+  h2
+    +leader(1)
+    +adjust-font-size-to(16px)
+    +trailer(0.5)
+
+  p
+    +adjust-font-size-to(14px)
+    +hyphenation
+
+// Footer
+
+#page_footer
+  +leader(2)
+  +adjust-font-size-to(12px)
+  font-weight: 500
+  border-top: 1px solid $base01
+  margin-left: 0 - $grid-padding
+  margin-right: 0 - $grid-padding
+  ul
+    +horizontal-list
+    float: left
+    margin-left: $grid-padding
+    li
+      margin-right: 1em
+      a 
+        +unstyled-link
+        color: $base3
+        &:hover
+          color: $red
+  p
+    float: right
+    text-align: right
+    margin-right: $grid-padding
