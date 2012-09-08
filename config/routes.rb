@@ -1,6 +1,4 @@
 MedialOperations::Application.routes.draw do
-  break if ARGV.join.include? 'assets:precompile'
-
   root to: "info#home"
   match 'syllabus' => 'info#syllabus'
 

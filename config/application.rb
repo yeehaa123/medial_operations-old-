@@ -64,5 +64,9 @@ module MedialOperations
 
     # YEEHAA: Sass, Compass, and Susy
     config.sass.preferred_syntax = :sass
+
+    # Active Admin & Heroku
+    config.assets.precompile += %w(active_admin.css active_admin/print.css active_admin.js)
+
   end
 end
