@@ -64,6 +64,5 @@ module MedialOperations
 
     # YEEHAA: Sass, Compass, and Susy
     config.sass.preferred_syntax = :sass
-    config.compass.require "susy"
   end
 end
