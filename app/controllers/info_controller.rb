@@ -5,5 +5,6 @@ class InfoController < ApplicationController
 
 	def syllabus
   	@course = Course.first
+    @sections = @course.sections
   end
 end

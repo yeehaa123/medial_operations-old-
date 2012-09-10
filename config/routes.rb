@@ -1,4 +1,6 @@
 MedialOperations::Application.routes.draw do
+  devise_for :courses, ActiveAdmin::Devise.config
+
   root to: "info#home"
   match 'syllabus' => 'info#syllabus'
 

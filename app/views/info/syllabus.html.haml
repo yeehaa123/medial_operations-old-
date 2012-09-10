@@ -1,4 +1,7 @@
 %h1= @course.full_title
 
-%h2 Description
-%p= simple_format(@course.description)
+%p= kramdown(@course.description)
+
+- @sections.order("number").each do |section|
+  %h2= "#{roman_numeral(section.number)}. #{section.title}"
+  %p= kramdown(section.description)

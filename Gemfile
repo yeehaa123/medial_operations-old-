@@ -9,6 +9,13 @@ gem 'pg'
 gem 'activeadmin'
 gem 'haml-rails'
 gem 'kramdown'
+gem 'jquery-rails'
+gem 'unicorn'
+
+
+group :development, :test do
+  gem 'rspec-rails'
+end
 
 
 # Gems used only for assets and not required
@@ -19,14 +26,12 @@ group :assets do
   gem 'compass-rails'
   gem 'compass'
   gem 'susy'
-
-  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  # gem 'therubyracer', :platforms => :ruby
-
   gem 'uglifier', '>= 1.0.3'
 end
 
-gem 'jquery-rails'
+group :test do 
+  gem 'capybara'
+end
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
@@ -35,7 +40,6 @@ gem 'jquery-rails'
 # gem 'jbuilder'
 
 # Use unicorn as the app server
-gem 'unicorn'
 
 # Deploy with Capistrano
 # gem 'capistrano'
