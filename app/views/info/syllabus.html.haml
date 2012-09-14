@@ -3,5 +3,21 @@
 %p= kramdown(@course.description)
 
 - @sections.order("number").each do |section|
-  %h2= "#{roman_numeral(section.number)}. #{section.title}"
+  %h2= "#{ roman_numeral(section.number) }. #{ section.title }"
   %p= kramdown(section.description)
+  - section.sessions.order("number").each do |session|
+    %section.session
+      %header
+        %h1= link_to(session)
+        %ul.info
+          %li.date= "Date: #{ session.start_time.strftime("%A, %B %d") }"
+          %li.time= "Time: #{ session.start_time.strftime("%H:%M") } - #{ session.end_time.strftime("%H:%M") }"
+          %li.location= "Location: #{ session.location }"
+      - if session.description
+        %p= kramdown(session.description)
+      %section.bibliography
+        %h1 Readings
+        %ul
+          %li= kramdown("Heidegger, Martin. *Sein und Zeit*, Tübingen 1927")
+          %li= kramdown("Deleuze, Gilles, Félix Guattari. *Anti-Oedipus*, Paris 1969")
+          %li= kramdown("Kittler, Friedrich. *Gramophone, Film, Typewriter*, Hamburg 1986")

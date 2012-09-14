@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120909163148) do
+ActiveRecord::Schema.define(:version => 20120914144557) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -46,15 +46,7 @@ ActiveRecord::Schema.define(:version => 20120909163148) do
   add_index "admin_users", ["email"], :name => "index_admin_users_on_email", :unique => true
   add_index "admin_users", ["reset_password_token"], :name => "index_admin_users_on_reset_password_token", :unique => true
 
-  create_table "courses", :force => true do |t|
-    t.string   "full_title"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-    t.string   "short_title"
-    t.text     "description"
-  end
-
-  create_table "sections", :force => true do |t|
+  create_table "course_sections", :force => true do |t|
     t.string   "title"
     t.text     "description"
     t.integer  "course_id"
@@ -63,6 +55,27 @@ ActiveRecord::Schema.define(:version => 20120909163148) do
     t.integer  "number"
   end
 
-  add_index "sections", ["course_id"], :name => "index_sections_on_course_id"
+  add_index "course_sections", ["course_id"], :name => "index_sections_on_course_id"
+
+  create_table "courses", :force => true do |t|
+    t.string   "full_title"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.string   "title"
+    t.text     "description"
+  end
+
+  create_table "sessions", :force => true do |t|
+    t.string   "title"
+    t.integer  "number"
+    t.text     "description"
+    t.integer  "course_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.integer  "section_id"
+    t.string   "location"
+    t.datetime "start_time"
+    t.datetime "end_time"
+  end
 
 end
