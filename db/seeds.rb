@@ -93,7 +93,7 @@ end
                  course: Course.first,
                  description: session_description,
                  start_time: Time.now + c.weeks,
-                 end_time: Time.now + + c.weeks + 2.hours,
+                 end_time: Time.now + c.weeks + 2.hours,
                  number: c)
 end
 
