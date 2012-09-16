@@ -49,9 +49,15 @@ AdminUser.create(email: "admin@example.com",
                  password: "password", 
                  password_confirmation: "password")
 
+
+# COURSE
+
 Course.create(full_title: "Art, Science, and Technology: Medial Operations",
               title: "Medial Operations", 
               description: course_description)
+
+
+# SECTIONS
 
 CourseSection.create(title: "Space Invaders", 
                      course: Course.first,
@@ -66,7 +72,10 @@ CourseSection.create(title: "Code Matters",
                      description: section_description,
                      number: 3)
 
-10.times do |count|
+
+# SESSIONS
+
+3.times do |count|
   c = count + 1
   Session.create(title: "Test #{ c }", 
                  section: CourseSection.find(1),
