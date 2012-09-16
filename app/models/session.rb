@@ -7,7 +7,7 @@ class RightCourseValidator < ActiveModel::Validator
 end
 
 class Session < ActiveRecord::Base
-  attr_accessible :description, :title, :number, :section_id, :course_id, 
+  attr_accessible :description, :title, :number, :section_id, :course_id, :course,
                 :section, :location, :date, :start_time, :end_time
 
   belongs_to :section, class_name: "CourseSection", 

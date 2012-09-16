@@ -2,9 +2,9 @@ require 'spec_helper'
 
 describe Course do
 
-  before { @course = Course.new(title: "New Course") }
+  let(:course) { FactoryGirl.create(:course) }
 
-  subject { @course }
+  subject { course }
 
   it { should respond_to(:title) }
   it { should respond_to(:full_title) }
@@ -16,5 +16,5 @@ describe Course do
 
   it { should validate_presence_of(:title) }
 
-  it { "#{ @course }".should == @course.title }
+  it { "#{ course }".should == course.title }
 end

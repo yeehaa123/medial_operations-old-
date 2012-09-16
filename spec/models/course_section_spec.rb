@@ -2,9 +2,9 @@ require 'spec_helper'
 
 describe CourseSection do
 
-  before { @section = CourseSection.new(title: "New Section", number: 1) }
+  let(:section) { FactoryGirl.create(:course_section) }
 
-  subject { @section }
+  subject { section }
 
   it { should respond_to(:course) }
   it { should respond_to(:title) }
@@ -15,4 +15,6 @@ describe CourseSection do
 
   it { should validate_presence_of(:title) }
   it { should validate_presence_of(:number) }
+
+  it { "#{ section }".should == section.title }
 end

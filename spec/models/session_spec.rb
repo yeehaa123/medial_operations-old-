@@ -1,13 +1,8 @@
 require 'spec_helper'
 
 describe Session do
-  let(:course)  { Course.create(title: "New Course") }
-  let(:section) do 
-    CourseSection.create(title: "New Section", number: 1, course_id: course.id)
-  end
-  let(:session) do 
-    Session.new(title: "New Session", number: 1, course_id: course.id) 
-  end
+  let(:section) { FactoryGirl.create(:section) }
+  let(:session) { FactoryGirl.create(:session) }
 
   subject { session }
 
@@ -21,7 +16,7 @@ describe Session do
   it { should validate_presence_of(:course_id) }
 
   describe "only assign sections belonging to right course" do
-    let(:other_course) { Course.new(title: "Other Course") }
+    let(:other_course) { FactoryGirl.create(:course, title: "Other Course") }
     before do 
       other_course.save!
       session.course_id   = other_course.id
@@ -31,4 +26,6 @@ describe Session do
     it { should_not be_valid }
     it { should have(1).error_on(:section) }
   end
+
+  it { "#{ session }".should == "#{ session.number } - #{ session.title }" }
 end

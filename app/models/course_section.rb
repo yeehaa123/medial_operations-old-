@@ -1,5 +1,5 @@
 class CourseSection < ActiveRecord::Base
-  attr_accessible :description, :title, :course_id, :number
+  attr_accessible :description, :title, :course_id, :number, :course
   
   belongs_to :course
   has_many :sessions, foreign_key: "section_id"

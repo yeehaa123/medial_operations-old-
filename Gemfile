@@ -11,7 +11,7 @@ gem 'haml-rails'
 gem 'kramdown'
 gem 'jquery-rails'
 gem 'unicorn'
-
+gem 'faker'
 
 group :development, :test do
   gem 'rspec-rails'
@@ -33,6 +33,7 @@ group :test do
   gem 'capybara'
   gem 'shoulda-matchers'
   gem 'simplecov', require: false
+  gem "factory_girl_rails"
 end
 
 # To use ActiveModel has_secure_password
