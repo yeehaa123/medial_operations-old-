@@ -4,6 +4,7 @@ MedialOperations::Application.routes.draw do
   root to: 'courses#index'
   resources :courses, only: [:show, :index] do
     resources :sessions, only: [:show, :index]
+    resources :sections, only: [:show, :index]
   end
 
   ActiveAdmin.routes(self)
