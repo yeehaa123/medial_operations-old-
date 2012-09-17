@@ -12,6 +12,7 @@ gem 'kramdown'
 gem 'jquery-rails'
 gem 'unicorn'
 gem 'faker'
+gem 'draper'
 
 group :development, :test do
   gem 'rspec-rails'

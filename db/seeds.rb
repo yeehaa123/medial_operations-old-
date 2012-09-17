@@ -1,10 +1,3 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
 course_description = <<END
 Nowadays, computers are literally everywhere. Through heterogeneous interfaces 
 - such as sensors, transistors, and servo motors - they are inextricably 
@@ -74,35 +67,35 @@ CourseSection.create(title: "Code Matters",
 
 # SESSIONS
 
-3.times do |count|
+14.times do |count|
   c = count + 1
-  Session.create(title: "Test #{ c }", 
-                 section: CourseSection.find(1),
-                 course: Course.first,
-                 description: session_description,
-                 start_time: Time.now + c.weeks,
-                 end_time: Time.now + c.weeks + 2.hours,
-                 number: c)
-end
-
-3.times do |count|
-  c = count + 4
-  Session.create(title: "Test #{ c }", 
-                 section: CourseSection.find(2),
-                 course: Course.first,
-                 description: session_description,
-                 start_time: Time.now + c.weeks,
-                 end_time: Time.now + c.weeks + 2.hours,
-                 number: c)
-end
-
-4.times do |count|
-  c = count + 7
-  Session.create(title: "Test #{ c }", 
-                 section: CourseSection.find(3), 
-                 course: Course.first,
-                 description: session_description,
-                 start_time: Time.now + c.weeks,
-                 end_time: Time.now + c.weeks + 2.hours,
-                 number: c)
+  case c
+  when 1..5  
+    Session.create(title: "Test #{ c }", 
+                   section: CourseSection.find(1),
+                   course: Course.first,
+                   description: session_description,
+                   start_time: Time.now + c.weeks,
+                   end_time: Time.now + c.weeks + 2.hours,
+                   location: "Bungehuis 4.01",
+                   number: c)
+  when 6..10
+    Session.create(title: "Test #{ c }", 
+                   section: CourseSection.find(2),
+                   course: Course.first,
+                   description: session_description,
+                   start_time: Time.now + c.weeks,
+                   end_time: Time.now + c.weeks + 2.hours,
+                   location: "Bungehuis 4.01",
+                   number: c)
+  when 11..14
+    Session.create(title: "Test #{ c }", 
+                   section: CourseSection.find(3), 
+                   course: Course.first,
+                   description: session_description,
+                   start_time: Time.now + c.weeks,
+                   end_time: Time.now + c.weeks + 2.hours,
+                   location: "Bungehuis 4.01",
+                   number: c)
+  end
 end

@@ -1,4 +1,6 @@
-class CourseSection < ActiveRecord::Base
+class Section < ActiveRecord::Base
+  default_scope order(:number)
+  
   attr_accessible :description, :title, :course_id, :number, :course
   
   belongs_to :course

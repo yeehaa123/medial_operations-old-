@@ -1,0 +1,5 @@
+%h2= course_section.heading
+= course_section.description
+
+- course_section.sessions.each do |session|
+  = render session

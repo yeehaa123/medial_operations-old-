@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe CourseSection do
+describe Section do
 
-  let(:section) { FactoryGirl.create(:course_section) }
+  let(:section) { FactoryGirl.create(:section) }
 
   subject { section }
 

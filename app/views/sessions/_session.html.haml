@@ -1,0 +1,14 @@
+%header
+  %h1= link_to(session.to_s)
+  %ul.info
+    %li.date= session.date
+    %li.time= session.time
+    %li.location= session.location
+= session.description
+
+%section.bibliography
+  %h1 Readings
+  %ul
+    %li= kramdown("Heidegger, Martin. *Sein und Zeit*, Tübingen 1927")
+    %li= kramdown("Deleuze, Gilles, Félix Guattari. *Anti-Oedipus*, Paris 1969")
+    %li= kramdown("Kittler, Friedrich. *Gramophone, Film, Typewriter*, Hamburg 1986")

@@ -4,7 +4,7 @@ FactoryGirl.define do
     title "New Course"
   end
 
-  factory :course_section, aliases: [:section] do
+  factory :section do
     title "New Section"
     number 1
     course

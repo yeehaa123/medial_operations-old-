@@ -4,7 +4,6 @@ class InfoController < ApplicationController
   end
 
 	def syllabus
-  	@course = Course.first
-    @sections = @course.sections
+  	@course = CourseDecorator.first
   end
 end
