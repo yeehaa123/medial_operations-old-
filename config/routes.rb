@@ -1,8 +1,10 @@
 MedialOperations::Application.routes.draw do
   devise_for :courses, ActiveAdmin::Devise.config
 
-  root to: "info#home"
-  match 'syllabus' => 'info#syllabus'
+  root to: 'courses#index'
+  resources :courses, only: [:show, :index] do
+    resources :sessions, only: [:show, :index]
+  end
 
   ActiveAdmin.routes(self)
 
