@@ -1,9 +1,8 @@
-%header
-  %h1= link_to session, course_session_path(session)
-  %ul.info
-    %li.date= session.date
-    %li.time= session.time
-    %li.location= session.location
+%h1= link_to session, course_session_path(session)
+%ul.info
+  %li.date= session.date
+  %li.time= session.time
+  %li.location= session.location
 = session.description
 
 %section.bibliography

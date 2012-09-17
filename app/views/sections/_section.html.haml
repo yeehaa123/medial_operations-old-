@@ -1,4 +1,4 @@
-%h1= section.heading
+%h1= link_to section.heading, course_section_path(section)
 = section.description
 %section.sessions
   = render section.sessions
