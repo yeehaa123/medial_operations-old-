@@ -17,8 +17,4 @@ class Session < ActiveRecord::Base
   
   validates_presence_of :course_id
   validates_with RightCourseValidator, if: :section_id
-
-  def to_s
-    "#{ number } - #{ title.titleize }"
-  end
 end
