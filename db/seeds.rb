@@ -51,15 +51,15 @@ Course.create(full_title: "Art, Science, and Technology: Medial Operations",
 
 # SECTIONS
 
-CourseSection.create(title: "Space Invaders", 
+Section.create(title: "Space Invaders", 
                      course: Course.first,
                      description: section_description,
                      number: 1)
-CourseSection.create(title: "War Games", 
+Section.create(title: "War Games", 
                      course: Course.first, 
                      description: section_description,
                      number: 2)
-CourseSection.create(title: "Code Matters", 
+Section.create(title: "Code Matters", 
                      course: Course.first, 
                      description: section_description,
                      number: 3)
@@ -72,7 +72,7 @@ CourseSection.create(title: "Code Matters",
   case c
   when 1..5  
     Session.create(title: "Test #{ c }", 
-                   section: CourseSection.find(1),
+                   section: Section.find(1),
                    course: Course.first,
                    description: session_description,
                    start_time: Time.now + c.weeks,
@@ -81,7 +81,7 @@ CourseSection.create(title: "Code Matters",
                    number: c)
   when 6..10
     Session.create(title: "Test #{ c }", 
-                   section: CourseSection.find(2),
+                   section: Section.find(2),
                    course: Course.first,
                    description: session_description,
                    start_time: Time.now + c.weeks,
@@ -90,7 +90,7 @@ CourseSection.create(title: "Code Matters",
                    number: c)
   when 11..14
     Session.create(title: "Test #{ c }", 
-                   section: CourseSection.find(3), 
+                   section: Section.find(3), 
                    course: Course.first,
                    description: session_description,
                    start_time: Time.now + c.weeks,
