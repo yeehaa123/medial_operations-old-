@@ -1,10 +1,1 @@
-%h1= @course.full_title
-
-= @course.description
-
-- if @course.sections
-  %section.sections
-    = render @course.sections
-- else
-  %section.sessions
-    = render @course.sessions
+= render @course

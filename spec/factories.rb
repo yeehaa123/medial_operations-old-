@@ -1,8 +1,8 @@
 FactoryGirl.define do
 
   factory :course do
-    title "New Course"
-    full_title "A New Course"
+    title         "New Course"
+    full_title    "A New Course"
 
     factory :defined_course do
       description "Hello *World*"
@@ -10,8 +10,8 @@ FactoryGirl.define do
   end
 
   factory :section do
-    title "New Section"
-    number 1
+    title         "New Section"
+    number        1
     course
     
     factory :defined_section do
@@ -20,15 +20,24 @@ FactoryGirl.define do
   end  
 
   factory :session do
-    title "New Session"
-    number 1
+    title         "New Session"
+    number        1
     course
 
     factory :defined_session do
       description "Hello *World*"
-      location "Bungehuis 4.01"
-      start_time Time.new
-      end_time Time.new
+      location    "Bungehuis 4.01"
+      start_time  Time.new
+      end_time    Time.new
+    end
+  end
+
+  factory :article do
+    title         "New Article"
+    content       "Interesting Stuff"
+
+    factory :markdown_article do
+      content     "# New Title"
     end
   end
 end

@@ -6,6 +6,8 @@ MedialOperations::Application.routes.draw do
     resources :sessions, only: [:show, :index]
     resources :sections, only: [:show, :index]
   end
+  
+  resources :articles, only: [:show, :index]
 
   ActiveAdmin.routes(self)
 

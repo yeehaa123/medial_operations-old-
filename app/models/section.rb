@@ -1,4 +1,6 @@
 class Section < ActiveRecord::Base
+  include FriendlyId
+
   default_scope order(:number)
   
   attr_accessible :description, :title, :course_id, :number, :course
@@ -11,7 +13,9 @@ class Section < ActiveRecord::Base
   validates_presence_of :number
   validates_uniqueness_of :number, scope: :course_id
 
+  friendly_id :to_s, use: :slugged
+
   def to_s
-    title
+    "#{ number } - #{ title }"
   end
 end

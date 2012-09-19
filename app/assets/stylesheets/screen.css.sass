@@ -90,27 +90,109 @@
 
 .content
   clear: both
-  // +baseline-grid-background($base-line-height, $base01)
-  h1
-    // font-family: $sans-serif
-    letter-spacing: -0.05em
-    font-weight: 700
-    +adjust-font-size-to(20px)
-    color: $yellow
-    +padding-leader(1)
-    +trailer(1)
-    a, a:active, a:visited, code.url
-      +unstyled-link
-      color: $yellow
 
   p
     +adjust-font-size-to(14px)
     +hyphenation
 
+  sup
+    +adjust-font-size-to(12px)
+    vertical-align: baseline
+    position: relative
+    top: -0.5em
+    padding-left: 0.1em
+    padding-right: 0.1em
+    a, a:active, a:visited, code.url
+      +unstyled-link
+      color: $red
+    &:hover
+      background-color: $red
+      a
+        color: $base1
+  
+  ol
+    +margin-leader(0.5)
+    +padding-leader(0.5)
+    +adjust-font-size-to(12px)
+    list-style-type: decimal
+    border-top: 0.1em solid $base02
+    margin-right: 0 - $grid-padding
+    margin-left: 0 - $grid-padding
+    padding-right: $grid-padding
+    padding-left: 2 * $grid-padding
+
+  em
+    font-style: italic
+  // +baseline-grid-background($base-line-height, $base01)
+
+  h1
+    // font-family: $sans-serif
+    letter-spacing: -0.05em
+    font-weight: 700
+    +adjust-font-size-to(16px)
+    color: $yellow
+    +padding-leader(1)
+    +trailer(2)
+    a, a:active, a:visited, code.url
+      +unstyled-link
+      color: $yellow
+  h1 + p
+    +leader(-2)
+    em
+      font-family: $slab-serif
+      font-style: normal
+      color: $red
+
+  h1 + ul.info
+    +leader(-1.5)
+    li
+      +adjust-font-size-to(12px)
+      color: $base2
+      &:first-child
+        +padding-leader(0.5)
+        +margin-leader(0.5)
+        border-top: 0.1em solid $base02
+      &:last-child
+        +padding-trailer(0.5)
+        +margin-trailer(0.5)
+        border-bottom: 0.1em solid $base02
+
+
+  h2
+    +adjust-font-size-to(16px)
+    +leader(1.5)
+    +trailer(0.5)
+    &:first-child
+      +leader(-1)
+
+  blockquote
+    +margin-leader(0.5)
+    +padding-leader(0.5)
+    +padding-trailer(0.5)
+    +margin-trailer(0.5)
+    border-top: 0.1em solid $base02 
+    border-bottom: 0.1em solid $base02
+    margin-right: 0 - $grid-padding
+    margin-left: 0 - $grid-padding
+    font-family: $slab-serif
+    padding-right: $grid-padding
+    padding-left: $grid-padding
+
+    blockquote
+      +margin-leader(0)
+      +padding-leader(0)
+      +padding-trailer(0)
+      +margin-trailer(0)
+      border: none
+      text-align: right
+    p 
+      +adjust-font-size-to(11px)
+      color: $base2
+
   section.sections
     h1
-      +leader(2)
-      +trailer(0.5)
+      +leader(1.5)
+      +trailer(2.5)
       // text-align: center
       +adjust-font-size-to(14px)
       // background-color: $red
@@ -120,23 +202,6 @@
         &:hover
           color: $red 
           border-bottom: 1px solid $red
-      // margin-right: 0 - $grid-padding
-      // margin-left: 0 - $grid-padding
-      // padding: 0.5em $grid-padding
-
-    blockquote
-      +margin-leader(0.5)
-      +padding-leader(0.5)
-      +padding-trailer(0.5)
-      +margin-trailer(0.5)
-      border-top: 0.1em solid $base02 
-      border-bottom: 0.1em solid $base02 
-      // background-color: $base02
-      margin-right: 0 - $grid-padding
-      margin-left: 0 - $grid-padding
-      font-family: $slab-serif
-      padding-right: $grid-padding
-      padding-left: $grid-padding
       p
         color: $base2
     a

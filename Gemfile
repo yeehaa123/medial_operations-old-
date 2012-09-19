@@ -13,6 +13,7 @@ gem 'jquery-rails'
 gem 'unicorn'
 gem 'faker'
 gem 'draper'
+gem 'friendly_id'
 
 group :development, :test do
   gem 'rspec-rails'

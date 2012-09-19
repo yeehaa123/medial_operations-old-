@@ -94,6 +94,7 @@ GEM
     ffi (1.1.5)
     formtastic (2.2.1)
       actionpack (>= 3.0)
+    friendly_id (4.0.8)
     fssm (0.2.9)
     haml (3.1.7)
     haml-rails (0.3.4)
@@ -231,6 +232,7 @@ DEPENDENCIES
   draper
   factory_girl_rails
   faker
+  friendly_id
   haml-rails
   jquery-rails
   kramdown
