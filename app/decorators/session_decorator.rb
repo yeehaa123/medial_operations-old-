@@ -9,18 +9,14 @@ class SessionDecorator < ApplicationDecorator
 
   def time
     if model.start_time
-      "Time: #{ session.start_time.strftime("%H:%M") } - #{ session.end_time.strftime("%H:%M") }"
+      "Time: #{ model.start_time.strftime("%H:%M") } - #{ model.end_time.strftime("%H:%M") }"
     end
   end
 
   def location
     if model.location
-      "Location: #{ session.location }"
+      "Location: #{ model.location }"
     end
-  end
-
-  def to_s
-    "#{ model.number } - #{ model.title.titleize }"
   end
 
 

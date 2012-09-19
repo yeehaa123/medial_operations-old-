@@ -5,8 +5,10 @@ class Course < ActiveRecord::Base
   has_many :sessions
 
   validates_presence_of :title
+  validates_presence_of :full_title
+
   
   def to_s
-    title
+    full_title
   end
 end
