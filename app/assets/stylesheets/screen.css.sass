@@ -137,27 +137,25 @@
       color: $yellow
     +trailer(0.5)
 
-    h1 + p
-    &:first-child
+  h1 + p
     em
       font-family: $slab-serif
       font-style: normal
       color: $red
 
-  h1 + ul.info
-    +leader(0)
+  ul.info
+    +padding-leader(0.5)
+    +padding-trailer(0.5)
+    +margin-trailer(0.5)
+    border-top: 0.1em solid $base02
+    border-bottom: 0.1em solid $base02
+    margin-right: 0 - $grid-padding
+    margin-left: 0 - $grid-padding
+    padding-right: $grid-padding
+    padding-left: $grid-padding
     li
       +adjust-font-size-to(12px)
       color: $base2
-      &:first-child
-        +padding-leader(0.5)
-        +margin-leader(0.5)
-        border-top: 0.1em solid $base02
-      &:last-child
-        +padding-trailer(0.5)
-        +margin-trailer(0.5)
-        border-bottom: 0.1em solid $base02
-
 
   h2
     +adjust-font-size-to(16px)
@@ -171,11 +169,11 @@
     +padding-leader(0.5)
     +padding-trailer(0.5)
     +margin-trailer(0.5)
+    font-family: $slab-serif
     border-top: 0.1em solid $base02 
     border-bottom: 0.1em solid $base02
     margin-right: 0 - $grid-padding
     margin-left: 0 - $grid-padding
-    font-family: $slab-serif
     padding-right: $grid-padding
     padding-left: $grid-padding
 
@@ -192,6 +190,7 @@
 
   section.sections
     h1
+      +leader(1)
       // text-align: center
       +adjust-font-size-to(14px)
       // background-color: $red
@@ -212,9 +211,15 @@
   section.sessions
     h1
       color: $yellow
+      border-top: 0.1em solid $base02 
+      border-bottom: 0.1em solid $base02
+      margin-right: 0 - $grid-padding
+      margin-left: 0 - $grid-padding
+      padding-right: $grid-padding
+      padding-left: $grid-padding
       border-bottom: 0.1em solid $yellow
       border-top: 0.1em solid $yellow
-      +margin-leader(1.3)
+      +margin-leader(1.8)
       +margin-trailer(0.8)
       +padding-leader(0.2)
       +padding-trailer(0.2)
@@ -230,11 +235,10 @@
           color: $base03
           border: none
     
-
-    h1 + ul.info
-      +leader(-0.5)
+    ul.info
+      border-top: none
+      +padding-leader(0)
       li
-        border-top: none
         +adjust-font-size-to(10px)
         color: $base2
         width: 100%
@@ -247,13 +251,18 @@
             float: right
             text-align: right
         &:last-child
-          +padding-trailer(0.5)
-          +margin-trailer(0.5)
-          border-bottom: 0.1em solid $base02
-        
+          +padding-trailer(0)
+
   section.bibliography
+    +margin-leader(0.5)
+    +padding-leader(0)
+    margin-right: 0 - $grid-padding
+    margin-left: 0 - $grid-padding
+    padding-right: $grid-padding
+    padding-left: $grid-padding
     border-top: 0.1em solid $base02
-    border-bottom: none
+
+    // border-bottom: 0.1em solid $base02
 
     h1
       +adjust-font-size-to(10px)
@@ -261,8 +270,8 @@
       border: none
       font-weight: 700
       color: $base01
-      +margin-leader(0)
-      +padding-leader(0.5)
+      +margin-leader(0.5)
+      +padding-leader(0)
       +margin-trailer(0)
       +padding-trailer(0)
     ul
@@ -278,8 +287,10 @@
 // Footer
 
 #page_footer
-  +leader(2)
+  +leader(1)
   font-weight: 500
+  margin-right: 0 - $grid-padding
+  margin-left: 0 - $grid-padding
   border-top: 0.1em solid $base01
   +adjust-font-size-to(12px)
   
@@ -288,7 +299,7 @@
     float: left
     margin-left: $grid-padding
     li
-      margin-right: 1em
+      margin-right: $grid-padding
       a 
         +unstyled-link
         color: $base3
