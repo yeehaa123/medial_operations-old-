@@ -136,14 +136,16 @@
       +unstyled-link
       color: $yellow
     +trailer(0.5)
-  h1 + p
+
+    h1 + p
+    &:first-child
     em
       font-family: $slab-serif
       font-style: normal
       color: $red
 
   h1 + ul.info
-    +leader(-0.5)
+    +leader(0)
     li
       +adjust-font-size-to(12px)
       color: $base2
