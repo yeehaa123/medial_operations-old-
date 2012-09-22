@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120919203604) do
+ActiveRecord::Schema.define(:version => 20120922205857) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -56,16 +56,55 @@ ActiveRecord::Schema.define(:version => 20120919203604) do
 
   add_index "articles", ["slug"], :name => "index_articles_on_slug", :unique => true
 
-  create_table "courses", :force => true do |t|
-    t.string   "full_title"
+  create_table "authors", :force => true do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "middle_name"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+  end
+
+  create_table "authorships", :force => true do |t|
+    t.integer  "reference_id"
+    t.integer  "author_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "authorships", ["author_id", "reference_id"], :name => "index_authorships_on_author_id_and_reference_id", :unique => true
+  add_index "authorships", ["author_id"], :name => "index_authorships_on_author_id"
+  add_index "authorships", ["reference_id"], :name => "index_authorships_on_reference_id"
+
+  create_table "courses", :force => true do |t|
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
     t.string   "title"
     t.text     "description"
     t.string   "slug"
+    t.string   "title_prefix"
   end
 
   add_index "courses", ["slug"], :name => "index_courses_on_slug", :unique => true
+
+  create_table "referencables", :force => true do |t|
+    t.integer  "reference_id"
+    t.integer  "article_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+    t.integer  "course_id"
+  end
+
+  add_index "referencables", ["article_id", "reference_id"], :name => "index_referencables_on_article_id_and_reference_id", :unique => true
+  add_index "referencables", ["article_id"], :name => "index_referencables_on_article_id"
+  add_index "referencables", ["reference_id"], :name => "index_referencables_on_reference_id"
+
+  create_table "references", :force => true do |t|
+    t.string   "title"
+    t.date     "date"
+    t.string   "medium"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "sections", :force => true do |t|
     t.string   "title"

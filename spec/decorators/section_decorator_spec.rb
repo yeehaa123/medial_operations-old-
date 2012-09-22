@@ -1,7 +1,8 @@
 require 'spec_helper'
 
 describe SectionDecorator do
-  let(:section) { SectionDecorator.new(FactoryGirl.create(:section)) }
+  let(:section) { SectionDecorator.new(build(:section)) }
+  
   subject { section }
 
   it { should respond_to(:section) }
@@ -18,7 +19,7 @@ describe SectionDecorator do
 
   context "defined section" do
     let(:section) do
-      SectionDecorator.new(FactoryGirl.create(:defined_section)) 
+      SectionDecorator.new(build(:defined_section)) 
     end
 
     subject { section }

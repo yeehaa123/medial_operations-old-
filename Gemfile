@@ -35,7 +35,8 @@ group :test do
   gem 'capybara'
   gem 'shoulda-matchers'
   gem 'simplecov', require: false
-  gem "factory_girl_rails"
+  gem 'factory_girl_rails'
+  gem 'deadweight'
 end
 
 # To use ActiveModel has_secure_password

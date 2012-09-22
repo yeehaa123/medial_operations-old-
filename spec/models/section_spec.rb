@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Section do
 
-  let(:section) { FactoryGirl.create(:section) }
+  let(:section) { build(:section) }
 
   subject { section }
 
@@ -16,5 +16,5 @@ describe Section do
   it { should validate_presence_of(:title) }
   it { should validate_presence_of(:number) }
 
-  it { "#{ section }".should == section.title }
+  its(:to_s) { should == "#{ section.number } - #{ section.title }" }
 end

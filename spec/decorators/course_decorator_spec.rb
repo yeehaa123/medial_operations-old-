@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe CourseDecorator do
-  let(:course) { FactoryGirl.create(:course) }
+  let(:course) { build(:course) }
 
   subject { CourseDecorator.new(course) }
 
@@ -9,18 +9,16 @@ describe CourseDecorator do
   it { should respond_to(:sections) }
   it { should respond_to(:sessions) }
   
-  describe "undefined course" do
-    its(:description) { should be_nil }
-    its(:heading) { should == "#{ course }" }
+  context "undefined course" do
+    its(:description)   { should be_nil }
+    its(:title_prefix)  { should be_nil }
+    its(:heading)       { should == "#{ course }" }
   end
 
-  describe "defined course" do
-    let(:course) do
-      CourseDecorator.new(FactoryGirl.create(:defined_course)) 
-    end
+  context "defined course" do
+    let(:course) { CourseDecorator.new(build(:defined_course)) }
 
-    subject { course }
-
-    its(:description) { should == "<p><p>Hello <em>World</em></p>\n</p>" }
+    its(:description)   { should == "<p><p>Hello <em>World</em></p>\n</p>" }
+    its(:title_prefix)  { should == "12345:" }
   end
 end

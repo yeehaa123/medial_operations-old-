@@ -66,3 +66,34 @@ html, .dark
 html *
   color-profile: sRGB
   rendering-intent: auto
+
+// Mixins --------------------------------------------------------------------
+
+@mixin border-styles($top: none, $bottom: none, $ml: 0.5, $pl: 0.5, $pt: 0.5, $mt: 0.5)
+  +margin-leader($ml)
+  +padding-leader($pl)
+  +margin-trailer($mt)
+  +padding-trailer($pt)
+  margin-right: 0 - $grid-padding
+  margin-left: 0 - $grid-padding
+  padding-right: $grid-padding
+  padding-left: $grid-padding
+  border-top: $top
+  border-bottom: $bottom
+
+@mixin background-block($ml: 0.5, $pl: 0.5, $pt: 0.5, $mt: 0.5)
+  +margin-leader($ml)
+  +padding-leader($pl)
+  +margin-trailer($mt)
+  +padding-trailer($pt)
+  margin-right: -1000em
+  margin-left: -1000em
+  padding-right: 1000em
+  padding-left: 1000em
+  background-color: $base02
+
+// Variables
+
+$default-border-style: 0.1em solid $base02
+$yellow-border-style: 0.1em solid $yellow
+$red-border-style: 0.1em solid $red

@@ -44,7 +44,7 @@ AdminUser.create(email: "admin@example.com",
 
 # COURSE
 
-Course.create(full_title: "Art, Science, and Technology: Medial Operations",
+Course.create(title_prefix: "Art, Science, and Technology",
               title: "Medial Operations", 
               description: course_description)
 
@@ -104,7 +104,7 @@ end
 
 article = <<END
 # Towards a New Intellectual
-*A Shared Dilemma*
+A Shared Dilemma
 
 >> I'm not what I seem. But that's okay.  
 >> Artists thrive on contradictions.  
@@ -321,3 +321,24 @@ medium that allows us to view the human subject differently.
 END
 
 Article.create(content: article)
+
+# Authors
+Author.create(first_name: "Jane", last_name: "Doe")
+Author.create(first_name: "John", last_name: "Doe")
+Author.create(first_name: "Jane", last_name: "Wayne")
+
+# References
+Reference.create(title: "Stier")
+Reference.create(title: "Bizon")
+Reference.create(title: "Buffel")
+
+Reference.all.each_with_index do |r, i|
+  j = 1974 + i
+  i += 1
+  r.authors << Author.find(i)
+  r.date = Time.new(j)
+  r.courses << Course.first
+  r.articles << Article.first
+  r.medium = "print"
+  r.save
+end

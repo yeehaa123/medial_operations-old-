@@ -1,7 +1,8 @@
 require 'spec_helper'
 
 describe SessionDecorator do
-  let(:session) { SessionDecorator.new(FactoryGirl.create(:session)) }
+  let(:session) { SessionDecorator.new(build(:session)) }
+  
   subject { session }
 
   it { should respond_to(:session) }
@@ -18,7 +19,7 @@ describe SessionDecorator do
 
   describe "defined session" do
     let(:session) do
-      SessionDecorator.new(FactoryGirl.create(:defined_session)) 
+      SessionDecorator.new(build(:defined_session)) 
     end
 
     subject { session }

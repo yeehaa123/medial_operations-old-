@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Article do
-  let(:article) { FactoryGirl.create(:article) }
+  let(:article) { create(:article) }
 
   subject { article }
 
@@ -14,11 +14,15 @@ describe Article do
   
   it { "#{ article }".should == article.title }
   
-  context "with markdown content" do 
-    let(:article) { FactoryGirl.create(:markdown_article) }
+  context "defined article" do 
+    let(:article) { create(:defined_article) }
     
-    it { should be_valid}
+    it { should be_valid }
     
-    its(:title) { "#{ article.title }".should == "New Title" }
+    describe "with markdown content" do
+      its(:title) { "#{ article.title }".should == "New Title" }
+    end
+    
+    it { should have(5).references }
   end
 end

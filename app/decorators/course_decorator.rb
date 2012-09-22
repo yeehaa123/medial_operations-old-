@@ -3,7 +3,11 @@ class CourseDecorator < ApplicationDecorator
   decorates_association :sections
   decorates_association :sessions
 
-  
+  def title_prefix
+    if model.title_prefix
+      "#{ model.title_prefix }:"
+    end
+  end  
   # Accessing Helpers
   #   You can access any helper via a proxy
   #

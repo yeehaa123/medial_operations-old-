@@ -5,21 +5,20 @@
 @import "compass/reset"
 @import "compass/utilities"
 
-/* Layout ------------------------------------------------------------------
-
+// Layout ------------------------------------------------------------------
 
 // General
+
 .page
+  // +susy-grid-background
   +container($total-columns)
   +establish-baseline
-
+  +accentize($red)
   width: 100%
-  // +susy-grid-background
   font-family: $sans-serif
   font-style: normal
   font-weight: 300
   text-align: justify
-  +accentize($red)
   h1, h2, h3, h4, h5, h6
     text-align: left
     font-family: $slab-serif
@@ -30,21 +29,22 @@
   margin: 0 0 - $grid-padding
 
   // Navigation 
+
   #main_nav
-    background-color: $base01
     +padding-trailer
     +adjust-font-size-to(12px)
     +adjust-leading-to(2)
     +border-radius(0 0 0 0.5em)
     font-weight: 700
+    background-color: $base01
     ul
       li
         text-align: left
         &:nth-child(2n)
           background-color: $base1
         a
-          padding: 0 $grid-padding
           +unstyled-link
+          padding: 0 $grid-padding
           color: $base03
         &:hover
           background-color: $base3
@@ -52,19 +52,20 @@
             color: $red
 
   // Logo
+
   #logo
-    +leader(0)
-    float: right
-    +span-columns(2 omega)
-    padding: 0.25em 0em 0.25em 0em
-    +border-radius(0 0 0.5em 0.5em)
     // +single-box-shadow(inset, black, 0em, -0.1em, 0.2em)
+    +leader(0)
+    +trailer(0.5)
+    +span-columns(2 omega)
+    +border-radius(0 0 0.5em 0.5em)
+    +adjust-font-size-to(16px)
+    float: right
+    padding: 0.25em 0em 0.25em 0em
     background-color: $base01
     font-family: $slab-serif
-    +adjust-font-size-to(16px)
     letter-spacing: -0.05em
     font-weight: 500
-    +trailer(0.5)
     text-align: center
     a      
       +unstyled-link
@@ -72,8 +73,8 @@
         color: $base3
         vertical-align: 30%
       span#slash
-        color: $red
         +adjust-font-size-to(22px)
+        color: $red
         margin: 0 -0.3em 0 -0.2em
       span#operations
         color: $base3
@@ -90,6 +91,7 @@
 
 .content
   clear: both
+  +padding-leader(1)
 
   p
     +adjust-font-size-to(14px)
@@ -111,48 +113,33 @@
         color: $base1
   
   ol
-    +margin-leader(0.5)
-    +padding-leader(0.5)
+    +border-styles($default-border-style)
     +adjust-font-size-to(12px)
     list-style-type: decimal
-    border-top: 0.1em solid $base02
-    margin-right: 0 - $grid-padding
-    margin-left: 0 - $grid-padding
-    padding-right: $grid-padding
     padding-left: 2 * $grid-padding
 
   em
     font-style: italic
-  // +baseline-grid-background($base-line-height, $base01)
+  
+  hgroup
+    +background-block(0.5, 0.5, 1, 1)
+    div.course_prefix
+      color: $red
+      +trailer(-0.5)
+      +adjust-font-size-to(11px)
 
   h1
-    // font-family: $sans-serif
-    letter-spacing: -0.05em
+    +trailer(0.5)
+    +adjust-font-size-to(18px)
+    letter-spacing: 0em
     font-weight: 700
-    +adjust-font-size-to(16px)
     color: $yellow
-    +padding-leader(1)
     a, a:active, a:visited, code.url
       +unstyled-link
       color: $yellow
-    +trailer(0.5)
-
-  h1 + p
-    em
-      font-family: $slab-serif
-      font-style: normal
-      color: $red
 
   ul.info
-    +padding-leader(0.5)
-    +padding-trailer(0.5)
-    +margin-trailer(0.5)
-    border-top: 0.1em solid $base02
-    border-bottom: 0.1em solid $base02
-    margin-right: 0 - $grid-padding
-    margin-left: 0 - $grid-padding
-    padding-right: $grid-padding
-    padding-left: $grid-padding
+    +border-styles($default-border-style, $default-border-style)
     li
       +adjust-font-size-to(12px)
       color: $base2
@@ -165,17 +152,8 @@
       +leader(-1)
 
   blockquote
-    +margin-leader(0.5)
-    +padding-leader(0.5)
-    +padding-trailer(0.5)
-    +margin-trailer(0.5)
+    +border-styles($default-border-style, $default-border-style)
     font-family: $slab-serif
-    border-top: 0.1em solid $base02 
-    border-bottom: 0.1em solid $base02
-    margin-right: 0 - $grid-padding
-    margin-left: 0 - $grid-padding
-    padding-right: $grid-padding
-    padding-left: $grid-padding
 
     blockquote
       +margin-leader(0)
@@ -188,13 +166,24 @@
       +adjust-font-size-to(11px)
       color: $base2
 
+  section.article
+    h1
+      +background-block(0.5, 0.5, 0, 0)
+    h1 + p
+      +background-block(0, 0, 2, -1)
+      color: $red
+      +leader(-0.5)
+      +adjust-font-size-to(12px)
+
+    blockquote blockquote
+      +padding-leader(0.5)
+
   section.sections
     h1
       +leader(1)
-      // text-align: center
       +adjust-font-size-to(14px)
-      // background-color: $red
       font-weight: 500
+      +background-block(2,0.5,1.5,1)
       a
         color: $red
         &:hover
@@ -210,22 +199,12 @@
 
   section.sessions
     h1
-      color: $yellow
-      border-top: 0.1em solid $base02 
-      border-bottom: 0.1em solid $base02
-      margin-right: 0 - $grid-padding
-      margin-left: 0 - $grid-padding
-      padding-right: $grid-padding
-      padding-left: $grid-padding
-      border-bottom: 0.1em solid $yellow
-      border-top: 0.1em solid $yellow
-      +margin-leader(1.8)
-      +margin-trailer(0.8)
-      +padding-leader(0.2)
-      +padding-trailer(0.2)
-      text-align: center
+      +border-styles($yellow-border-style, $yellow-border-style, 1.8, 0.2, 0.2, 0.8)
       +adjust-font-size-to(12px)
+      color: $yellow
+      text-align: center
       font-weight: 700
+      background-color: $base03
       a, a:active, a:visited, code.url
         +unstyled-link
         color: $yellow
@@ -236,8 +215,8 @@
           border: none
     
     ul.info
-      border-top: none
       +padding-leader(0)
+      border-top: none
       li
         +adjust-font-size-to(10px)
         color: $base2
@@ -253,27 +232,25 @@
         &:last-child
           +padding-trailer(0)
 
+    p
+      +adjust-font-size-to(12px)
+
   section.bibliography
     +margin-leader(0.5)
     +padding-leader(0)
-    margin-right: 0 - $grid-padding
-    margin-left: 0 - $grid-padding
-    padding-right: $grid-padding
-    padding-left: $grid-padding
-    border-top: 0.1em solid $base02
-
-    // border-bottom: 0.1em solid $base02
+    +border-styles($default-border-style)
 
     h1
+      +margin-leader(0.5)
+      +padding-leader(0)
+      +margin-trailer(0)
+      +padding-trailer(0)
       +adjust-font-size-to(10px)
       text-align: left
       border: none
       font-weight: 700
       color: $base01
-      +margin-leader(0.5)
-      +padding-leader(0)
-      +margin-trailer(0)
-      +padding-trailer(0)
+
     ul
       li
         p
@@ -284,15 +261,16 @@
           font-style: italic
         &:last-child
           border: none
+
 // Footer
 
 #page_footer
   +leader(1)
+  +adjust-font-size-to(12px)
   font-weight: 500
   margin-right: 0 - $grid-padding
   margin-left: 0 - $grid-padding
   border-top: 0.1em solid $base01
-  +adjust-font-size-to(12px)
   
   ul
     +horizontal-list
