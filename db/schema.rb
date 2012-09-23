@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120922205857) do
+ActiveRecord::Schema.define(:version => 20120923162823) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -75,6 +75,17 @@ ActiveRecord::Schema.define(:version => 20120922205857) do
   add_index "authorships", ["author_id"], :name => "index_authorships_on_author_id"
   add_index "authorships", ["reference_id"], :name => "index_authorships_on_reference_id"
 
+  create_table "cited_works", :force => true do |t|
+    t.integer  "reference_id"
+    t.integer  "article_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "cited_works", ["article_id"], :name => "index_cited_works_on_article_id"
+  add_index "cited_works", ["reference_id", "article_id"], :name => "index_cited_works_on_reference_id_and_article_id", :unique => true
+  add_index "cited_works", ["reference_id"], :name => "index_cited_works_on_reference_id"
+
   create_table "courses", :force => true do |t|
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
@@ -86,17 +97,16 @@ ActiveRecord::Schema.define(:version => 20120922205857) do
 
   add_index "courses", ["slug"], :name => "index_courses_on_slug", :unique => true
 
-  create_table "referencables", :force => true do |t|
+  create_table "readings", :force => true do |t|
     t.integer  "reference_id"
-    t.integer  "article_id"
+    t.integer  "session_id"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
-    t.integer  "course_id"
   end
 
-  add_index "referencables", ["article_id", "reference_id"], :name => "index_referencables_on_article_id_and_reference_id", :unique => true
-  add_index "referencables", ["article_id"], :name => "index_referencables_on_article_id"
-  add_index "referencables", ["reference_id"], :name => "index_referencables_on_reference_id"
+  add_index "readings", ["reference_id", "session_id"], :name => "index_readings_on_reference_id_and_session_id", :unique => true
+  add_index "readings", ["reference_id"], :name => "index_readings_on_reference_id"
+  add_index "readings", ["session_id"], :name => "index_readings_on_session_id"
 
   create_table "references", :force => true do |t|
     t.string   "title"
@@ -104,7 +114,11 @@ ActiveRecord::Schema.define(:version => 20120922205857) do
     t.string   "medium"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "type"
+    t.integer  "type_id"
   end
+
+  add_index "references", ["type_id"], :name => "index_references_on_type_id"
 
   create_table "sections", :force => true do |t|
     t.string   "title"

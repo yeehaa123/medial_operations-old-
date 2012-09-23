@@ -9,9 +9,9 @@ describe Reference do
   it { should respond_to(:title) }
   it { should respond_to(:date) }
   it { should respond_to(:medium) }
-
-  it { should respond_to(:articles) }
+  it { should respond_to(:site_articles) }
   it { should respond_to(:courses) }
+  it { should respond_to(:sessions) }
   it { should be_valid }
   
   context "author with references" do
@@ -20,7 +20,10 @@ describe Reference do
     it { should be_valid }
 
     it { should have(2).authors } 
-    it { should have(3).courses } 
-    it { should have(4).articles } 
+    it { should have(3).sessions } 
+    it { should have(4).site_articles }
+
+    its(:to_s) { should == "#{ reference.authors.first.last_name}, #{ reference.authors.first.first_name}. 
+    \"#{ reference.title }\". #{ reference.date.strftime("%Y") }. #{ reference.medium.titleize }" }
   end
 end

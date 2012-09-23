@@ -1,0 +1,2 @@
+class CollectionReference < Reference
+end

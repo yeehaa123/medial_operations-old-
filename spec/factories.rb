@@ -56,8 +56,8 @@ FactoryGirl.define do
     factory :defined_reference do
       after(:build) do |reference|
         2.times { reference.authors << build(:author) }
-        3.times { reference.courses << build(:course) }
-        4.times { reference.articles << build(:article) }
+        3.times { reference.sessions << build(:session) }
+        4.times { reference.site_articles << build(:article) }
       end
     end
   end

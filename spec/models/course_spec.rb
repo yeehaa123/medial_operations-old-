@@ -17,10 +17,4 @@ describe Course do
   it { should validate_presence_of(:title) }
 
   its(:to_s) { should == "#{ course.title }" }
-
-  context "defined course" do
-    let(:course) { build(:defined_course) }
-    
-    it { should have(5).references }
-  end
 end

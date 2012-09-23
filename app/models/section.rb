@@ -6,7 +6,8 @@ class Section < ActiveRecord::Base
   attr_accessible :description, :title, :course_id, :number, :course
   
   belongs_to :course
-  has_many :sessions, foreign_key: "section_id"
+  has_many :sessions
+  has_many :references, through: :sessions
   
   validates_presence_of :title
 

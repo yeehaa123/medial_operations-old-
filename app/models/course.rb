@@ -1,11 +1,10 @@
 class Course < ActiveRecord::Base
   include FriendlyId
-  attr_accessible :title, :title_prefix, :description, :sections, :sessions
+  attr_accessible :title, :title_prefix, :description, :sections, :sessions, :references
   
   has_many :sections, dependent: :destroy
   has_many :sessions
-  has_many :referencables
-  has_many :references, through: :referencables
+  has_many :references, through: :sessions, uniq: true
 
   validates_presence_of :title
   

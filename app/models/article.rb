@@ -4,8 +4,8 @@ class Article < ActiveRecord::Base
 
   attr_accessible :content, :title, :references
 
-  has_many :referencables
-  has_many :references, through: :referencables
+  has_many :cited_works
+  has_many :references, through: :cited_works
 
   validates_presence_of :title
   before_validation { self.title = $1 if content.match(/\A\s*#\s*(.+)\s*$/)}

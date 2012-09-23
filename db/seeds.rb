@@ -323,22 +323,38 @@ END
 Article.create(content: article)
 
 # Authors
-Author.create(first_name: "Jane", last_name: "Doe")
-Author.create(first_name: "John", last_name: "Doe")
-Author.create(first_name: "Jane", last_name: "Wayne")
+Author.create(first_name: "Martin", last_name: "Heidegger")
+Author.create(first_name: "Hannah", last_name: "Arendt")
+Author.create(first_name: "Walter", last_name: "Benjamin")
+Author.create(first_name: "Friedrich", last_name: "Kittler")
+
 
 # References
-Reference.create(title: "Stier")
-Reference.create(title: "Bizon")
-Reference.create(title: "Buffel")
+ChapterReference.create(title: "What is Metaphyics?", authors: [Author.find(1)])
+ChapterReference.create(title: "On Revolution", authors: [Author.find(2)])
+ChapterReference.create(title: "The Work of Art in the Age of Mechanical Reproduction", 
+                        authors: [Author.find(3)])
+ChapterReference.create(title: "Grammophone, Film, Typewriter", authors: [Author.find(4)])
 
 Reference.all.each_with_index do |r, i|
   j = 1974 + i
   i += 1
-  r.authors << Author.find(i)
   r.date = Time.new(j)
-  r.courses << Course.first
-  r.articles << Article.first
+  Session.all.each do |s|
+    r.sessions << s
+  end
+  r.site_articles << Article.first
   r.medium = "print"
   r.save
+end
+
+b = MonographReference.create
+b.title = "Everything Ever Written"
+b.authors = [Author.create(first_name: "Uni", last_name: "Versal")]
+b.date = Time.new(2012)
+b.medium = "print"
+b.site_articles << Article.first
+ChapterReference.all.each do |c|
+  b.chapters << c
+  b.save
 end
