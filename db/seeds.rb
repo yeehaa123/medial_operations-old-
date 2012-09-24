@@ -328,15 +328,33 @@ Author.create(first_name: "Hannah", last_name: "Arendt")
 Author.create(first_name: "Walter", last_name: "Benjamin")
 Author.create(first_name: "Friedrich", last_name: "Kittler")
 
+# Publisher
+Publisher.create(name: "Annoying", location: "Amsterdam")
+
+
+b = MonographReference.create
+b.title = "Everything Ever Written"
+b.authors = [Author.create(first_name: "Uni", last_name: "Versal")]
+b.date = Time.new(2012)
+b.medium = "print"
+b.publisher = Publisher.first
+b.site_articles << Article.first
 
 # References
-ChapterReference.create(title: "What is Metaphyics?", authors: [Author.find(1)])
-ChapterReference.create(title: "On Revolution", authors: [Author.find(2)])
+ChapterReference.create(title: "What is Metaphyics?", 
+                        authors: [Author.find(1)],
+                        monograph: b)
+ChapterReference.create(title: "On Revolution", 
+                        authors: [Author.find(2)],
+                        monograph: b)
 ChapterReference.create(title: "The Work of Art in the Age of Mechanical Reproduction", 
-                        authors: [Author.find(3)])
-ChapterReference.create(title: "Grammophone, Film, Typewriter", authors: [Author.find(4)])
+                        authors: [Author.find(3)],
+                        monograph: b)
+ChapterReference.create(title: "Grammophone, Film, Typewriter", 
+                        authors: [Author.find(4)],
+                        monograph: b)
 
-Reference.all.each_with_index do |r, i|
+ChapterReference.all.each_with_index do |r, i|
   j = 1974 + i
   i += 1
   r.date = Time.new(j)
@@ -345,16 +363,8 @@ Reference.all.each_with_index do |r, i|
   end
   r.site_articles << Article.first
   r.medium = "print"
-  r.save
-end
-
-b = MonographReference.create
-b.title = "Everything Ever Written"
-b.authors = [Author.create(first_name: "Uni", last_name: "Versal")]
-b.date = Time.new(2012)
-b.medium = "print"
-b.site_articles << Article.first
-ChapterReference.all.each do |c|
-  b.chapters << c
+  r.publisher = Publisher.first
+  r.save!
+  b.chapters << r
   b.save
 end

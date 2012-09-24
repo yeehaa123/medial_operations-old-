@@ -1,2 +1,10 @@
 %section.article
   = kramdown(@article.content)
+
+  %section.bibliography
+    %h1 Readings
+    %ul
+      - @article.authors.each do |a|
+        - a.references.each do |r|
+          - unless r.collection
+            %li= raw(r)

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120923162823) do
+ActiveRecord::Schema.define(:version => 20120924171054) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -97,6 +97,24 @@ ActiveRecord::Schema.define(:version => 20120923162823) do
 
   add_index "courses", ["slug"], :name => "index_courses_on_slug", :unique => true
 
+  create_table "publisheds", :force => true do |t|
+    t.integer  "publisher_id"
+    t.integer  "reference_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "publisheds", ["publisher_id", "reference_id"], :name => "index_publisheds_on_publisher_id_and_reference_id", :unique => true
+  add_index "publisheds", ["publisher_id"], :name => "index_publisheds_on_publisher_id"
+  add_index "publisheds", ["reference_id"], :name => "index_publisheds_on_reference_id"
+
+  create_table "publishers", :force => true do |t|
+    t.string   "name"
+    t.string   "location"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "readings", :force => true do |t|
     t.integer  "reference_id"
     t.integer  "session_id"
@@ -112,12 +130,14 @@ ActiveRecord::Schema.define(:version => 20120923162823) do
     t.string   "title"
     t.date     "date"
     t.string   "medium"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
     t.string   "type"
     t.integer  "type_id"
+    t.boolean  "collection", :default => false
   end
 
+  add_index "references", ["collection"], :name => "index_references_on_collection"
   add_index "references", ["type_id"], :name => "index_references_on_type_id"
 
   create_table "sections", :force => true do |t|

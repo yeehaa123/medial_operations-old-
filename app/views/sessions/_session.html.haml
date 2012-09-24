@@ -9,8 +9,9 @@
   %h1 Readings
   %ul
     - session.references.each do |reference|
-      %li= reference
+      %li= raw(reference)
 
+  
     / %li= kramdown("Heidegger, Martin. *Sein und Zeit*, Tübingen 1927")
     / %li= kramdown("Deleuze, Gilles, Félix Guattari. *Anti-Oedipus*, Paris 1969")
     / %li= kramdown("Kittler, Friedrich. *Gramophone, Film, Typewriter*, Hamburg 1986")
