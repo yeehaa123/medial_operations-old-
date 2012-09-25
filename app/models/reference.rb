@@ -1,9 +1,9 @@
 class Reference < ActiveRecord::Base
   scope :collections, where(collection: true)
   scope :individuals, where(collection: false)
-
+  
   attr_accessible :date, :medium, :title, :authors, :site_articles, :courses, :type_id, 
-                  :authors_attributes, :collection, :publisher
+                  :authors_attributes, :collection, :publisher, :author
   
   has_many  :authorships
   has_many  :authors, through: :authorships

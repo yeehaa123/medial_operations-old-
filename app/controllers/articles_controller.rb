@@ -1,9 +1,9 @@
 class ArticlesController < ApplicationController
   def index
-    @articles = Article.all
+    @articles = ArticleDecorator.all
   end
 
   def show
-    @article = Article.find(params[:id])
+    @article = ArticleDecorator.find(params[:id])
   end
 end

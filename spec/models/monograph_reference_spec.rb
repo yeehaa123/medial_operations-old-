@@ -23,6 +23,8 @@ describe MonographReference do
     it { should have(5).chapters }
     
     its(:to_s) { should == "#{ reference.authors.first.last_name}, #{ reference.authors.first.first_name}. 
-    \"#{ reference.title }\". #{ reference.date.strftime("%Y") }. #{ reference.medium.titleize }" }
+    \"#{ reference.title }\".
+    #{ reference.publisher.name }: #{ reference.publisher.location }.
+    #{ reference.date.strftime("%Y") }. #{ reference.medium.titleize }" }
   end
 end
