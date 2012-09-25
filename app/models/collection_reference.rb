@@ -1,2 +1,0 @@
-class CollectionReference < Reference
-end
