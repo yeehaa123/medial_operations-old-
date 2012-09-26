@@ -1,16 +1,14 @@
 class ApplicationDecorator < Draper::Base
   include Draper::LazyHelpers
 
-  def works_cited
-    wc = []
-    model.authors.each do |a|
-      a.references.each do |r|
-        wc << r
-      end
+  def cited_works
+    wc = ""
+    model.references.list.each do |r|
+      wc += content_tag :li, raw(r)
     end
-    wc
+    raw(wc)
   end
-  alias_method :readings, :works_cited 
+  alias_method :readings, :cited_works
   
   def description
     if model.description

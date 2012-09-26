@@ -74,6 +74,7 @@ GEM
     css_parser (1.2.6)
       addressable
       rdoc
+    database_cleaner (0.8.0)
     deadweight (0.2.2)
       css_parser (~> 1.2.6)
       nokogiri
@@ -235,6 +236,7 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   compass
   compass-rails
+  database_cleaner
   deadweight
   draper
   factory_girl_rails

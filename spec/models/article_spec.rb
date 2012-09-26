@@ -7,6 +7,7 @@ describe Article do
 
   it { should respond_to(:title) }
   it { should respond_to(:content) }
+  it { should respond_to(:references) }
   
   it { should be_valid}
 

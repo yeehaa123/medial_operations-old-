@@ -3,8 +3,4 @@
 
   %section.bibliography
     %h1 Readings
-    %ul
-      / - @article.authors.each do |a|
-      - @article.works_cited.each do |r|
-        - unless r.collection
-          %li= raw(r)
+    %ul= @article.cited_works

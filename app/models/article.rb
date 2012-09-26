@@ -6,7 +6,7 @@ class Article < ActiveRecord::Base
 
   has_many :cited_works
   has_many :references, through: :cited_works
-  has_many :authors, through: :references, uniq: true
+  has_many :authors, through: :references
 
   validates_presence_of :title
   before_validation { self.title = $1 if content.match(/\A\s*#\s*(.+)\s*$/)}

@@ -8,6 +8,9 @@ describe CourseDecorator do
   it { should respond_to(:course) }
   it { should respond_to(:sections) }
   it { should respond_to(:sessions) }
+  it { should respond_to(:description) }
+  it { should respond_to(:title_prefix) }
+  it { should respond_to(:heading) }
   
   context "undefined course" do
     its(:description)   { should be_nil }

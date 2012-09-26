@@ -8,6 +8,8 @@ describe MonographReference do
   it { should be_kind_of(Reference) }
   it { should respond_to(:chapters) }
 
+  it { should validate_presence_of(:publisher) }
+
   it { should be_valid }
   
   context "defined reference" do
@@ -23,7 +25,7 @@ describe MonographReference do
     it { should have(5).chapters }
     
     its(:to_s) { should == "#{ reference.authors.first.last_name}, #{ reference.authors.first.first_name}. 
-    \"#{ reference.title }\".
+    <em>#{ reference.title }</em>.
     #{ reference.publisher.name }: #{ reference.publisher.location }.
     #{ reference.date.strftime("%Y") }. #{ reference.medium.titleize }" }
   end

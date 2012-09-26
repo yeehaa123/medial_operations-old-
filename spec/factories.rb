@@ -43,13 +43,13 @@ FactoryGirl.define do
     factory :defined_article do
       content  "# New Title"
       after(:build) do |article|
-        5.times { article.references << build(:reference) }
+        article.references = build_list(:reference, 5)
       end
     end
   end
 
   factory :reference do
-    title   "New Article"
+    sequence(:title) { |n| "New Article #{n}" }
     date    Time.new(1979)
     medium  "print"
     publisher
@@ -103,7 +103,8 @@ FactoryGirl.define do
 
   factory :author do
     first_name  "Jane"
-    last_name   "Doe"
+    middle_name "H."
+    sequence(:last_name) { |n| "Doe-#{n}" }
     
     factory :author_with_references do
       after(:build) do |author|
@@ -114,6 +115,6 @@ FactoryGirl.define do
 
   factory :publisher do
     name  "Annoying Publisher"
-    location  "Amsterdam"
+    sequence(:location) { |n| "Amsterdam-#{n}" }
   end
 end

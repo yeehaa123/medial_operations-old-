@@ -37,6 +37,7 @@ group :test do
   gem 'simplecov', require: false
   gem 'factory_girl_rails'
   gem 'deadweight'
+  gem 'database_cleaner'
 end
 
 # To use ActiveModel has_secure_password
