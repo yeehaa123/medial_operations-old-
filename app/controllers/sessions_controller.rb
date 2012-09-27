@@ -5,5 +5,6 @@ class SessionsController < ApplicationController
 
   def show
     @session = SessionDecorator.find(params[:id])
+    @references = @session.references
   end
 end

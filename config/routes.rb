@@ -2,12 +2,14 @@ MedialOperations::Application.routes.draw do
   devise_for :courses, ActiveAdmin::Devise.config
 
   root to: 'courses#index'
-  resources :courses, only: [:show, :index] do
-    resources :sessions, only: [:show, :index]
-    resources :sections, only: [:show, :index]
+  resources :courses,       only: [:show, :index] do
+    resources :sessions,    only: [:show, :index]
+    resources :sections,    only: [:show, :index]
+    resources :references,  only: [:show, :index]
+    resources :authors,     only: [:show, :index]
   end
   
-  resources :articles, only: [:show, :index]
+  resources :articles,      only: [:show, :index]
 
   ActiveAdmin.routes(self)
 

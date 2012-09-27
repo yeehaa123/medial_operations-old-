@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120924171054) do
+ActiveRecord::Schema.define(:version => 20120927131252) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -85,6 +85,17 @@ ActiveRecord::Schema.define(:version => 20120924171054) do
   add_index "cited_works", ["article_id"], :name => "index_cited_works_on_article_id"
   add_index "cited_works", ["reference_id", "article_id"], :name => "index_cited_works_on_reference_id_and_article_id", :unique => true
   add_index "cited_works", ["reference_id"], :name => "index_cited_works_on_reference_id"
+
+  create_table "coauthorships", :force => true do |t|
+    t.integer  "author_id"
+    t.integer  "reference_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "coauthorships", ["author_id", "reference_id"], :name => "index_coauthorships_on_author_id_and_reference_id", :unique => true
+  add_index "coauthorships", ["author_id"], :name => "index_coauthorships_on_author_id"
+  add_index "coauthorships", ["reference_id"], :name => "index_coauthorships_on_reference_id"
 
   create_table "courses", :force => true do |t|
     t.datetime "created_at",   :null => false

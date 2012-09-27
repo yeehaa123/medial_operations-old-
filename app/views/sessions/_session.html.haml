@@ -3,8 +3,7 @@
   %li.date= session.date
   %li.time= session.time
   %li.location= session.location
+
 = session.description
 
-%section.bibliography
-  %h1 Readings
-  %ul= session.readings
+= render partial: "shared/bibliography", locals: { references: session.references }

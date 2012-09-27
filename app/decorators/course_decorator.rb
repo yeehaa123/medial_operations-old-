@@ -8,6 +8,7 @@ class CourseDecorator < ApplicationDecorator
       "#{ model.title_prefix }:"
     end
   end  
+ 
   # Accessing Helpers
   #   You can access any helper via a proxy
   #

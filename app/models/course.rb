@@ -4,7 +4,8 @@ class Course < ActiveRecord::Base
   
   has_many :sections, dependent: :destroy
   has_many :sessions
-  has_many :references, through: :sessions, uniq: true
+  has_many :references, through: :sessions
+  has_many :authors, through: :references
 
   validates_presence_of :title
   

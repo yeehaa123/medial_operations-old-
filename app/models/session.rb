@@ -16,8 +16,6 @@ class Session < ActiveRecord::Base
   belongs_to :course
   has_many :readings
   has_many :references, through: :readings
-  has_many :authors, through: :references
-
   
   validates_presence_of :course_id
   validates_with RightCourseValidator, if: :section_id

@@ -327,6 +327,8 @@ Author.create(first_name: "Martin", last_name: "Heidegger")
 Author.create(first_name: "Hannah", last_name: "Arendt")
 Author.create(first_name: "Walter", last_name: "Benjamin")
 Author.create(first_name: "Friedrich", last_name: "Kittler")
+Author.create(first_name: "Gilles", last_name: "Deleuze")
+Author.create(first_name: "Felix", last_name: "Guattari")
 
 # Publisher
 Publisher.create(name: "Annoying", location: "Amsterdam")
@@ -334,7 +336,7 @@ Publisher.create(name: "Annoying", location: "Amsterdam")
 
 b = MonographReference.create
 b.title = "Everything Ever Written"
-b.authors = [Author.create(first_name: "Uni", last_name: "Versal")]
+b.author = Author.create(first_name: "Uni", last_name: "Versal")
 b.date = Time.new(2012)
 b.medium = "print"
 b.publisher = Publisher.first
@@ -342,16 +344,20 @@ b.site_articles << Article.first
 
 # References
 ChapterReference.create(title: "What is Metaphyics?", 
-                        authors: [Author.find(1)],
+                        author: Author.find_by_last_name("heidegger"),
                         monograph: b)
 ChapterReference.create(title: "On Revolution", 
-                        authors: [Author.find(2)],
+                        author: Author.find_by_last_name("arendt"),
                         monograph: b)
 ChapterReference.create(title: "The Work of Art in the Age of Mechanical Reproduction", 
-                        authors: [Author.find(3)],
+                        author: Author.find_by_last_name("benjamin"),
                         monograph: b)
 ChapterReference.create(title: "Grammophone, Film, Typewriter", 
-                        authors: [Author.find(4)],
+                        author: Author.find_by_last_name("kittler"),
+                        monograph: b)
+ChapterReference.create(title: "A Thousand Plateaus", 
+                        author: Author.find_by_last_name("deleuze"),
+                        coauthors: [Author.find_by_last_name("guattari")],
                         monograph: b)
 
 ChapterReference.all.each_with_index do |r, i|
