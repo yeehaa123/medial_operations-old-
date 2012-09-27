@@ -8,9 +8,8 @@ class MonographReference < Reference
   validates_presence_of :publisher
 
   def to_s
-    "#{ authors.first.last_name.capitalize }, #{ authors.first.first_name.capitalize }. 
-    <em>#{ title }</em>.
-    #{ publisher.name }: #{ publisher.location }.
+    "#{ author }. <em>#{ title }</em>.
+    #{ publisher }.
     #{ date.strftime("%Y") }. #{ medium.titleize }"
   end
 end

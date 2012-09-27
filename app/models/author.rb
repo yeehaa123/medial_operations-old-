@@ -4,7 +4,7 @@ class Author < ActiveRecord::Base
   after_initialize :name_downcase
 
   default_scope order(:last_name)
-
+  
   has_many :authorships
   has_many :references, through: :authorships, uniq: true
   

@@ -6,9 +6,9 @@ class ChapterReference < Reference
   validates_presence_of :monograph
 
   def to_s
-    "#{ authors.first.last_name.capitalize }, #{ authors.first.first_name.capitalize }. 
+    "#{ author }.
     \"#{ title }\" in <em>#{ monograph.title }</em>.
-    #{ monograph.publisher.name }: #{ monograph.publisher.location }.
+    #{ monograph.publisher }.
     #{ monograph.date.strftime("%Y") }. #{ monograph.medium.titleize }"
   end
 end
