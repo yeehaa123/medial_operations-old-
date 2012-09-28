@@ -17,11 +17,11 @@ describe ChapterReference do
 
     it { should_not be_a_collection}
     
-    it { should have(2).coauthors }
+    it { should have(2).authors }
     it { should have(3).sessions } 
     it { should have(4).site_articles }
   
-    its(:to_s) { should == "#{ reference.author } and #{ reference.coauthors.first.full_name }.
+    its(:to_s) { should == "#{ reference.authors.first } and #{ reference.authors.last.full_name }.
       \"#{ reference.title }\" in <em>#{ reference.monograph.title }</em>.
       #{ reference.monograph.publisher }.
       #{ reference.date.strftime("%Y") }. #{ reference.medium.titleize }" }

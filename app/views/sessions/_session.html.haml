@@ -6,4 +6,4 @@
 
 = session.description
 
-= render partial: "shared/bibliography", locals: { references: session.references }
+= render partial: "shared/bibliography", locals: { references: session.references.uniq }

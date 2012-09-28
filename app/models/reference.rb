@@ -3,15 +3,13 @@ class Reference < ActiveRecord::Base
   scope :individuals, where(collection: false)
   scope :year, order(:date)
 
-  default_scope joins(:author).order(:last_name).year.readonly(false)
+  default_scope joins(:authors).order(:last_name)
 
   attr_accessible :date, :medium, :title, :authors, :site_articles, :courses, :type_id, 
-                  :authors_attributes, :collection, :publisher, :author, :coauthors
-  
-  has_one   :authorship
-  has_one   :author, through: :authorship
-  has_many  :coauthorships
-  has_many  :coauthors, through: :coauthorships, source: :author
+                  :authors_attributes, :collection, :publisher
+
+  has_many  :authorships
+  has_many  :authors, through: :authorships, uniq: true
   has_one   :published
   has_one   :publisher, through: :published
   has_many  :cited_works
@@ -20,6 +18,6 @@ class Reference < ActiveRecord::Base
   has_many  :sessions, through: :readings
   has_many  :courses, through: :sessions
   
-  validates_presence_of  :author
+  validates_presence_of  :authors
   validates_presence_of  :title
 end

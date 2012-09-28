@@ -336,7 +336,7 @@ Publisher.create(name: "Annoying", location: "Amsterdam")
 
 b = MonographReference.create
 b.title = "Everything Ever Written"
-b.author = Author.create(first_name: "Uni", last_name: "Versal")
+b.authors = [Author.create(first_name: "Uni", last_name: "Versal")]
 b.date = Time.new(2012)
 b.medium = "print"
 b.publisher = Publisher.first
@@ -344,20 +344,20 @@ b.site_articles << Article.first
 
 # References
 ChapterReference.create(title: "What is Metaphyics?", 
-                        author: Author.find_by_last_name("heidegger"),
+                        authors: [Author.find_by_last_name("heidegger")],
                         monograph: b)
 ChapterReference.create(title: "On Revolution", 
-                        author: Author.find_by_last_name("arendt"),
+                        authors: [Author.find_by_last_name("arendt")],
                         monograph: b)
 ChapterReference.create(title: "The Work of Art in the Age of Mechanical Reproduction", 
-                        author: Author.find_by_last_name("benjamin"),
+                        authors: [Author.find_by_last_name("benjamin")],
                         monograph: b)
 ChapterReference.create(title: "Grammophone, Film, Typewriter", 
-                        author: Author.find_by_last_name("kittler"),
+                        authors: [Author.find_by_last_name("kittler")],
                         monograph: b)
 ChapterReference.create(title: "A Thousand Plateaus", 
-                        author: Author.find_by_last_name("deleuze"),
-                        coauthors: [Author.find_by_last_name("guattari")],
+                        authors: [Author.find_by_last_name("deleuze"),
+                                 Author.find_by_last_name("guattari")],
                         monograph: b)
 
 ChapterReference.all.each_with_index do |r, i|

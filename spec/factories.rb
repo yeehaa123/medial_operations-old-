@@ -52,10 +52,9 @@ FactoryGirl.define do
     sequence(:title) { |n| "New Article #{n}" }
     date    Time.new(1979)
     medium  "print"
-    author
     publisher
     after(:build) do |reference|
-      reference.coauthors = build_list(:author, 2)
+      reference.authors = build_list(:author, 2)
     end
 
     factory :defined_reference do
@@ -71,8 +70,10 @@ FactoryGirl.define do
     date    Time.new(1960)
     medium  "print"
     publisher
-    author
-
+    after(:build) do |reference|
+      reference.authors = build_list(:author, 2)
+    end
+    
     factory :defined_monograph_reference do
       after(:build) do |reference|
         3.times { reference.sessions << build(:session) }
@@ -87,9 +88,8 @@ FactoryGirl.define do
     date    Time.new(1960)
     medium  "print"
     publisher
-    author
     after(:build) do |reference|
-      reference.coauthors = build_list(:author, 2)
+      reference.authors = build_list(:author, 2)
     end
     monograph { build(:monograph_reference) }
 

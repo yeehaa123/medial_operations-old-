@@ -5,7 +5,7 @@ describe SessionsController do
 
   describe "making an index request" do
     
-    before { get :index, course_id: 1 }   
+    before { get :index, course_id: session.course_id }   
 
     it { should respond_with(:success) }
     it { should render_template(:index) }
@@ -14,7 +14,7 @@ describe SessionsController do
 
   describe "making a show request" do
 
-    before  { get :show, course_id: 1, id: session }   
+    before  { get :show, course_id: session.course_id, id: session }   
 
     it { should respond_with(:success) }
     it { should render_template(:show) }

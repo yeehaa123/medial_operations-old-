@@ -1,7 +1,7 @@
 class ReferencesController < ApplicationController
   def index
     @course = Course.find(params[:course_id])
-    @references = @course.references.uniq
+    @references = References.all.uniq
   end
 
   def show

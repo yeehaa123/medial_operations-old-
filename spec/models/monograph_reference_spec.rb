@@ -18,12 +18,13 @@ describe MonographReference do
     it { should be_valid }
 
     it { should be_a_collection}
-
+    
+    it { should have(2).authors }
     it { should have(3).sessions } 
     it { should have(4).site_articles }
     it { should have(5).chapters }
     
-    its(:to_s) { should == "#{ reference.author }. <em>#{ reference.title }</em>.
+    its(:to_s) { should == "#{ reference.authors.first }. <em>#{ reference.title }</em>.
     #{ reference.publisher }.
     #{ reference.date.strftime("%Y") }. #{ reference.medium.titleize }" }
   end

@@ -6,7 +6,7 @@ class AuthorsController < ApplicationController
 
   def show
     @course = Course.find(params[:course_id])
-    @author = Author.find(params[:id])
-    @references = @author.references.all
+    @author = @course.authors.find(params[:id])
+    @references = @author.references.uniq
   end
 end
