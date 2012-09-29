@@ -5,11 +5,11 @@ MedialOperations::Application.routes.draw do
   resources :courses,       only: [:show, :index] do
     resources :sessions,    only: [:show, :index]
     resources :sections,    only: [:show, :index]
-    resources :references,  only: [:show, :index]
-    resources :authors,     only: [:show, :index]
   end
-  
-  resources :articles,      only: [:show, :index]
+
+  resources :references,  only: [:show, :index]
+  resources :authors,     only: [:show, :index]
+  resources :articles,    only: [:show, :index]
 
   ActiveAdmin.routes(self)
 

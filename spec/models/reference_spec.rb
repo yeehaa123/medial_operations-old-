@@ -18,7 +18,7 @@ describe Reference do
   it { should validate_presence_of(:title) }
 
   it { should be_valid }
-  
+
   context "defined reference" do
     let(:reference) { build(:defined_reference) }
     
@@ -28,5 +28,9 @@ describe Reference do
     it { should have(2).authors }
     it { should have(3).sessions }  
     it { should have(4).site_articles }
+  end
+
+  its(:to_s) do
+    should == "#{ reference.authors.first } - #{ reference.title }"
   end
 end

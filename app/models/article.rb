@@ -3,7 +3,7 @@ class Article < ActiveRecord::Base
   default_scope order(:created_at).reverse_order
 
   attr_accessible :content, :title, :references
-  
+
   has_many :cited_works
   has_many :references, through: :cited_works
 

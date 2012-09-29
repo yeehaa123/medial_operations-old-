@@ -49,16 +49,17 @@ FactoryGirl.define do
   end
 
   factory :reference do
-    sequence(:title) { |n| "New Article #{n}" }
+    sequence(:title) { |n| "new article #{n}" }
     date    Time.new(1979)
     medium  "print"
     publisher
     after(:build) do |reference|
-      reference.authors = build_list(:author, 2)
+      reference.authors = build_list(:author, 1)
     end
 
     factory :defined_reference do
-      after(:build) do |reference|
+      after(:build) do |reference|      
+        reference.authors = build_list(:author, 2)
         3.times { reference.sessions << build(:session) }
         4.times { reference.site_articles << build(:article) }
       end
@@ -104,7 +105,7 @@ FactoryGirl.define do
   factory :author do
     first_name  "Jane"
     middle_name "H."
-    sequence(:last_name) { |n| "#{n} Doe" }
+    sequence(:last_name) { |n| "#{n}-Doe" }
 
     factory :author_with_references do
       after(:build) do |author|

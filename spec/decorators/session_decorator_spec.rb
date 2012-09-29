@@ -6,6 +6,13 @@ describe SessionDecorator do
   subject { session }
 
   it { should respond_to(:session) }
+  it { should respond_to(:course) }
+  it { should respond_to(:section) }
+  it { should respond_to(:description) }
+  it { should respond_to(:heading) }
+  it { should respond_to(:date) }
+  it { should respond_to(:time) }
+  it { should respond_to(:location) }
 
   describe "undefined session" do
     its(:description) { should be_nil }

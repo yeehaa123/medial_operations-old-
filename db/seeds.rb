@@ -360,16 +360,16 @@ ChapterReference.create(title: "A Thousand Plateaus",
                                  Author.find_by_last_name("guattari")],
                         monograph: b)
 
-ChapterReference.all.each_with_index do |r, i|
+ChapterReference.all.uniq.each_with_index do |r, i|
   j = 1974 + i
   i += 1
   r.date = Time.new(j)
-  Session.all.each do |s|
-    r.sessions << s
-  end
   r.site_articles << Article.first
   r.medium = "print"
   r.publisher = Publisher.first
+  Session.all.each do |s|
+    r.sessions << s
+  end
   r.save!
   b.chapters << r
   b.save

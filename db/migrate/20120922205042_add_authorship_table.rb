@@ -1,5 +1,5 @@
 class AddAuthorshipTable < ActiveRecord::Migration
-  def change       
+  def change
     create_table :authorships do |t|
     t.integer :reference_id
     t.integer :author_id

@@ -1,12 +1,48 @@
-class CourseDecorator < ApplicationDecorator
-  decorates :course
-  decorates_association :sections
-  decorates_association :sessions
+class ReferenceDecorator < ApplicationDecorator
+  decorates :reference
 
-  def title_prefix
-    if model.title_prefix
-      "#{ model.title_prefix }:"
+  def authors
+    s = ""
+    model.authors.each_with_index do |a, i|
+      if i == 0
+        s += "#{ a }"
+      else 
+        s += " and #{ a.full_name }"
+      end
     end
+    return s
+  end
+
+  def title 
+    if model.title
+      "#{ model.title.titleize }"
+    end
+  end
+
+  def publisher
+    if model.publisher
+      "#{ model.publisher }"
+    end
+  end
+
+  def year
+    if model.date
+      "#{ model.date.strftime("%Y") }"
+    end
+  end
+
+  def medium
+    if model.medium
+      "#{ model.medium.capitalize }"
+    end
+  end
+
+  def to_s
+    s =  "#{ authors }. "
+    s += "#{ title }. "
+    s += "#{ publisher }. "
+    s += "#{ year }. " 
+    s += "#{ medium }."
   end
 
   # Accessing Helpers

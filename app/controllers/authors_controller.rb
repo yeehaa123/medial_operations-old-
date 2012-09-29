@@ -1,12 +1,9 @@
 class AuthorsController < ApplicationController
   def index
-    @course = Course.find(params[:course_id])
-    @authors = @course.authors.uniq
+    @authors = Author.all.uniq
   end
 
   def show
-    @course = Course.find(params[:course_id])
-    @author = @course.authors.find(params[:id])
-    @references = @author.references.uniq
+    @author = Author.find(params[:id])
   end
 end
