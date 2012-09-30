@@ -23,9 +23,5 @@ describe MonographReference do
     it { should have(3).sessions } 
     it { should have(4).site_articles }
     it { should have(5).chapters }
-    
-    its(:to_s) { should == "#{ reference.authors.first }. <em>#{ reference.title }</em>.
-    #{ reference.publisher }.
-    #{ reference.date.strftime("%Y") }. #{ reference.medium.titleize }" }
   end
 end

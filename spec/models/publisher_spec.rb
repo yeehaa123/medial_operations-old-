@@ -18,6 +18,6 @@ describe Publisher do
   its(:to_s) do
     name = publisher.name.titleize
     location = publisher.location.titleize
-    should == "#{ name }: #{ location }"
+    should == "#{ location }: #{ name }"
   end
 end

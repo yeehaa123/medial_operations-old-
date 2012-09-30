@@ -57,6 +57,18 @@ FactoryGirl.define do
       reference.authors = build_list(:author, 1)
     end
 
+    factory :two_authors do
+      after(:build) do |reference|
+        reference.authors = build_list(:author, 2)
+      end
+    end
+
+    factory :three_authors do
+      after(:build) do |reference|
+        reference.authors = build_list(:author, 3)
+      end
+    end
+
     factory :defined_reference do
       after(:build) do |reference|      
         reference.authors = build_list(:author, 2)

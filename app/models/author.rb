@@ -3,8 +3,6 @@ class Author < ActiveRecord::Base
   before_validation :format_name
   after_initialize :format_name
 
-  scope :publications, joins(:references).order(:date).joins(:coreferences).order(:date)
-
   default_scope order(:last_name)
 
   has_many :authorships

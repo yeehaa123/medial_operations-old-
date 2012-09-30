@@ -1,5 +1,7 @@
 class ArticleDecorator < ApplicationDecorator
   decorates :article
+  decorates_associations :references
+
   # Accessing Helpers
   #   You can access any helper via a proxy
   #

@@ -14,7 +14,7 @@ describe ReferencesController do
 
   describe "making a show request" do
 
-    before  { get :show, id: reference }   
+    before  { get :show, id: reference.id }   
 
     it { should respond_with(:success) }
     it { should render_template(:show) }

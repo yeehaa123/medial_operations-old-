@@ -5,6 +5,6 @@ class ArticlesController < ApplicationController
 
   def show
     @article = ArticleDecorator.find(params[:id])
-    @references = @article.references.uniq
+    @references = @article.references
   end
 end

@@ -344,20 +344,20 @@ b.site_articles << Article.first
 
 # References
 ChapterReference.create(title: "What is Metaphyics?", 
-                        authors: [Author.find_by_last_name("heidegger")],
+                        authors: [Author.find_by_last_name("Heidegger")],
                         monograph: b)
 ChapterReference.create(title: "On Revolution", 
-                        authors: [Author.find_by_last_name("arendt")],
+                        authors: [Author.find_by_last_name("Arendt")],
                         monograph: b)
 ChapterReference.create(title: "The Work of Art in the Age of Mechanical Reproduction", 
-                        authors: [Author.find_by_last_name("benjamin")],
+                        authors: [Author.find_by_last_name("Benjamin")],
                         monograph: b)
 ChapterReference.create(title: "Grammophone, Film, Typewriter", 
-                        authors: [Author.find_by_last_name("kittler")],
+                        authors: [Author.find_by_last_name("Kittler")],
                         monograph: b)
 ChapterReference.create(title: "A Thousand Plateaus", 
-                        authors: [Author.find_by_last_name("deleuze"),
-                                 Author.find_by_last_name("guattari")],
+                        authors: [Author.find_by_last_name("Deleuze"),
+                                 Author.find_by_last_name("Guattari")],
                         monograph: b)
 
 ChapterReference.all.uniq.each_with_index do |r, i|

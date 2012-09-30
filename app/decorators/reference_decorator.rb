@@ -6,14 +6,18 @@ class ReferenceDecorator < ApplicationDecorator
     model.authors.each_with_index do |a, i|
       if i == 0
         s += "#{ a }"
-      else 
+      elsif i > 0 && model.authors.size == 2
         s += " and #{ a.full_name }"
+      elsif i > 0 && i < model.authors.size - 1
+        s += ", #{ a.full_name }"
+      else
+        s += ", and #{ a.full_name }"
       end
     end
     return s
   end
 
-  def title 
+  def title
     if model.title
       "#{ model.title.titleize }"
     end
@@ -37,13 +41,14 @@ class ReferenceDecorator < ApplicationDecorator
     end
   end
 
-  def to_s
+  def to_mla
     s =  "#{ authors }. "
     s += "#{ title }. "
     s += "#{ publisher }. "
-    s += "#{ year }. " 
+    s += "#{ year }. "
     s += "#{ medium }."
   end
+  alias_method :to_s, :to_mla
 
   # Accessing Helpers
   #   You can access any helper via a proxy

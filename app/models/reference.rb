@@ -1,9 +1,10 @@
 class Reference < ActiveRecord::Base
-  scope :collections, where(collection: true)
   scope :individuals, where(collection: false)
-  scope :year, order(:date)
+  scope :collections, where(collection: true)
+  scope :year, order('date')
+  scope :auth, includes(:authors).order('authors.last_name')
 
-  default_scope joins(:authors).order(:last_name).readonly(false)
+  default_scope auth.year
 
   attr_accessible :date, :medium, :title, :authors, :site_articles, :courses, :type_id,
                   :collection, :publisher

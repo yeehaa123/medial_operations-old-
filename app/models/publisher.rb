@@ -9,6 +9,6 @@ class Publisher < ActiveRecord::Base
   validates_uniqueness_of :location, scope: :name
 
   def to_s
-    "#{ name.titleize }: #{ location.titleize }"
+    "#{ location.titleize }: #{ name.titleize }"
   end
 end

@@ -1,6 +1,6 @@
 class ReferencesController < ApplicationController
   def index
-    @references = ReferenceDecorator.all.uniq
+    @references = ReferenceDecorator.all
   end
 
   def show
