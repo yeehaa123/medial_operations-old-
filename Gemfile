@@ -15,9 +15,9 @@ gem 'faker'
 gem 'draper'
 gem 'friendly_id'
 
-# group :development do
-#   gem 'rails_best_practices'
-# end
+group :development do
+  gem 'rails_best_practices'
+end
 
 group :development, :test do
   gem 'rspec-rails'

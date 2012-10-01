@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120924171054) do
+ActiveRecord::Schema.define(:version => 20121001161225) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -165,5 +165,8 @@ ActiveRecord::Schema.define(:version => 20120924171054) do
     t.datetime "start_time"
     t.datetime "end_time"
   end
+
+  add_index "sessions", ["course_id"], :name => "index_sessions_on_course_id"
+  add_index "sessions", ["section_id"], :name => "index_sessions_on_section_id"
 
 end

@@ -18,47 +18,87 @@ describe ReferenceDecorator do
   it { should respond_to(:sessions) }
   it { should respond_to(:courses) }
 
-  context "undefined reference" do
-    its(:authors)     { should == "#{ reference.authors.first }" }
-    its(:title)       { should == "#{ reference.title.titleize }" }
-    its(:publisher)   { should == "#{ reference.publisher }" }
-    its(:year)        { should == "#{ reference.date.strftime("%Y") }" }
-    its(:medium)      { should == "#{ reference.medium.capitalize }" }
+  context "mla formatted references" do
+ 
+    context "authors" do
+      it "with same author as previous reference" do
+        dec_ref.authors(true).should == "---"
+      end
 
-    its(:to_s) do 
-      s =  "#{ dec_ref.authors }. "
-      s += "#{ dec_ref.title }. "
-      s += "#{ dec_ref.publisher }. "
-      s += "#{ dec_ref.year }. " 
-      s += "#{ dec_ref.medium }."
-      should == s
-    end
-  end
+      describe "with one author" do
+        its(:authors) { should == "#{ reference.authors.first }" }
+      end
+      
+      describe "with two authors" do
+        let(:reference) { build(:two_authors) }
 
-  context "multiple authors" do
-    describe "two authors" do
-      let(:reference) { build(:two_authors) }
+        its(:authors) do
+          first_author = reference.authors.first
+          second_author = reference.authors.last.full_name
+          should == "#{ first_author } and #{ second_author }"
+        end
+      end
 
-      its(:authors) do
-        first_author = reference.authors.first
-        second_author = reference.authors.last.full_name
-        should == "#{ first_author } and #{ second_author }"
+      describe "with three authors" do
+        let(:reference) { build(:three_authors) }
+
+        its(:authors) do
+          a1, a2, a3, a4 = []
+          reference.authors.each_with_index do |a, i|
+            case i
+              when 0 then a1 = a
+              when 1 then a2 = a
+              when 2 then a3 = a
+            end
+          end
+          should == "#{ a1 }, #{ a2.full_name }, and #{ a3.full_name }"
+        end
       end
     end
 
-    describe "three authors" do
-      let(:reference) { build(:three_authors) }
+    context "title" do
 
-      its(:authors) do
-        a1, a2, a3, a4 = []
-        reference.authors.each_with_index do |a, i|
-          case i
-            when 0 then a1 = a
-            when 1 then a2 = a
-            when 2 then a3 = a
-          end
+      describe "if reference is a collection" do
+        let(:reference) { build(:monograph_reference) }
+        its(:title) { should == "<em>#{ reference.title.titleize }</em>" }
+      end
+      
+      describe "if reference is not a collection" do
+        let(:reference) { build(:chapter_reference) }
+        
+        it "should include monograph in reference" do
+          chapter_title = "'#{ reference.title.titleize }'"
+          monograph_title = "<em>#{reference.monograph.title }</em>"
+          dec_ref.title.should == chapter_title + " in " + monograph_title
         end
-        should == "#{ a1 }, #{ a2.full_name }, and #{ a3.full_name }"
+      end
+    end
+    
+    context "other attributes" do
+      its(:publisher)   { should == "#{ reference.publisher }" }
+      its(:year)        { should == "#{ reference.date.strftime("%Y") }" }
+      its(:medium)      { should == "#{ reference.medium.capitalize }" }
+    end
+
+    context "formatted reference" do
+      let(:reference) { build(:chapter_reference) }
+      
+      it "should output a correct mla reference" do 
+        s =  "#{ dec_ref.authors }. "
+        s += "#{ dec_ref.title }. "
+        s += "#{ dec_ref.publisher }. "
+        s += "#{ dec_ref.year }. " 
+        s += "#{ dec_ref.medium }."
+        dec_ref.to_mla.should == s
+      end
+        
+      it "should output --- when author is same" do
+        s =  "---. "
+        s += "#{ dec_ref.title }. "
+        s += "#{ dec_ref.publisher }. "
+        s += "#{ dec_ref.year }. " 
+        s += "#{ dec_ref.medium }."
+        dec_ref.to_mla(true).should == s
       end
     end
   end

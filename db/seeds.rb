@@ -349,6 +349,9 @@ ChapterReference.create(title: "What is Metaphyics?",
 ChapterReference.create(title: "On Revolution", 
                         authors: [Author.find_by_last_name("Arendt")],
                         monograph: b)
+ChapterReference.create(title: "Vita Activa", 
+                        authors: [Author.find_by_last_name("Arendt")],
+                        monograph: b)
 ChapterReference.create(title: "The Work of Art in the Age of Mechanical Reproduction", 
                         authors: [Author.find_by_last_name("Benjamin")],
                         monograph: b)
@@ -356,6 +359,10 @@ ChapterReference.create(title: "Grammophone, Film, Typewriter",
                         authors: [Author.find_by_last_name("Kittler")],
                         monograph: b)
 ChapterReference.create(title: "A Thousand Plateaus", 
+                        authors: [Author.find_by_last_name("Deleuze"),
+                                 Author.find_by_last_name("Guattari")],
+                        monograph: b)
+ChapterReference.create(title: "Kafka. Towards a Minor Literature", 
                         authors: [Author.find_by_last_name("Deleuze"),
                                  Author.find_by_last_name("Guattari")],
                         monograph: b)

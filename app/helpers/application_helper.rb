@@ -16,4 +16,21 @@ module ApplicationHelper
     end
     result
   end
+
+  def works_cited(references, title = "Works Cited")
+    haml_tag :section, class: "bibliography" do
+      haml_tag :h1, title
+      haml_tag :ul do
+        a = []
+        references.each do |r|
+          if a == r.authors
+            haml_tag :li, link_to(raw(r.to_mla(true)), r)
+          else
+            haml_tag :li, link_to(raw(r.to_mla), r)
+          end
+          a = r.authors
+        end
+      end
+    end
+  end
 end

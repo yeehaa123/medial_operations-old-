@@ -2,7 +2,7 @@ class Reference < ActiveRecord::Base
   scope :individuals, where(collection: false)
   scope :collections, where(collection: true)
   scope :year, order('date')
-  scope :auth, includes(:authors).order('authors.last_name')
+  scope :auth, includes(:authors).order('authors.last_name').unscoped
 
   default_scope auth.year
 

@@ -1,5 +1,6 @@
 class SessionDecorator < ApplicationDecorator
   decorates :session
+  decorates_association :references
 
   def date
     if model.start_time

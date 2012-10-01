@@ -1,3 +1,3 @@
 %section.article
   = kramdown(@article.content)
-  = render partial: "shared/bibliography", locals: { references: @references }
+  - works_cited(@references)

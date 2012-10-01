@@ -1,7 +1,3 @@
-%h1= @reference.title
-
-- if @reference.authors.count > 1
-  %h2= "#{ link_to(@reference.authors.first) } and #{ link_to(@reference.authors.last.full_name) }"
-- else
-  %h2= link_to @reference.authors.first
-%p= @reference.publishers
+%h1= @reference.reference.title
+%h2= link_to @reference.authors
+%p= @reference.publisher

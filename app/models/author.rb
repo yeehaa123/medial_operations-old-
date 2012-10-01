@@ -3,8 +3,6 @@ class Author < ActiveRecord::Base
   before_validation :format_name
   after_initialize :format_name
 
-  default_scope order(:last_name)
-
   has_many :authorships
   has_many :references, through: :authorships
 
