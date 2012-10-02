@@ -8,7 +8,7 @@ describe ReferenceDecorator do
 
   it { should respond_to(:reference) }
   it { should respond_to(:authors) }
-  it { should respond_to(:authors) }
+  it { should respond_to(:author_list) }
   it { should respond_to(:title) }
   it { should respond_to(:medium) }
   it { should respond_to(:date) }
@@ -22,17 +22,17 @@ describe ReferenceDecorator do
  
     context "authors" do
       it "with same author as previous reference" do
-        dec_ref.authors(true).should == "---"
+        dec_ref.author_list(true).should == "---"
       end
 
       describe "with one author" do
-        its(:authors) { should == "#{ reference.authors.first }" }
+        its(:author_list) { should == "#{ reference.authors.first }" }
       end
       
       describe "with two authors" do
         let(:reference) { build(:two_authors) }
 
-        its(:authors) do
+        its(:author_list) do
           first_author = reference.authors.first
           second_author = reference.authors.last.full_name
           should == "#{ first_author } and #{ second_author }"
@@ -42,7 +42,7 @@ describe ReferenceDecorator do
       describe "with three authors" do
         let(:reference) { build(:three_authors) }
 
-        its(:authors) do
+        its(:author_list) do
           a1, a2, a3, a4 = []
           reference.authors.each_with_index do |a, i|
             case i
@@ -67,9 +67,9 @@ describe ReferenceDecorator do
         let(:reference) { build(:chapter_reference) }
         
         it "should include monograph in reference" do
-          chapter_title = "'#{ reference.title.titleize }'"
+          chapter_title = "\"#{ reference.title.titleize }.\" "
           monograph_title = "<em>#{reference.monograph.title }</em>"
-          dec_ref.title.should == chapter_title + " in " + monograph_title
+          dec_ref.title.should == chapter_title + monograph_title
         end
       end
     end
@@ -84,9 +84,9 @@ describe ReferenceDecorator do
       let(:reference) { build(:chapter_reference) }
       
       it "should output a correct mla reference" do 
-        s =  "#{ dec_ref.authors }. "
+        s =  "#{ dec_ref.author_list }. "
         s += "#{ dec_ref.title }. "
-        s += "#{ dec_ref.publisher }. "
+        s += "#{ dec_ref.publisher }, "
         s += "#{ dec_ref.year }. " 
         s += "#{ dec_ref.medium }."
         dec_ref.to_mla.should == s
@@ -95,7 +95,7 @@ describe ReferenceDecorator do
       it "should output --- when author is same" do
         s =  "---. "
         s += "#{ dec_ref.title }. "
-        s += "#{ dec_ref.publisher }. "
+        s += "#{ dec_ref.publisher }, "
         s += "#{ dec_ref.year }. " 
         s += "#{ dec_ref.medium }."
         dec_ref.to_mla(true).should == s

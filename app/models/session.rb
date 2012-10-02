@@ -1,10 +1,19 @@
-class RightCourseValidator < ActiveModel::Validator
-  def validate(record)
-    unless record.section.course_id == record.course_id
-      record.errors[:section] << 'section needs to belong to same course'
-    end
-  end
-end
+# == Schema Information
+#
+# Table name: sessions
+#
+#  id          :integer          not null, primary key
+#  title       :string(255)
+#  number      :integer
+#  description :text
+#  course_id   :integer
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  section_id  :integer
+#  location    :string(255)
+#  start_time  :datetime
+#  end_time    :datetime
+#
 
 class Session < ActiveRecord::Base
   attr_accessible :description, :title, :number, :section_id, :course_id, :course,

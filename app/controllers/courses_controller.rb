@@ -1,9 +1,10 @@
 class CoursesController < ApplicationController
+  expose(:course)   { CourseDecorator.find(params[:id]) }
+  expose(:courses)  { CourseDecorator.decorate(Course.all) }
+
   def index
-    @courses = CourseDecorator.all
   end
 
   def show
-    @course = CourseDecorator.find(params[:id])
   end
 end

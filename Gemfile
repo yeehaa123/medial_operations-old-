@@ -14,10 +14,13 @@ gem 'unicorn'
 gem 'faker'
 gem 'draper'
 gem 'friendly_id'
+gem 'annotate', ">=2.5.0"
+gem 'decent_exposure'
 
-group :development do
-  gem 'rails_best_practices'
-end
+# group :development do
+#   gem 'rails_best_practices'
+#   gem "rails-erd"
+# end
 
 group :development, :test do
   gem 'rspec-rails'

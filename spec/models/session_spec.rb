@@ -1,3 +1,20 @@
+# == Schema Information
+#
+# Table name: sessions
+#
+#  id          :integer          not null, primary key
+#  title       :string(255)
+#  number      :integer
+#  description :text
+#  course_id   :integer
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  section_id  :integer
+#  location    :string(255)
+#  start_time  :datetime
+#  end_time    :datetime
+#
+
 require 'spec_helper'
 
 describe Session do

@@ -1,3 +1,5 @@
-%h1= @reference.reference.title
-%h2= link_to @reference.authors
-%p= @reference.publisher
+%h1= raw(reference.title)
+%h2= link_to reference.authors.first.full_name, reference.authors.first
+- if reference.reference.authors.size > 1
+  %h2= link_to reference.authors.last.full_name, reference.authors.last
+%p= reference.publisher

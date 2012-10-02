@@ -1,7 +1,7 @@
 class ReferenceDecorator < ApplicationDecorator
   decorates :reference
 
-  def authors(dup = false)
+  def author_list(dup = false)
     if dup
       s = "---"
     else
@@ -25,7 +25,7 @@ class ReferenceDecorator < ApplicationDecorator
     if model.title && model.collection
       content_tag :em, "#{ model.title.titleize }"
     elsif model.title
-      s = "'#{ model.title.titleize }' in "
+      s = "\"#{ model.title.titleize }.\" "
       s += content_tag :em, "#{ monograph.title.titleize }"
     end
   end
@@ -49,9 +49,9 @@ class ReferenceDecorator < ApplicationDecorator
   end
 
   def to_mla(dup = false)
-    s =  "#{ authors(dup) }. "
+    s =  "#{ author_list(dup) }. "
     s += "#{ title }. "
-    s += "#{ publisher }. "
+    s += "#{ publisher }, "
     s += "#{ year }. "
     s += "#{ medium }."
   end

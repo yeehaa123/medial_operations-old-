@@ -1,9 +1,10 @@
 class ReferencesController < ApplicationController
+  expose(:reference)  { ReferenceDecorator.find(params[:id]) }
+  expose(:references) { ReferenceDecorator.decorate(Reference.all) }
+
   def index
-    @references = ReferenceDecorator.decorate(Reference.all)
   end
 
   def show
-    @reference = ReferenceDecorator.find(params[:id])
   end
 end

@@ -49,14 +49,21 @@ describe ApplicationHelper do
       let(:dec_refs)      { ReferenceDecorator.decorate(references) }
       let(:bibliography)  { capture_haml { works_cited(dec_refs) } }
 
-      it { should include("Me") }
+      it { should have_content("Me") }
+      it { should have_link("Me") }
+      it { should have_link("You") }
+      it { should have_selector('ul', count: 1) }
+      it { should have_selector('li', count: 2) }
 
       describe "two identical authors" do
         let(:reference2)    { stub authors: ["Me"], title: "Title", collection: true, 
                             publisher: "", date: Time.now, medium: "Print" }
-        it { should include("---.") }
-        it { should include("Me") }
-        it { should_not include("You") }
+
+        it { should have_content("---.") }
+        it { should have_content("Me") }
+        it { should have_link("Me") }
+        it { should have_link("---") }
+        it { should_not have_content("You") }
       end
     end
   end

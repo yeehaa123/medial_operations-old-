@@ -1,10 +1,11 @@
 class ArticlesController < ApplicationController
+  expose(:article)    { ArticleDecorator.find(params[:id]) }
+  expose(:articles)   { ArticleDecorator.decorate(Article.all) }
+  expose(:references) { article.references }
+  
   def index
-    @articles = ArticleDecorator.all
   end
 
   def show
-    @article = ArticleDecorator.find(params[:id])
-    @references = @article.references
   end
 end

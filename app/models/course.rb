@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: courses
+#
+#  id           :integer          not null, primary key
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  title        :string(255)
+#  description  :text
+#  slug         :string(255)
+#  title_prefix :string(255)
+#
+
 class Course < ActiveRecord::Base
   include FriendlyId
   attr_accessible :title, :title_prefix, :description, :sections, :sessions, :references

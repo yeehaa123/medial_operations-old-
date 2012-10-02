@@ -1,2 +1,2 @@
-%h1= @author.full_name
-= render partial: "shared/bibliography", locals: { references: @author.references }
+%h1= author.full_name
+- works_cited(references)

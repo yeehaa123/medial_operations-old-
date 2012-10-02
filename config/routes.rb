@@ -1,7 +1,8 @@
 MedialOperations::Application.routes.draw do
+  root to: 'static_pages#home'
+
   devise_for :courses, ActiveAdmin::Devise.config
 
-  root to: 'courses#index'
   resources :courses,       only: [:show, :index] do
     resources :sessions,    only: [:show, :index]
     resources :sections,    only: [:show, :index]
