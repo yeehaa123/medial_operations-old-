@@ -128,6 +128,8 @@ GEM
       activesupport (>= 3.0.0)
     kgio (2.7.4)
     kramdown (0.13.8)
+    launchy (2.1.2)
+      addressable (~> 2.3)
     libwebsocket (0.1.5)
       addressable
     mail (2.4.4)
@@ -250,6 +252,7 @@ DEPENDENCIES
   haml-rails
   jquery-rails
   kramdown
+  launchy
   pg
   rails (= 3.2.8)
   rspec-rails

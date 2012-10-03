@@ -44,6 +44,7 @@ group :test do
   gem 'factory_girl_rails'
   gem 'deadweight'
   gem 'database_cleaner'
+  gem "launchy"
 end
 
 # To use ActiveModel has_secure_password

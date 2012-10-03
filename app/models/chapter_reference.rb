@@ -11,6 +11,7 @@
 #  type       :string(255)
 #  type_id    :integer
 #  collection :boolean          default(FALSE)
+#  pages      :string(255)
 #
 
 class ChapterReference < Reference

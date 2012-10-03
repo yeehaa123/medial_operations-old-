@@ -18,6 +18,8 @@ describe Author do
   subject { author }
 
   it { should respond_to(:references) }
+  it { should respond_to(:volumes) }
+  it { should respond_to(:translations) }
   it { should respond_to(:first_name) }
   it { should respond_to(:middle_name) }
   it { should respond_to(:last_name) }
@@ -44,5 +46,23 @@ describe Author do
     let(:author) { build(:author_with_references) }
 
     it { should have(5).references }
+    it { should have(0).translations }
+    it { should have(0).volumes }
+  end
+
+  context "author with translations" do
+    let(:author) { build(:author_with_translations) }
+
+    it { should have(5).translations }
+    it { should have(0).references }
+    it { should have(0).volumes }
+  end
+
+  context "author with volumes" do
+    let(:author) { build(:author_with_volumes) }
+
+    it { should have(0).translations }
+    it { should have(0).references }
+    it { should have(5).volumes }
   end
 end

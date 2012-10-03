@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121001161225) do
+ActiveRecord::Schema.define(:version => 20121003200915) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -97,6 +97,17 @@ ActiveRecord::Schema.define(:version => 20121001161225) do
 
   add_index "courses", ["slug"], :name => "index_courses_on_slug", :unique => true
 
+  create_table "editorships", :force => true do |t|
+    t.integer  "author_id"
+    t.integer  "reference_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "editorships", ["author_id", "reference_id"], :name => "index_editorships_on_author_id_and_reference_id", :unique => true
+  add_index "editorships", ["author_id"], :name => "index_editorships_on_author_id"
+  add_index "editorships", ["reference_id"], :name => "index_editorships_on_reference_id"
+
   create_table "publisheds", :force => true do |t|
     t.integer  "publisher_id"
     t.integer  "reference_id"
@@ -135,6 +146,7 @@ ActiveRecord::Schema.define(:version => 20121001161225) do
     t.string   "type"
     t.integer  "type_id"
     t.boolean  "collection", :default => false
+    t.string   "pages"
   end
 
   add_index "references", ["collection"], :name => "index_references_on_collection"
@@ -168,5 +180,16 @@ ActiveRecord::Schema.define(:version => 20121001161225) do
 
   add_index "sessions", ["course_id"], :name => "index_sessions_on_course_id"
   add_index "sessions", ["section_id"], :name => "index_sessions_on_section_id"
+
+  create_table "translatorships", :force => true do |t|
+    t.integer  "author_id"
+    t.integer  "reference_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "translatorships", ["author_id", "reference_id"], :name => "index_translatorships_on_author_id_and_reference_id", :unique => true
+  add_index "translatorships", ["author_id"], :name => "index_translatorships_on_author_id"
+  add_index "translatorships", ["reference_id"], :name => "index_translatorships_on_reference_id"
 
 end

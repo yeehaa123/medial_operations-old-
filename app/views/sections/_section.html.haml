@@ -1,4 +1,6 @@
-%h1= link_to section.heading, course_section_path(section.course, section)
-= section.description
-%section.sessions
-  = render section.sessions
+%section.sections
+  %h1= link_to section.heading, course_section_path(section.course, section)
+  = section.description
+
+  - if section.sessions.size > 0 
+    = render section.sessions

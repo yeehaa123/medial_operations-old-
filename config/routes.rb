@@ -1,5 +1,5 @@
 MedialOperations::Application.routes.draw do
-  root to: 'static_pages#home'
+  root to: 'courses#show', id: 1
 
   devise_for :courses, ActiveAdmin::Devise.config
 

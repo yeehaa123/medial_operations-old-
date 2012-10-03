@@ -1,106 +1,128 @@
-course_description = <<END
-Nowadays, computers are literally everywhere. Through heterogeneous interfaces 
-- such as sensors, transistors, and servo motors - they are inextricably 
-linked our spaces and bodies. For this reason, it is almost impossible to 
-analyze cultural object independent of its technological apparatus. 
-Nevertheless, the knowledge of scholars in the humanities about the hard-, 
-wet-, and software of art, literature, culture, and politics is little or none.
+# Authors ---------------------------------------------------------------------
 
-In this course we will modestly attempt to compensate for our discipline's 
-technological illiteracy and research the following question:
+Author.create(first_name: "Hannah", last_name: "Arendt")
+Author.create(first_name: "Walter", last_name: "Benjamin")
+Author.create(first_name: "Gilles", last_name: "Deleuze")
+Author.create(first_name: "Felix", last_name: "Guattari")
+Author.create(first_name: "Martin", last_name: "Heidegger")
+Author.create(first_name: "Friedrich", last_name: "Kittler")
+Author.create(first_name: "Friedrich", last_name: "Nietzsche")
+Author.create(first_name: "Uni", last_name: "Versal")
 
-> What kind of approaches, methods and techniques are needed to analyze the 
-technical dimension of contemporary cultural objects?
+# Editors
 
-Nowadays, computers are literally everywhere. Through heterogeneous interfaces 
-- such as sensors, transistors, and servo motors - they are inextricably 
-linked our spaces and bodies. For this reason, it is almost impossible to 
-analyze cultural object independent of its technological apparatus. 
-Nevertheless, the knowledge of scholars in the humanities about the hard-, 
-wet-, and software of art, literature, culture, and politics is little or none.
-END
+Author.create(first_name: "Bernard", last_name: "Williams")
+Author.create(first_name: "Marcus Paul", last_name: "Bullock")
+Author.create(first_name: "Michael William", last_name: "Jennings")
 
-section_description = <<END
-In this course we will modestly attempt to compensate for our discipline's 
-technological illiteracy and research the following question:
+# Translators
 
-> What kind of approaches, methods and techniques are needed to analyze the 
-technical dimension of contemporary cultural objects?
+Author.create(first_name: "Josefine", last_name: "Nauckhoff")
+Author.create(first_name: "Adrian", last_name: "Del Caro")
+Author.create(first_name: "R. J.", last_name: "Hollingdale")
 
-Nowadays, computers are literally everywhere. Through heterogeneous interfaces 
-- such as sensors, transistors, and servo motors - they are inextricably 
-linked our spaces and bodies.
-END
+# Publisher -------------------------------------------------------------------
 
-session_description = <<END
-Nowadays, computers are literally everywhere. Through heterogeneous interfaces 
-- such as sensors, transistors, and servo motors - they are inextricably 
-linked our spaces and bodies.
-END
+Publisher.create(name: "Annoying", location: "Amsterdam")
+Publisher.create(name: "Cambridge University Press", location: "Cambridge")
+Publisher.create(name: "Harvard University Press", location: "Cambridge, MA")
+
+
+# References ------------------------------------------------------------------
+
+MonographReference.create(title: "Everything Ever Written",
+                          authors: [Author.find_by_last_name("Versal")],
+                          date: Time.new(2012),
+                          medium: "print",
+                          publisher: Publisher.find_by_name("Annoying"))
+MonographReference.create(title: "The Gay Science",
+                          authors: [Author.find_by_last_name("Nietzsche")],
+                          editors: [Author.find_by_last_name("Williams")],
+                          translators: [Author.find_by_last_name("Nauckhoff"),
+                                        Author.find_by_last_name("Del Caro")],
+                          date: Time.new(2001),
+                          medium: "print",
+                          publisher: Publisher.find_by_location("Cambridge"))
+MonographReference.create(title: "Human, All Too Human",
+                          authors: [Author.find_by_last_name("Nietzsche")],
+                          translators: [Author.find_by_last_name("Hollingdale")],
+                          date: Time.new(1996),
+                          medium: "print",
+                          publisher: Publisher.find_by_location("Cambridge"))
+MonographReference.create(title: "One-Way Street",
+                          authors: [Author.find_by_last_name("Benjamin")],
+                          editors: [Author.find_by_last_name("Bullock"),
+                                    Author.find_by_last_name("Jennings")],
+                          date: Time.new(1996),
+                          medium: "print",
+                          publisher: Publisher.find_by_location("Cambridge, MA"))
+
+#------------------------------------------------------------------------------
+
+ChapterReference.create(title: "To the Planetarium", 
+                        authors: [Author.find_by_last_name("Benjamin")],
+                        monograph: MonographReference.find_by_title("One-Way Street"),
+                        publisher: Publisher.first,
+                        date: Time.new(1928),
+                        medium: "Print",
+                        pages: "486-487")
+ChapterReference.create(title: "Future of Science", 
+                        authors: [Author.find_by_last_name("Nietzsche")],
+                        monograph: MonographReference.find_by_title("Human, All Too Human"),
+                        publisher: Publisher.first,
+                        date: Time.new(1928),
+                        medium: "Print",
+                        pages: "119")
+
+
+ChapterReference.create(title: "What is Metaphyics?", 
+                        authors: [Author.find_by_last_name("Heidegger")],
+                        monograph: MonographReference.last,
+                        publisher: Publisher.first,
+                        date: Time.new(1929),
+                        medium: "Print")
+ChapterReference.create(title: "On Revolution", 
+                        authors: [Author.find_by_last_name("Arendt")],
+                        monograph: MonographReference.last,
+                        publisher: Publisher.first,
+                        date: Time.new(1970),
+                        medium: "Print")
+ChapterReference.create(title: "Vita Activa", 
+                        authors: [Author.find_by_last_name("Arendt")],
+                        monograph: MonographReference.last,
+                        publisher: Publisher.first,
+                        date: Time.new(1950),
+                        medium: "Print")
+ChapterReference.create(title: "Grammophone, Film, Typewriter", 
+                        authors: [Author.find_by_last_name("Kittler")],
+                        monograph: MonographReference.last,
+                        publisher: Publisher.first,
+                        date: Time.new(1984),
+                        medium: "Print")
+ChapterReference.create(title: "A Thousand Plateaus", 
+                        authors: [Author.find_by_last_name("Deleuze"),
+                                 Author.find_by_last_name("Guattari")],
+                        monograph: MonographReference.last,
+                        publisher: Publisher.last,
+                        date: Time.new(1981),
+                        medium: "Print")
+ChapterReference.create(title: "Kafka. Towards a Minor Literature", 
+                        authors: [Author.find_by_last_name("Deleuze"),
+                                 Author.find_by_last_name("Guattari")],
+                        monograph: MonographReference.last,
+                        publisher: Publisher.first,
+                        date: Time.new(1974),
+                        medium: "Print")
+
+
+# USERS -----------------------------------------------------------------------
 
 AdminUser.create(email: "admin@example.com", 
                  password: "password", 
                  password_confirmation: "password")
 
-# COURSE
 
-Course.create(title_prefix: "Art, Science, and Technology",
-              title: "Medial Operations", 
-              description: course_description)
-
-
-# SECTIONS
-
-Section.create(title: "Space Invaders", 
-                     course: Course.first,
-                     description: section_description,
-                     number: 1)
-Section.create(title: "War Games", 
-                     course: Course.first, 
-                     description: section_description,
-                     number: 2)
-Section.create(title: "Code Matters", 
-                     course: Course.first, 
-                     description: section_description,
-                     number: 3)
-
-
-# SESSIONS
-
-14.times do |count|
-  c = count + 1
-  case c
-  when 1..5  
-    Session.create(title: "Test #{ c }", 
-                   section: Section.find(1),
-                   course: Course.first,
-                   description: session_description,
-                   start_time: Time.now + c.weeks,
-                   end_time: Time.now + c.weeks + 2.hours,
-                   location: "Bungehuis 4.01",
-                   number: c)
-  when 6..10
-    Session.create(title: "Test #{ c }", 
-                   section: Section.find(2),
-                   course: Course.first,
-                   description: session_description,
-                   start_time: Time.now + c.weeks,
-                   end_time: Time.now + c.weeks + 2.hours,
-                   location: "Bungehuis 4.01",
-                   number: c)
-  when 11..14
-    Session.create(title: "Test #{ c }", 
-                   section: Section.find(3), 
-                   course: Course.first,
-                   description: session_description,
-                   start_time: Time.now + c.weeks,
-                   end_time: Time.now + c.weeks + 2.hours,
-                   location: "Bungehuis 4.01",
-                   number: c)
-  end
-end
-
-# Articles
+# Articles --------------------------------------------------------------------
 
 article = <<END
 # Towards a New Intellectual
@@ -320,64 +342,136 @@ to the task even better. In fact, I would claim that is actually the technical
 medium that allows us to view the human subject differently.
 END
 
-Article.create(content: article)
-
-# Authors
-Author.create(first_name: "Martin", last_name: "Heidegger")
-Author.create(first_name: "Hannah", last_name: "Arendt")
-Author.create(first_name: "Walter", last_name: "Benjamin")
-Author.create(first_name: "Friedrich", last_name: "Kittler")
-Author.create(first_name: "Gilles", last_name: "Deleuze")
-Author.create(first_name: "Felix", last_name: "Guattari")
-
-# Publisher
-Publisher.create(name: "Annoying", location: "Amsterdam")
+Article.create(content: article, references: Reference.all)
 
 
-b = MonographReference.create
-b.title = "Everything Ever Written"
-b.authors = [Author.create(first_name: "Uni", last_name: "Versal")]
-b.date = Time.new(2012)
-b.medium = "print"
-b.publisher = Publisher.first
-b.site_articles << Article.first
+# COURSE ----------------------------------------------------------------------
 
-# References
-ChapterReference.create(title: "What is Metaphyics?", 
-                        authors: [Author.find_by_last_name("Heidegger")],
-                        monograph: b)
-ChapterReference.create(title: "On Revolution", 
-                        authors: [Author.find_by_last_name("Arendt")],
-                        monograph: b)
-ChapterReference.create(title: "Vita Activa", 
-                        authors: [Author.find_by_last_name("Arendt")],
-                        monograph: b)
-ChapterReference.create(title: "The Work of Art in the Age of Mechanical Reproduction", 
-                        authors: [Author.find_by_last_name("Benjamin")],
-                        monograph: b)
-ChapterReference.create(title: "Grammophone, Film, Typewriter", 
-                        authors: [Author.find_by_last_name("Kittler")],
-                        monograph: b)
-ChapterReference.create(title: "A Thousand Plateaus", 
-                        authors: [Author.find_by_last_name("Deleuze"),
-                                 Author.find_by_last_name("Guattari")],
-                        monograph: b)
-ChapterReference.create(title: "Kafka. Towards a Minor Literature", 
-                        authors: [Author.find_by_last_name("Deleuze"),
-                                 Author.find_by_last_name("Guattari")],
-                        monograph: b)
 
-ChapterReference.all.uniq.each_with_index do |r, i|
-  j = 1974 + i
-  i += 1
-  r.date = Time.new(j)
-  r.site_articles << Article.first
-  r.medium = "print"
-  r.publisher = Publisher.first
-  Session.all.each do |s|
-    r.sessions << s
+course_description = <<END
+Nowadays, computers are literally everywhere. Through heterogeneous interfaces 
+- such as sensors, transistors, and servo motors - they are inextricably 
+linked our spaces and bodies. It has therefore become almost impossible to 
+analyze cultural objects independent of their technological apparatus. 
+Nevertheless, scholars in the humanities are reluctant to learn about the hard-, 
+wet-, and software of art, literature, culture, and politics.
+
+In this course we will modestly attempt to compensate for our discipline's 
+technological illiteracy and research the following question:
+
+> What kind of approaches, methods and techniques are needed to analyze the 
+technical dimension of contemporary cultural objects?
+
+END
+
+Course.create(title_prefix: "Art, Science, and Technology",
+              title: "Medial Operations", 
+              description: course_description)
+
+
+# SECTIONS --------------------------------------------------------------------
+
+section_1_description = <<END
+In this course we will modestly attempt to compensate for our discipline's 
+technological illiteracy and research the following question:
+
+> What kind of approaches, methods and techniques are needed to analyze the 
+technical dimension of contemporary cultural objects?
+
+Nowadays, computers are literally everywhere. Through heterogeneous interfaces 
+- such as sensors, transistors, and servo motors - they are inextricably 
+linked our spaces and bodies.
+END
+
+section_2_description = <<END
+In this course we will modestly attempt to compensate for our discipline's 
+technological illiteracy and research the following question:
+
+> What kind of approaches, methods and techniques are needed to analyze the 
+technical dimension of contemporary cultural objects?
+
+Nowadays, computers are literally everywhere. Through heterogeneous interfaces 
+- such as sensors, transistors, and servo motors - they are inextricably 
+linked our spaces and bodies.
+END
+
+section_3_description = <<END
+In this course we will modestly attempt to compensate for our discipline's 
+technological illiteracy and research the following question:
+
+> What kind of approaches, methods and techniques are needed to analyze the 
+technical dimension of contemporary cultural objects?
+
+Nowadays, computers are literally everywhere. Through heterogeneous interfaces 
+- such as sensors, transistors, and servo motors - they are inextricably 
+linked our spaces and bodies.
+END
+
+Section.create(title: "Mapping The Humanities", 
+                     course: Course.first,
+                     description: section_1_description,
+                     number: 1)
+Section.create(title: "F(r)ictions and/or (Fr)Actions of the Imaginary", 
+                     course: Course.first, 
+                     description: section_2_description,
+                     number: 2)
+Section.create(title: "The Eternal Recurrence of Body Snatchers", 
+                     course: Course.first, 
+                     description: section_3_description,
+                     number: 3)
+
+
+# SESSIONS --------------------------------------------------------------------
+
+session_description = <<END
+Nowadays, computers are literally everywhere. Through heterogeneous interfaces 
+- such as sensors, transistors, and servo motors - they are inextricably 
+linked our spaces and bodies.
+END
+
+Session.create(title: "Introduction", 
+               course: Course.first,
+               description: session_description,
+               references: [Reference.find_by_title("To the Planetarium"),
+                            Reference.find_by_title("Future of Science")],
+               start_time: Time.now,
+               end_time: Time.now + 2.hours,
+               location: "Bungehuis 4.01",
+               number: 1)
+
+
+13.times do |count|
+  c = count + 2
+  case c
+  when 1..5  
+    Session.create(title: "Test #{ c }", 
+                   section: Section.find(1),
+                   course: Course.first,
+                   description: session_description,
+                   references: Reference.all,
+                   start_time: Time.now + c.weeks,
+                   end_time: Time.now + c.weeks + 2.hours,
+                   location: "Bungehuis 4.01",
+                   number: c)
+  when 6..10
+    Session.create(title: "Test #{ c }", 
+                   section: Section.find(2),
+                   course: Course.first,
+                   description: session_description,
+                   references: Reference.all,
+                   start_time: Time.now + c.weeks,
+                   end_time: Time.now + c.weeks + 2.hours,
+                   location: "Bungehuis 4.01",
+                   number: c)
+  when 11..14
+    Session.create(title: "Test #{ c }", 
+                   section: Section.find(3), 
+                   course: Course.first,
+                   description: session_description,
+                   references: Reference.all,
+                   start_time: Time.now + c.weeks,
+                   end_time: Time.now + c.weeks + 2.hours,
+                   location: "Bungehuis 4.01",
+                   number: c)
   end
-  r.save!
-  b.chapters << r
-  b.save
 end

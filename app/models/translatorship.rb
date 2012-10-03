@@ -1,17 +1,17 @@
 # == Schema Information
 #
-# Table name: authorships
+# Table name: translatorships
 #
 #  id           :integer          not null, primary key
-#  reference_id :integer
 #  author_id    :integer
+#  reference_id :integer
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #
 
-class Authorship < ActiveRecord::Base
+class Translatorship < ActiveRecord::Base
   attr_accessible :author_id, :reference_id
 
-  belongs_to :reference
   belongs_to :author
+  belongs_to :reference
 end

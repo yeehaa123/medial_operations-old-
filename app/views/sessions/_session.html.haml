@@ -1,9 +1,10 @@
-%h1= link_to session.heading, course_session_path(session.course, session)
-%ul.info
-  %li.date= session.date
-  %li.time= session.time
-  %li.location= session.location
+%section.sessions
+  %h1= link_to session.heading, course_session_path(session.course, session)
+  %ul.info
+    %li.date= session.date
+    %li.time= session.time
+    %li.location= session.location
 
-= session.description
+  = session.description
 
-- works_cited(session.references, "Readings")
+  - works_cited(session.references, "Readings")

@@ -17,7 +17,7 @@
 
 class Session < ActiveRecord::Base
   attr_accessible :description, :title, :number, :section_id, :course_id, :course,
-                :section, :location, :date, :start_time, :end_time
+                :section, :location, :date, :start_time, :end_time, :references
 
   belongs_to :course
   belongs_to :section
@@ -27,6 +27,8 @@ class Session < ActiveRecord::Base
 
   validates_presence_of :course_id
   validates_with RightCourseValidator, if: :section_id
+  
+  default_scope order(:start_time)
 
   def to_s
     "#{ self.number } - #{ self.title.titleize }"

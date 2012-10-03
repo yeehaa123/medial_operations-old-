@@ -11,12 +11,17 @@
 #
 
 class Author < ActiveRecord::Base
-  attr_accessible :first_name, :last_name, :middle_name, :references, :referencable, :full_name
+  attr_accessible :first_name, :last_name, :middle_name, :references, 
+                  :translations, :volumes
   before_validation :format_name
   after_initialize :format_name
 
-  has_many :authorships
-  has_many :references, through: :authorships
+  has_many  :authorships
+  has_many  :references, through: :authorships
+  has_many  :translatorships
+  has_many  :translations, through: :translatorships, source: :reference
+  has_many  :editorships
+  has_many  :volumes, through: :editorships, source: :reference
 
   validates_length_of :middle_name, minimum: 1, allow_nil: true
   validates_uniqueness_of :last_name, scope: [:first_name, :middle_name]

@@ -1,12 +1,14 @@
-%hgroup
+%hgroup.course_title
   %div.course_prefix= course.title_prefix
   %h1= course.heading
 
-= course.description
+%section.course_description
+  = course.description
 
-- if course.sections
-  %section.sections
+%section.course_program
+  %h1 Program
+  = render introduction
+  - if course.sections.size > 0 
     = render course.sections
-- else
-  %section.sessions
+  - else
     = render course.sessions

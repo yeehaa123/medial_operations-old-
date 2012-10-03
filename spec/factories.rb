@@ -9,14 +9,37 @@ FactoryGirl.define do
       after(:build) do |course|
         5.times { course.references << build(:reference) }
       end
+
+      factory :course_with_sections do      
+        after(:build) do |course|
+          3.times { course.sections << build(:section, course_id: course) }
+        end
+      end
+
+      factory :course_with_sessions_and_sections do
+        after(:build) do |course|
+          3.times { course.sections << create(:section, course_id: course) }
+          course.sections.each do |section|
+            3.times { course.sessions << build(:session, course_id: course, 
+                                               section_id: section.id) }
+          end
+        end          
+      end
+
+      factory :course_with_sessions do      
+        after(:build) do |course|
+          9.times { course.sessions << build(:session, section_id: nil, 
+                                             course_id: course) }
+        end
+      end
     end
   end
 
   factory :section do
     title   "New Section"
-    number  1
+    sequence(:number) { |n| n }
     course
-    
+
     factory :defined_section do
       description "Hello *World*"
     end
@@ -24,11 +47,11 @@ FactoryGirl.define do
 
   factory :session do
     title   "New Session"
-    number  1
+    sequence(:number) { |n| n }
     section
     course { section.course }
 
-    factory :defined_session do
+    factory :defined_session do    
       description "Hello *World*"
       location    "Bungehuis 4.01"
       start_time  Time.new
@@ -52,29 +75,14 @@ FactoryGirl.define do
     sequence(:title) { |n| "new article #{n}" }
     date    Time.new(1979)
     medium  "print"
+    pages   "100-200"
     publisher
     after(:build) do |reference|
       reference.authors = build_list(:author, 1)
-    end
-
-    factory :two_authors do
-      after(:build) do |reference|
-        reference.authors = build_list(:author, 2)
-      end
-    end
-
-    factory :three_authors do
-      after(:build) do |reference|
-        reference.authors = build_list(:author, 3)
-      end
-    end
-
-    factory :defined_reference do
-      after(:build) do |reference|      
-        reference.authors = build_list(:author, 2)
-        3.times { reference.sessions << build(:session) }
-        4.times { reference.site_articles << build(:article) }
-      end
+      reference.translators = build_list(:author, 2)
+      reference.editors = build_list(:author, 2)
+      reference.sessions = build_list(:session, 3)
+      reference.site_articles << build_list(:article, 4)
     end
   end
 
@@ -89,7 +97,7 @@ FactoryGirl.define do
     
     factory :defined_monograph_reference do
       after(:build) do |reference|
-        3.times { reference.sessions << build(:session) }
+        reference.sessions = build_list(:session, 3)
         4.times { reference.site_articles << build(:article) }
         5.times { reference.chapters << build(:chapter_reference) }
       end
@@ -121,7 +129,19 @@ FactoryGirl.define do
 
     factory :author_with_references do
       after(:build) do |author|
-        5.times { author.references << build(:reference) }
+        author.references = build_list(:reference, 5)
+      end
+    end
+
+    factory :author_with_translations do
+      after(:build) do |author|
+        author.translations = build_list(:reference, 5)
+      end
+    end
+
+    factory :author_with_volumes do
+      after(:build) do |author|
+        author.volumes = build_list(:reference, 5)
       end
     end
   end
