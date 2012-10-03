@@ -15,7 +15,7 @@
 #
 
 class ChapterReference < Reference
-  attr_accessible :monograph
+  attr_accessible :monograph, :pages
 
   belongs_to :monograph, class_name: 'MonographReference', foreign_key: :type_id
 
