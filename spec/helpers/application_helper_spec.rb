@@ -41,23 +41,33 @@ describe ApplicationHelper do
     end
 
     describe "list of references" do
-      let(:reference1)    { stub authors: ["Me"], title: "Title", collection: true, 
-                            publisher: "", date: Time.now, medium: "Print" }
-      let(:reference2)    { stub authors: ["You"], title: "Title", collection: true, 
-                            publisher: "", date: Time.now, medium: "Print" }
+      let(:editor)        { stub full_name: "He" }
+      let(:translator)    { stub full_name: "Them"}
+      let(:reference1)    { stub collection: true, authors: ["Me"], title: "Title", 
+                            editors: [editor], translators: [translator], 
+                            publisher: "", date: Time.now, pages: "666", 
+                            medium: "Print" }
+      let(:reference2)    { stub collection: true, authors: ["You"], title: "Title", 
+                            editors: [editor], translators: [translator], 
+                            publisher: "", date: Time.now, pages: "1", 
+                            medium: "Print" }
       let(:references)    { [reference1, reference2] }
       let(:dec_refs)      { ReferenceDecorator.decorate(references) }
       let(:bibliography)  { capture_haml { works_cited(dec_refs) } }
 
-      it { should have_content("Me") }
       it { should have_link("Me") }
+      it { should have_link("He"), count: 2 }      
+      it { should have_link("Them", count: 2) }
       it { should have_link("You") }
       it { should have_selector('ul', count: 1) }
       it { should have_selector('li', count: 2) }
+      it { should have_content("666") }
 
       describe "two identical authors" do
-        let(:reference2)    { stub authors: ["Me"], title: "Title", collection: true, 
-                            publisher: "", date: Time.now, medium: "Print" }
+        let(:reference2)    { stub collection: true, authors: ["Me"], title: "Title", 
+                              editors: [editor], translators: [translator], 
+                              publisher: "", date: Time.now, pages: "1", 
+                              medium: "Print" }
 
         it { should have_content("---.") }
         it { should have_content("Me") }

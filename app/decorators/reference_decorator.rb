@@ -26,8 +26,13 @@ class ReferenceDecorator < ApplicationDecorator
       s = content_tag :em, "#{ model.title.titleize }"
       s += ". "
     elsif model.title
+      if model.respond_to?(:monograph)
+        t = model.monograph.title
+      elsif model.respond_to?(:journal)
+        t = model.journal.title
+      end        
       s = "\"#{ model.title.titleize }.\" "
-      s += content_tag :em, "#{ monograph.title.titleize }"
+      s += content_tag :em, "#{ t.titleize }"
       s += ". "
     end
   end
@@ -46,8 +51,8 @@ class ReferenceDecorator < ApplicationDecorator
         elsif i > 0
           s += " and #{t.full_name}"
         end
-        s += ". "
       end
+      s += ". " unless s == ""
     end
     s
   end
@@ -67,16 +72,18 @@ class ReferenceDecorator < ApplicationDecorator
   end
 
   def publisher
-    if model.respond_to?(:monograph) && model.monograph.editors
-      "#{ model.monograph.publisher }"
-    elsif model.editors
-      "#{ model.publisher }"
+    if model.respond_to?(:monograph) && model.monograph.publisher
+      "#{ model.monograph.publisher }, "
+    elsif model.respond_to?(:journal) && model.journal.publisher
+      "#{ model.journal.publisher }, "
+    else
+      "#{ model.publisher }, "
     end
   end
 
   def year
     if model.date
-      "#{ model.date.strftime("%Y") }"
+      "#{ model.date.strftime("%Y") }. "
     end
   end
 
@@ -85,23 +92,27 @@ class ReferenceDecorator < ApplicationDecorator
       "#{ model.pages }. "
     end
   end
+
   def medium
-    if model.medium
-      "#{ model.medium.capitalize }"
+    if model.respond_to?(:monograph)
+      "#{ model.monograph.medium.capitalize }."
+    elsif model.respond_to?(:journal)
+      "#{ model.journal.medium.capitalize }."
+    elsif model.medium
+      "#{ model.medium.capitalize }."
     end
   end
 
-
-
   def to_mla(dup = false)
-    s =  "#{ author_list(dup) }"
-    s += "#{ title }"
-    s += "#{ editor_list }"
-    s += "#{ translator_list }"
-    s += "#{ publisher }, "
-    s += "#{ year }. "
-    s += "#{ pages }"
-    s += "#{ medium }."
+    s = ""
+    s += author_list(dup) if author_list
+    s += title if title
+    s += editor_list if editor_list
+    s += translator_list if translator_list
+    s += publisher if publisher
+    s += year if year    
+    s += pages if pages
+    s += medium if medium
   end
   alias_method :to_s, :to_mla
 end

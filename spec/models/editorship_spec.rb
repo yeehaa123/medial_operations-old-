@@ -12,5 +12,11 @@
 require 'spec_helper'
 
 describe Editorship do
-  pending "add some examples to (or delete) #{__FILE__}"
+  let(:author)      { build(:author) }
+  let(:reference)   { build(:reference) }
+  let(:authorship)  { author.authorships.build(reference_id: reference.id) }
+
+  subject { authorship }
+
+  it { should be_valid }
 end

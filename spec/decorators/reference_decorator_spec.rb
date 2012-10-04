@@ -117,29 +117,30 @@ describe ReferenceDecorator do
     end
     
     context "other attributes" do
-      its(:publisher)   { should == "#{ reference.publisher }" }
-      its(:year)        { should == "#{ reference.date.strftime("%Y") }" }
-      its(:medium)      { should == "#{ reference.medium.capitalize }" }
+      its(:pages)       { should == "#{ reference.pages }. " }
+      its(:publisher)   { should == "#{ reference.publisher }, " }
+      its(:year)        { should == "#{ reference.date.strftime("%Y") }. " }
+      its(:medium)      { should == "#{ reference.medium.capitalize }." }
     end
 
-    context "formatted reference" do
+    context "formatted chapter reference" do
       let(:reference) { build(:chapter_reference) }
       
       it "should output a correct mla reference" do 
         s =  "#{ dec_ref.author_list }"
         s += "#{ dec_ref.title }"
-        s += "#{ dec_ref.publisher }, "
-        s += "#{ dec_ref.year }. " 
-        s += "#{ dec_ref.medium }."
+        s += "#{ dec_ref.publisher }"
+        s += "#{ dec_ref.year }" 
+        s += "#{ dec_ref.medium }"
         dec_ref.to_mla.should == s
       end
         
       it "should output --- when author is same" do
         s =  "---. "
         s += "#{ dec_ref.title }"
-        s += "#{ dec_ref.publisher }, "
-        s += "#{ dec_ref.year }. " 
-        s += "#{ dec_ref.medium }."
+        s += "#{ dec_ref.publisher }"
+        s += "#{ dec_ref.year }" 
+        s += "#{ dec_ref.medium }"
         dec_ref.to_mla(true).should == s
       end
     end

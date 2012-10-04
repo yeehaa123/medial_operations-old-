@@ -20,21 +20,29 @@ Author.create(first_name: "Michael William", last_name: "Jennings")
 Author.create(first_name: "Josefine", last_name: "Nauckhoff")
 Author.create(first_name: "Adrian", last_name: "Del Caro")
 Author.create(first_name: "R. J.", last_name: "Hollingdale")
+Author.create(first_name: "William", last_name: "Lovitt")
+
 
 # Publisher -------------------------------------------------------------------
 
-Publisher.create(name: "Annoying", location: "Amsterdam")
 Publisher.create(name: "Cambridge University Press", location: "Cambridge")
 Publisher.create(name: "Harvard University Press", location: "Cambridge, MA")
+Publisher.create(name: "The University of Chicago Press", location: "Chicago")
+
+Publisher.create(name: "Annoying", location: "Amsterdam")
 
 
 # References ------------------------------------------------------------------
 
-MonographReference.create(title: "Everything Ever Written",
-                          authors: [Author.find_by_last_name("Versal")],
-                          date: Time.new(2012),
+# Monographs
+
+MonographReference.create(title: "The Question Concerning Technology",
+                          authors: [Author.find_by_last_name("Heidegger")],
+                          translators: [Author.find_by_last_name("Lovitt")],
+                          date: Time.new(1977),
                           medium: "print",
-                          publisher: Publisher.find_by_name("Annoying"))
+                          publisher: Publisher.find_by_location("Cambridge"))
+
 MonographReference.create(title: "The Gay Science",
                           authors: [Author.find_by_last_name("Nietzsche")],
                           editors: [Author.find_by_last_name("Williams")],
@@ -43,12 +51,14 @@ MonographReference.create(title: "The Gay Science",
                           date: Time.new(2001),
                           medium: "print",
                           publisher: Publisher.find_by_location("Cambridge"))
+
 MonographReference.create(title: "Human, All Too Human",
                           authors: [Author.find_by_last_name("Nietzsche")],
                           translators: [Author.find_by_last_name("Hollingdale")],
                           date: Time.new(1996),
                           medium: "print",
                           publisher: Publisher.find_by_location("Cambridge"))
+
 MonographReference.create(title: "One-Way Street",
                           authors: [Author.find_by_last_name("Benjamin")],
                           editors: [Author.find_by_last_name("Bullock"),
@@ -57,15 +67,34 @@ MonographReference.create(title: "One-Way Street",
                           medium: "print",
                           publisher: Publisher.find_by_location("Cambridge, MA"))
 
-#------------------------------------------------------------------------------
+
+MonographReference.create(title: "Everything Ever Written",
+                          authors: [Author.find_by_last_name("Versal")],
+                          date: Time.new(2012),
+                          medium: "print",
+                          publisher: Publisher.find_by_name("Annoying"))
+
+
+# Journals
+
+
+# Articles
+
+# Chapters
+
+ChapterReference.create(title: "The Age of the World Picture", 
+                        authors: [Author.find_by_last_name("Heidegger")],
+                        monograph: MonographReference.find_by_title("The Question Concerning Technology"),
+                        publisher: Publisher.first,
+                        date: Time.new(1938),
+                        pages: "115-155")
 
 ChapterReference.create(title: "To the Planetarium", 
                         authors: [Author.find_by_last_name("Benjamin")],
                         monograph: MonographReference.find_by_title("One-Way Street"),
-                        publisher: Publisher.first,
                         date: Time.new(1928),
-                        medium: "Print",
                         pages: "486-487")
+
 ChapterReference.create(title: "Future of Science", 
                         authors: [Author.find_by_last_name("Nietzsche")],
                         monograph: MonographReference.find_by_title("Human, All Too Human"),
@@ -439,9 +468,19 @@ Session.create(title: "Introduction",
                location: "Bungehuis 4.01",
                number: 1)
 
+Session.create(title: "Lecture", 
+                   section: Section.find_by_title("Mapping The Humanities"),
+                   course: Course.first,
+                   description: session_description,
+                   references: [Reference.find_by_title("The Age of the World Picture")],
+                   start_time: Time.now + 1.weeks,
+                   end_time: Time.now + 1.weeks + 2.hours,
+                   location: "Bungehuis 4.01",
+                   number: 2)
+
 
 13.times do |count|
-  c = count + 2
+  c = count + 3
   case c
   when 1..5  
     Session.create(title: "Test #{ c }", 

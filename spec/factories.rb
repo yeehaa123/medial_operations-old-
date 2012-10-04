@@ -20,7 +20,7 @@ FactoryGirl.define do
         after(:build) do |course|
           3.times { course.sections << create(:section, course_id: course) }
           course.sections.each do |section|
-            3.times { course.sessions << build(:session, course_id: course, 
+            3.times { course.sessions << create(:session, course_id: course, 
                                                section_id: section.id) }
           end
         end          
@@ -104,6 +104,24 @@ FactoryGirl.define do
     end
   end
 
+  factory :journal_reference do
+    title   "New Journal"
+    date    Time.new(1960)
+    medium  "print"
+    publisher
+    after(:build) do |reference|
+      reference.authors = build_list(:author, 2)
+    end
+    
+    factory :defined_journal_reference do
+      after(:build) do |reference|
+        reference.sessions = build_list(:session, 3)
+        4.times { reference.site_articles << build(:article) }
+        5.times { reference.articles << build(:article_reference) }
+      end
+    end
+  end
+
   factory :chapter_reference do
     title   "New Chapter"
     date    Time.new(1960)
@@ -115,6 +133,24 @@ FactoryGirl.define do
     monograph { build(:monograph_reference) }
 
     factory :defined_chapter_reference do
+      after(:build) do |reference|
+        3.times { reference.sessions << build(:session) }
+        4.times { reference.site_articles << build(:article) }
+      end
+    end
+  end
+
+  factory :article_reference do
+    title   "New Article"
+    date    Time.new(1960)
+    medium  "print"
+    publisher
+    after(:build) do |reference|
+      reference.authors = build_list(:author, 2)
+    end
+    journal { build(:journal_reference) }
+
+    factory :defined_article_reference do
       after(:build) do |reference|
         3.times { reference.sessions << build(:session) }
         4.times { reference.site_articles << build(:article) }
