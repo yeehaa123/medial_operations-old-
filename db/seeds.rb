@@ -1,12 +1,15 @@
 # Authors ---------------------------------------------------------------------
 
+Author.create(first_name: "Chris", last_name: "Anderson")
 Author.create(first_name: "Hannah", last_name: "Arendt")
 Author.create(first_name: "Walter", last_name: "Benjamin")
 Author.create(first_name: "Gilles", last_name: "Deleuze")
 Author.create(first_name: "Felix", last_name: "Guattari")
 Author.create(first_name: "Martin", last_name: "Heidegger")
 Author.create(first_name: "Friedrich", last_name: "Kittler")
+Author.create(first_name: "Steven", last_name: "Levy")
 Author.create(first_name: "Friedrich", last_name: "Nietzsche")
+
 Author.create(first_name: "Uni", last_name: "Versal")
 
 # Editors
@@ -77,15 +80,47 @@ MonographReference.create(title: "Everything Ever Written",
 
 # Journals
 
+JournalReference.create(title: "Critical Inquiry",
+                        publisher: Publisher.find_by_location("Chicago"))
 
-# Articles
+# Magazines
+
+MagazineReference.create(title: "Wired")
+
+# Magazine Articles
+
+MagazineArticleReference.create(title: "How Google's Algorithm Rules the Web",
+                                authors: [Author.find_by_last_name("Levy")],
+                                magazine: MagazineReference.find_by_title("Wired"),
+                                url: "http://www.wired.com/magazine/2010/02/ff_google_algorithm/",
+                                volume: 16,
+                                issue:  07,
+                                date: Date.new(2010, 2, 22))
+
+MagazineArticleReference.create(title: "The End of Theory: The Data Deluge Makes the Scientific Method Obsolete",
+                                authors: [Author.find_by_last_name("Anderson")],
+                                magazine: MagazineReference.find_by_title("Wired"),
+                                url: "http://www.wired.com/science/discoveries/magazine/16-07/pb_intro",
+                                volume: 17,
+                                issue:  12,
+                                date: Date.new(2008, 8, 23))
+
+# Journal Articles
+
+JournalArticleReference.create(title: "Universities: Wet, Hard, Soft, and Harder",
+                        authors: [Author.find_by_last_name("Kittler")],
+                        journal: JournalReference.find_by_title("Critical Inquiry"),
+                        url: "http://www.jstor.org/stable/10.1086/427310",
+                        pages: "244-255",
+                        volume: 31,
+                        issue: 1,
+                        date: Date.new(2004))
 
 # Chapters
 
 ChapterReference.create(title: "The Age of the World Picture", 
                         authors: [Author.find_by_last_name("Heidegger")],
                         monograph: MonographReference.find_by_title("The Question Concerning Technology"),
-                        publisher: Publisher.first,
                         date: Time.new(1938),
                         pages: "115-155")
 
@@ -98,7 +133,6 @@ ChapterReference.create(title: "To the Planetarium",
 ChapterReference.create(title: "Future of Science", 
                         authors: [Author.find_by_last_name("Nietzsche")],
                         monograph: MonographReference.find_by_title("Human, All Too Human"),
-                        publisher: Publisher.first,
                         date: Time.new(1928),
                         medium: "Print",
                         pages: "119")
@@ -472,7 +506,10 @@ Session.create(title: "Lecture",
                    section: Section.find_by_title("Mapping The Humanities"),
                    course: Course.first,
                    description: session_description,
-                   references: [Reference.find_by_title("The Age of the World Picture")],
+                   references: [Reference.find_by_title("The Age of the World Picture"),
+                                Reference.find_by_title("Universities: Wet, Hard, Soft, and Harder"),
+                                Reference.find_by_title("How Google's Algorithm Rules the Web"),
+                                Reference.find_by_title("The End of Theory: The Data Deluge Makes the Scientific Method Obsolete")],
                    start_time: Time.now + 1.weeks,
                    end_time: Time.now + 1.weeks + 2.hours,
                    location: "Bungehuis 4.01",

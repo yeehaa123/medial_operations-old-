@@ -117,7 +117,25 @@ FactoryGirl.define do
       after(:build) do |reference|
         reference.sessions = build_list(:session, 3)
         4.times { reference.site_articles << build(:article) }
-        5.times { reference.articles << build(:article_reference) }
+        5.times { reference.articles << build(:journal_article_reference) }
+      end
+    end
+  end
+
+  factory :magazine_reference do
+    title   "New Magazine"
+    date    Time.new(1960)
+    medium  "print"
+    publisher
+    after(:build) do |reference|
+      reference.authors = build_list(:author, 2)
+    end
+    
+    factory :defined_magazine_reference do
+      after(:build) do |reference|
+        reference.sessions = build_list(:session, 3)
+        4.times { reference.site_articles << build(:article) }
+        5.times { reference.articles << build(:magazine_article_reference) }
       end
     end
   end
@@ -140,8 +158,8 @@ FactoryGirl.define do
     end
   end
 
-  factory :article_reference do
-    title   "New Article"
+  factory :journal_article_reference do
+    title   "New Journal Article"
     date    Time.new(1960)
     medium  "print"
     publisher
@@ -150,7 +168,25 @@ FactoryGirl.define do
     end
     journal { build(:journal_reference) }
 
-    factory :defined_article_reference do
+    factory :defined_journal_article_reference do
+      after(:build) do |reference|
+        3.times { reference.sessions << build(:session) }
+        4.times { reference.site_articles << build(:article) }
+      end
+    end
+  end
+  
+  factory :magazine_article_reference do
+    title   "New Magazine Article"
+    date    Time.new(1960)
+    medium  "print"
+    publisher
+    after(:build) do |reference|
+      reference.authors = build_list(:author, 2)
+    end
+    magazine { build(:magazine_reference) }
+
+    factory :defined_magazine_article_reference do
       after(:build) do |reference|
         3.times { reference.sessions << build(:session) }
         4.times { reference.site_articles << build(:article) }

@@ -3,37 +3,45 @@ class ReferenceDecorator < ApplicationDecorator
 
   def author_list(dup = false)
     if dup
-      s = "---"
+      al = "---. "
     else
-      s = ""
+      al = ""
       model.authors.each_with_index do |a, i|
         if i == 0
-          s += "#{ a }"
+          al += "#{ a }"
         elsif i > 0 && model.authors.size == 2
-          s += " and #{ a.full_name }"
+          al += " and #{ a.full_name }"
         elsif i > 0 && i < model.authors.size - 1
-          s += ", #{ a.full_name }"
+          al += ", #{ a.full_name }"
         else
-          s += ", and #{ a.full_name }"
+          al += ", and #{ a.full_name }"
         end
       end
+      al += ". " unless al == "" 
     end
-    s += ". "
+    al
   end
 
   def title
     if model.title && model.collection
-      s = content_tag :em, "#{ model.title.titleize }"
-      s += ". "
+      t = content_tag :em, "#{ model.title.titleize }"
     elsif model.title
+      t = "\"#{ model.title.titleize }.\" "
       if model.respond_to?(:monograph)
-        t = model.monograph.title
+        t += content_tag :em, "#{ model.monograph.title.titleize }"
       elsif model.respond_to?(:journal)
-        t = model.journal.title
-      end        
-      s = "\"#{ model.title.titleize }.\" "
-      s += content_tag :em, "#{ t.titleize }"
-      s += ". "
+        t += content_tag :em, "#{ model.journal.title.titleize }"
+      elsif model.respond_to?(:magazine)
+        t += content_tag :em, "#{ model.magazine.title.titleize }"
+      end
+    end
+    t += ". " unless t == ""
+  end
+
+  def volume_issue
+    if model.respond_to?(:journal)
+      vi = " #{ model.volume }." if model.volume
+      vi += "#{ model.issue } " if model.issue
     end
   end
   
@@ -67,30 +75,34 @@ class ReferenceDecorator < ApplicationDecorator
           s += " and #{ t.full_name }"
         end
       end
-      s += ". "
+      s += ". " unless s == ""
     end
   end
 
   def publisher
-    if model.respond_to?(:monograph) && model.monograph.publisher
-      "#{ model.monograph.publisher }, "
-    elsif model.respond_to?(:journal) && model.journal.publisher
-      "#{ model.journal.publisher }, "
+    if model.respond_to?(:monograph) 
+      "#{ model.monograph.publisher }, " if model.monograph.publisher
+    elsif model.respond_to?(:journal)
+      "#{ model.journal.publisher }, " if model.journal.publisher
     else
-      "#{ model.publisher }, "
+      "#{ model.publisher }, " if model.publisher
     end
   end
 
   def year
-    if model.date
-      "#{ model.date.strftime("%Y") }. "
+    if model.kind_of?(JournalReference)
+      "(#{ model.date.strftime("%Y") }). " if model.date
+    elsif model.respond_to?(:journal)
+      "(#{ model.journal.date.strftime("%Y") }). " if model.journal.date
+    elsif model.respond_to?(:magazine)
+      "#{ model.date.strftime("%e %b. %Y") }: " if model.date
+    else
+      "#{ model.date.strftime("%Y") }. " if model.date
     end
   end
 
   def pages
-    if model.pages
-      "#{ model.pages }. "
-    end
+    "#{ model.pages }. " if model.pages
   end
 
   def medium
@@ -98,15 +110,16 @@ class ReferenceDecorator < ApplicationDecorator
       "#{ model.monograph.medium.capitalize }."
     elsif model.respond_to?(:journal)
       "#{ model.journal.medium.capitalize }."
-    elsif model.medium
-      "#{ model.medium.capitalize }."
+    else
+      "#{ model.medium.capitalize }." if model.medium
     end
   end
 
   def to_mla(dup = false)
     s = ""
-    s += author_list(dup) if author_list
+    s += author_list(dup) if authors
     s += title if title
+    s += volume_issue if volume_issue
     s += editor_list if editor_list
     s += translator_list if translator_list
     s += publisher if publisher
@@ -115,4 +128,7 @@ class ReferenceDecorator < ApplicationDecorator
     s += medium if medium
   end
   alias_method :to_s, :to_mla
+
+  def reference_kind
+  end
 end

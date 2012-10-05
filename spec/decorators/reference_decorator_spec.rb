@@ -67,13 +67,29 @@ describe ReferenceDecorator do
         its(:title) { should == "<em>#{ reference.title.titleize }</em>. " }
       end
       
-      describe "if reference is not a collection" do
+      describe "if reference is a chapter" do
         let(:reference) { build(:chapter_reference) }
         
         it "should include monograph in reference" do
           chapter_title = "\"#{ reference.title.titleize }.\" "
           monograph_title = "<em>#{reference.monograph.title }</em>. "
           dec_ref.title.should == chapter_title + monograph_title
+        end
+      end
+
+      describe "if reference is a journal" do
+        let(:reference) { build(:journal_reference) }
+
+        its(:title) { should == "<em>#{ reference.title.titleize }</em>. " }
+      end
+      
+      describe "if reference is an article" do
+        let(:reference) { build(:journal_article_reference) }
+        
+        it "should include journal in reference" do
+          article_title = "\"#{ reference.title.titleize }.\" "
+          journal_title = "<em>#{reference.journal.title }</em>. "
+          dec_ref.title.should == article_title + journal_title
         end
       end
     end
@@ -116,11 +132,44 @@ describe ReferenceDecorator do
       end
     end
     
-    context "other attributes" do
-      its(:pages)       { should == "#{ reference.pages }. " }
+    context "publisher" do
       its(:publisher)   { should == "#{ reference.publisher }, " }
+
+      describe "if reference is a chapter" do
+        let(:reference) { build(:chapter_reference) }
+
+        its(:publisher) { should == "#{ reference.monograph.publisher }, " }
+      end
+
+      describe "if reference is an article" do
+        let(:reference) { build(:journal_article_reference) }
+
+        its(:publisher) { should == "#{ reference.journal.publisher }, " }
+      end
+    end
+
+    context "pages" do
+      its(:pages)       { should == "#{ reference.pages }. " }
+    end
+
+    context "year" do
       its(:year)        { should == "#{ reference.date.strftime("%Y") }. " }
+    end
+
+    context "medium" do
       its(:medium)      { should == "#{ reference.medium.capitalize }." }
+
+      describe "if reference is a chapter" do
+        let(:reference) { build(:chapter_reference) }
+
+        its(:medium) { should == "#{ reference.monograph.medium.capitalize }." }
+      end
+
+      describe "if reference is an article" do
+        let(:reference) { build(:journal_article_reference) }
+
+        its(:medium) { should == "#{ reference.journal.medium.capitalize }." }
+      end
     end
 
     context "formatted chapter reference" do

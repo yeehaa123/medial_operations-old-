@@ -1,20 +1,19 @@
 require 'spec_helper'
 
-describe JournalReference do
-  let(:reference) { build(:journal_reference) }
+describe MagazineReference do
+  let(:reference) { build(:magazine_reference) }
 
   subject { reference }
 
-  it { should be_kind_of(Reference) }
+  it { should be_kind_of(Reference) } 
   it { should respond_to(:articles) }
 
-  it { should validate_presence_of(:publisher) }
   it { should_not validate_presence_of(:authors) }
 
   it { should be_valid }
   
   context "defined reference" do
-    let(:reference) { build(:defined_journal_reference) }
+    let(:reference) { build(:defined_magazine_reference) }
     
     it { should be_valid }
 

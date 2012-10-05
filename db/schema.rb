@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121003200915) do
+ActiveRecord::Schema.define(:version => 20121005195230) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -108,6 +108,12 @@ ActiveRecord::Schema.define(:version => 20121003200915) do
   add_index "editorships", ["author_id"], :name => "index_editorships_on_author_id"
   add_index "editorships", ["reference_id"], :name => "index_editorships_on_reference_id"
 
+  create_table "magazines", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "publisheds", :force => true do |t|
     t.integer  "publisher_id"
     t.integer  "reference_id"
@@ -147,6 +153,10 @@ ActiveRecord::Schema.define(:version => 20121003200915) do
     t.integer  "type_id"
     t.boolean  "collection", :default => false
     t.string   "pages"
+    t.integer  "volume"
+    t.integer  "issue"
+    t.string   "isbn"
+    t.string   "url"
   end
 
   add_index "references", ["collection"], :name => "index_references_on_collection"

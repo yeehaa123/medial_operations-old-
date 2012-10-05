@@ -21,9 +21,12 @@ class Reference < ActiveRecord::Base
   scope :auth, includes(:authors).order('authors.last_name')
 
   default_scope auth.year
+  
+  after_initialize { self.medium = "Print" }
 
-  attr_accessible :date, :medium, :title, :authors, :site_articles, :courses, :type_id,
-                  :collection, :publisher, :translators, :editors, :pages
+  attr_accessible :date, :medium, :title, :authors, :site_articles, :courses,
+                  :type_id, :collection, :publisher, :translators, :editors,
+                  :pages, :volume, :issue, :url
 
   has_many  :authorships
   has_many  :authors, through: :authorships
@@ -40,10 +43,14 @@ class Reference < ActiveRecord::Base
   has_many  :sessions, through: :readings
   has_many  :courses, through: :sessions
 
-  validates_presence_of  :authors
+  validates_presence_of  :authors, if: :no_collection?
   validates_presence_of  :title
 
   def to_s
     "#{ authors.first } - #{ title }"
+  end
+
+  def no_collection?
+    collection == false
   end
 end

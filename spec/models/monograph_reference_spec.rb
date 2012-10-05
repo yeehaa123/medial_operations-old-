@@ -25,6 +25,7 @@ describe MonographReference do
   it { should respond_to(:chapters) }
 
   it { should validate_presence_of(:publisher) }
+  it { should_not validate_presence_of(:authors) }
 
   it { should be_valid }
   

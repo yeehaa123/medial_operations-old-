@@ -23,7 +23,7 @@ module ApplicationHelper
       haml_tag :ul do
         a = []
         references.each do |r|
-          if a == r.authors
+          if a == r.authors && a != []
             haml_tag :li, link_to(raw(r.to_mla(true)), r)
           else
             haml_tag :li, link_to(raw(r.to_mla), r)
