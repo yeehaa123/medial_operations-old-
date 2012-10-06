@@ -17,10 +17,10 @@ gem 'friendly_id'
 gem 'annotate', ">=2.5.0"
 gem 'decent_exposure'
 
-# group :development do
-#   gem 'rails_best_practices'
+group :development do
+  gem 'rails_best_practices'
 #   gem "rails-erd"
-# end
+end
 
 group :development, :test do
   gem 'rspec-rails'

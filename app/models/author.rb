@@ -11,7 +11,7 @@
 #
 
 class Author < ActiveRecord::Base
-  attr_accessible :first_name, :last_name, :middle_name, :references, 
+  attr_accessible :first_name, :last_name, :middle_name, :references,
                   :translations, :volumes
   before_validation :format_name
   after_initialize :format_name

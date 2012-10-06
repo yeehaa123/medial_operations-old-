@@ -17,7 +17,7 @@ class ReferenceDecorator < ApplicationDecorator
           al += ", and #{ a.full_name }"
         end
       end
-      al += ". " unless al == "" 
+      al += ". " unless al == ""
     end
     al
   end
@@ -30,9 +30,9 @@ class ReferenceDecorator < ApplicationDecorator
       if model.respond_to?(:monograph)
         t += content_tag :em, "#{ model.monograph.title.titleize }"
       elsif model.respond_to?(:journal)
-        t += content_tag :em, "#{ model.journal.title.titleize }"
+        t += content_tag :em, "#{ model.journal.name.titleize }"
       elsif model.respond_to?(:magazine)
-        t += content_tag :em, "#{ model.magazine.title.titleize }"
+        t += content_tag :em, "#{ model.magazine.name.titleize }"
       end
     end
     t += ". " unless t == ""
@@ -44,13 +44,14 @@ class ReferenceDecorator < ApplicationDecorator
       vi += "#{ model.issue } " if model.issue
     end
   end
-  
+
   def editor_list
-    if model.respond_to?(:monograph) 
-      editors = model.monograph.editors
+    editors = if model.respond_to?(:monograph)
+      model.monograph.editors
     else
-      editors = model.editors
+      model.editors
     end
+
     if editors
       s = ""
       editors.each_with_index do |t, i|
@@ -80,7 +81,7 @@ class ReferenceDecorator < ApplicationDecorator
   end
 
   def publisher
-    if model.respond_to?(:monograph) 
+    if model.respond_to?(:monograph)
       "#{ model.monograph.publisher }, " if model.monograph.publisher
     elsif model.respond_to?(:journal)
       "#{ model.journal.publisher }, " if model.journal.publisher
@@ -90,11 +91,7 @@ class ReferenceDecorator < ApplicationDecorator
   end
 
   def year
-    if model.kind_of?(JournalReference)
-      "(#{ model.date.strftime("%Y") }). " if model.date
-    elsif model.respond_to?(:journal)
-      "(#{ model.journal.date.strftime("%Y") }). " if model.journal.date
-    elsif model.respond_to?(:magazine)
+    if model.respond_to?(:magazine)
       "#{ model.date.strftime("%e %b. %Y") }: " if model.date
     else
       "#{ model.date.strftime("%Y") }. " if model.date
@@ -123,12 +120,9 @@ class ReferenceDecorator < ApplicationDecorator
     s += editor_list if editor_list
     s += translator_list if translator_list
     s += publisher if publisher
-    s += year if year    
+    s += year if year
     s += pages if pages
     s += medium if medium
   end
   alias_method :to_s, :to_mla
-
-  def reference_kind
-  end
 end

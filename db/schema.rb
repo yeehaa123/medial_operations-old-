@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121005195230) do
+ActiveRecord::Schema.define(:version => 20121006205940) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -108,22 +108,16 @@ ActiveRecord::Schema.define(:version => 20121005195230) do
   add_index "editorships", ["author_id"], :name => "index_editorships_on_author_id"
   add_index "editorships", ["reference_id"], :name => "index_editorships_on_reference_id"
 
-  create_table "magazines", :force => true do |t|
+  create_table "periodicals", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "publisheds", :force => true do |t|
     t.integer  "publisher_id"
-    t.integer  "reference_id"
+    t.string   "type"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
+    t.string   "medium"
   end
 
-  add_index "publisheds", ["publisher_id", "reference_id"], :name => "index_publisheds_on_publisher_id_and_reference_id", :unique => true
-  add_index "publisheds", ["publisher_id"], :name => "index_publisheds_on_publisher_id"
-  add_index "publisheds", ["reference_id"], :name => "index_publisheds_on_reference_id"
+  add_index "periodicals", ["publisher_id"], :name => "index_periodicals_on_publisher_id"
 
   create_table "publishers", :force => true do |t|
     t.string   "name"
@@ -147,19 +141,23 @@ ActiveRecord::Schema.define(:version => 20121005195230) do
     t.string   "title"
     t.date     "date"
     t.string   "medium"
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
     t.string   "type"
     t.integer  "type_id"
-    t.boolean  "collection", :default => false
+    t.boolean  "collection",    :default => false
     t.string   "pages"
     t.integer  "volume"
     t.integer  "issue"
     t.string   "isbn"
     t.string   "url"
+    t.integer  "publisher_id"
+    t.integer  "periodical_id"
   end
 
   add_index "references", ["collection"], :name => "index_references_on_collection"
+  add_index "references", ["periodical_id"], :name => "index_references_on_periodical_id"
+  add_index "references", ["publisher_id"], :name => "index_references_on_publisher_id"
   add_index "references", ["type_id"], :name => "index_references_on_type_id"
 
   create_table "sections", :force => true do |t|

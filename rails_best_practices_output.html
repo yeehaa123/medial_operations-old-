@@ -57,7 +57,7 @@
       to see more useful Rails Best Practices.
     </p>
     <p>
-        Found 5 warnings.
+        Found 6 warnings.
     </p>
     <table>
         <tr>
@@ -66,18 +66,22 @@
               />&nbsp;<label for="IsolateSeedDataReview">Isolate Seed Data</label>
             </td>
             <td>
-              <input type="checkbox" class="error-type" id="RemoveUnusedMethodsInModelsReview" value="RemoveUnusedMethodsInModelsReview"
-              />&nbsp;<label for="RemoveUnusedMethodsInModelsReview">Remove Unused Methods In Models</label>
-            </td>
-        </tr>
-        <tr>
-            <td>
               <input type="checkbox" class="error-type" id="RemoveUnusedMethodsInHelpersReview" value="RemoveUnusedMethodsInHelpersReview"
               />&nbsp;<label for="RemoveUnusedMethodsInHelpersReview">Remove Unused Methods In Helpers</label>
             </td>
             <td>
               <input type="checkbox" class="error-type" id="RemoveTrailingWhitespaceCheck" value="RemoveTrailingWhitespaceCheck"
               />&nbsp;<label for="RemoveTrailingWhitespaceCheck">Remove Trailing Whitespace</label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <input type="checkbox" class="error-type" id="RemoveUnusedMethodsInControllersReview" value="RemoveUnusedMethodsInControllersReview"
+              />&nbsp;<label for="RemoveUnusedMethodsInControllersReview">Remove Unused Methods In Controllers</label>
+            </td>
+            <td>
+              <input type="checkbox" class="error-type" id="RemoveUnusedMethodsInModelsReview" value="RemoveUnusedMethodsInModelsReview"
+              />&nbsp;<label for="RemoveUnusedMethodsInModelsReview">Remove Unused Methods In Models</label>
             </td>
         </tr>
       <tr>
@@ -105,6 +109,15 @@
               <a href='http://rails-bestpractices.com/posts/20-isolating-seed-data' target='_blank'>isolate seed data</a>
             </td>
           </tr>
+          <tr class="RemoveUnusedMethodsInControllersReview">
+            <td class='filename'>
+                app/controllers/pages_controller.rb
+            </td>
+            <td class='line'>2</td>
+            <td class='message'>
+              <a href='' target='_blank'>remove unused methods (PagesController#home)</a>
+            </td>
+          </tr>
           <tr class="RemoveUnusedMethodsInHelpersReview">
             <td class='filename'>
                 app/helpers/application_helper.rb
@@ -118,7 +131,7 @@
             <td class='filename'>
                 app/models/reference.rb
             </td>
-            <td class='line'>2</td>
+            <td class='line'>22</td>
             <td class='message'>
               <a href='' target='_blank'>remove unused methods (Reference#individuals)</a>
             </td>
@@ -127,7 +140,7 @@
             <td class='filename'>
                 app/models/reference.rb
             </td>
-            <td class='line'>3</td>
+            <td class='line'>23</td>
             <td class='message'>
               <a href='' target='_blank'>remove unused methods (Reference#collections)</a>
             </td>
@@ -136,7 +149,7 @@
             <td class='filename'>
                 db/seeds.rb
             </td>
-            <td class='line'>2</td>
+            <td class='line'>194</td>
             <td class='message'>
               <a href='http://rails-bestpractices.com/posts/60-remove-trailing-whitespace' target='_blank'>remove trailing whitespace</a>
             </td>

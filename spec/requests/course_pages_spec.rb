@@ -27,7 +27,7 @@ describe "CoursePages" do
     describe "course with sessions" do
       let(:course)  { create(:course_with_sessions) }
       
-      it { should have_selector('section.sessions', count: 9) }
+      it { should have_selector('section.sessions', count: 10) }
     end
 
     describe "course with sessions and sections" do

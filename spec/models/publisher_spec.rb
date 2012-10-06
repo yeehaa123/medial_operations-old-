@@ -16,7 +16,10 @@ describe Publisher do
 
   subject { publisher }
 
-  it { should respond_to(:references) }
+  it { should respond_to(:magazines) }
+  it { should respond_to(:magazine_articles) }
+  it { should respond_to(:monographs) }
+  it { should respond_to(:chapters) }
   it { should respond_to(:name) }
   it { should respond_to(:location) }
 

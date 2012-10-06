@@ -76,7 +76,6 @@ FactoryGirl.define do
     date    Time.new(1979)
     medium  "print"
     pages   "100-200"
-    publisher
     after(:build) do |reference|
       reference.authors = build_list(:author, 1)
       reference.translators = build_list(:author, 2)
@@ -104,38 +103,25 @@ FactoryGirl.define do
     end
   end
 
-  factory :journal_reference do
-    title   "New Journal"
-    date    Time.new(1960)
-    medium  "print"
+  factory :journal do
+    name   "New Journal"
     publisher
-    after(:build) do |reference|
-      reference.authors = build_list(:author, 2)
-    end
+    medium "print"
     
-    factory :defined_journal_reference do
-      after(:build) do |reference|
-        reference.sessions = build_list(:session, 3)
-        4.times { reference.site_articles << build(:article) }
-        5.times { reference.articles << build(:journal_article_reference) }
+    factory :defined_journal do
+      after(:build) do |journal|
+        5.times { journal.articles << build(:journal_article_reference) }
       end
     end
   end
 
-  factory :magazine_reference do
-    title   "New Magazine"
-    date    Time.new(1960)
-    medium  "print"
+  factory :magazine do
+    name   "New Magazine"
     publisher
-    after(:build) do |reference|
-      reference.authors = build_list(:author, 2)
-    end
-    
-    factory :defined_magazine_reference do
-      after(:build) do |reference|
-        reference.sessions = build_list(:session, 3)
-        4.times { reference.site_articles << build(:article) }
-        5.times { reference.articles << build(:magazine_article_reference) }
+
+    factory :defined_magazine do
+      after(:build) do |magazine|
+        magazine.articles = build_list(:magazine_article_reference, 3)
       end
     end
   end
@@ -144,7 +130,6 @@ FactoryGirl.define do
     title   "New Chapter"
     date    Time.new(1960)
     medium  "print"
-    publisher
     after(:build) do |reference|
       reference.authors = build_list(:author, 2)
     end
@@ -162,11 +147,10 @@ FactoryGirl.define do
     title   "New Journal Article"
     date    Time.new(1960)
     medium  "print"
-    publisher
     after(:build) do |reference|
       reference.authors = build_list(:author, 2)
     end
-    journal { build(:journal_reference) }
+    journal { build(:journal) }
 
     factory :defined_journal_article_reference do
       after(:build) do |reference|
@@ -180,11 +164,10 @@ FactoryGirl.define do
     title   "New Magazine Article"
     date    Time.new(1960)
     medium  "print"
-    publisher
     after(:build) do |reference|
       reference.authors = build_list(:author, 2)
     end
-    magazine { build(:magazine_reference) }
+    magazine { build(:magazine) }
 
     factory :defined_magazine_article_reference do
       after(:build) do |reference|

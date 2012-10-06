@@ -27,7 +27,7 @@ class Session < ActiveRecord::Base
 
   validates_presence_of :course_id
   validates_with RightCourseValidator, if: :section_id
-  
+
   default_scope order(:start_time)
 
   def to_s

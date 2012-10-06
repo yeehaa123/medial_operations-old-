@@ -80,18 +80,19 @@ MonographReference.create(title: "Everything Ever Written",
 
 # Journals
 
-JournalReference.create(title: "Critical Inquiry",
-                        publisher: Publisher.find_by_location("Chicago"))
+Journal.create(name: "Critical Inquiry",
+               publisher: Publisher.find_by_location("Chicago"),
+               medium: "print")
 
 # Magazines
 
-MagazineReference.create(title: "Wired")
+Magazine.create(name: "Wired", medium: "print")
 
 # Magazine Articles
 
 MagazineArticleReference.create(title: "How Google's Algorithm Rules the Web",
                                 authors: [Author.find_by_last_name("Levy")],
-                                magazine: MagazineReference.find_by_title("Wired"),
+                                magazine: Magazine.find_by_name("Wired"),
                                 url: "http://www.wired.com/magazine/2010/02/ff_google_algorithm/",
                                 volume: 16,
                                 issue:  07,
@@ -99,7 +100,7 @@ MagazineArticleReference.create(title: "How Google's Algorithm Rules the Web",
 
 MagazineArticleReference.create(title: "The End of Theory: The Data Deluge Makes the Scientific Method Obsolete",
                                 authors: [Author.find_by_last_name("Anderson")],
-                                magazine: MagazineReference.find_by_title("Wired"),
+                                magazine: Magazine.find_by_name("Wired"),
                                 url: "http://www.wired.com/science/discoveries/magazine/16-07/pb_intro",
                                 volume: 17,
                                 issue:  12,
@@ -109,7 +110,7 @@ MagazineArticleReference.create(title: "The End of Theory: The Data Deluge Makes
 
 JournalArticleReference.create(title: "Universities: Wet, Hard, Soft, and Harder",
                         authors: [Author.find_by_last_name("Kittler")],
-                        journal: JournalReference.find_by_title("Critical Inquiry"),
+                        journal: Journal.find_by_name("Critical Inquiry"),
                         url: "http://www.jstor.org/stable/10.1086/427310",
                         pages: "244-255",
                         volume: 31,
@@ -118,19 +119,19 @@ JournalArticleReference.create(title: "Universities: Wet, Hard, Soft, and Harder
 
 # Chapters
 
-ChapterReference.create(title: "The Age of the World Picture", 
+ChapterReference.create(title: "The Age of the World Picture",
                         authors: [Author.find_by_last_name("Heidegger")],
                         monograph: MonographReference.find_by_title("The Question Concerning Technology"),
                         date: Time.new(1938),
                         pages: "115-155")
 
-ChapterReference.create(title: "To the Planetarium", 
+ChapterReference.create(title: "To the Planetarium",
                         authors: [Author.find_by_last_name("Benjamin")],
                         monograph: MonographReference.find_by_title("One-Way Street"),
                         date: Time.new(1928),
                         pages: "486-487")
 
-ChapterReference.create(title: "Future of Science", 
+ChapterReference.create(title: "Future of Science",
                         authors: [Author.find_by_last_name("Nietzsche")],
                         monograph: MonographReference.find_by_title("Human, All Too Human"),
                         date: Time.new(1928),
@@ -138,38 +139,38 @@ ChapterReference.create(title: "Future of Science",
                         pages: "119")
 
 
-ChapterReference.create(title: "What is Metaphyics?", 
+ChapterReference.create(title: "What is Metaphyics?",
                         authors: [Author.find_by_last_name("Heidegger")],
                         monograph: MonographReference.last,
                         publisher: Publisher.first,
                         date: Time.new(1929),
                         medium: "Print")
-ChapterReference.create(title: "On Revolution", 
+ChapterReference.create(title: "On Revolution",
                         authors: [Author.find_by_last_name("Arendt")],
                         monograph: MonographReference.last,
                         publisher: Publisher.first,
                         date: Time.new(1970),
                         medium: "Print")
-ChapterReference.create(title: "Vita Activa", 
+ChapterReference.create(title: "Vita Activa",
                         authors: [Author.find_by_last_name("Arendt")],
                         monograph: MonographReference.last,
                         publisher: Publisher.first,
                         date: Time.new(1950),
                         medium: "Print")
-ChapterReference.create(title: "Grammophone, Film, Typewriter", 
+ChapterReference.create(title: "Grammophone, Film, Typewriter",
                         authors: [Author.find_by_last_name("Kittler")],
                         monograph: MonographReference.last,
                         publisher: Publisher.first,
                         date: Time.new(1984),
                         medium: "Print")
-ChapterReference.create(title: "A Thousand Plateaus", 
+ChapterReference.create(title: "A Thousand Plateaus",
                         authors: [Author.find_by_last_name("Deleuze"),
                                  Author.find_by_last_name("Guattari")],
                         monograph: MonographReference.last,
                         publisher: Publisher.last,
                         date: Time.new(1981),
                         medium: "Print")
-ChapterReference.create(title: "Kafka. Towards a Minor Literature", 
+ChapterReference.create(title: "Kafka. Towards a Minor Literature",
                         authors: [Author.find_by_last_name("Deleuze"),
                                  Author.find_by_last_name("Guattari")],
                         monograph: MonographReference.last,
@@ -180,8 +181,8 @@ ChapterReference.create(title: "Kafka. Towards a Minor Literature",
 
 # USERS -----------------------------------------------------------------------
 
-AdminUser.create(email: "admin@example.com", 
-                 password: "password", 
+AdminUser.create(email: "admin@example.com",
+                 password: "password",
                  password_confirmation: "password")
 
 

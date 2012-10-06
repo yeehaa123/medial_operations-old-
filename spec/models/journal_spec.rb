@@ -22,26 +22,26 @@
 
 require 'spec_helper'
 
-describe ChapterReference do
-  let(:reference) { build(:chapter_reference) }
+describe Journal do
+  let(:journal) { build(:journal) }
 
-  subject { reference }
+  subject { journal }
 
-  it { should be_kind_of(Reference) }
-  it { should respond_to(:monograph) }
+  it { should be_kind_of(Periodical) }
+  it { should respond_to(:name) }
+  it { should respond_to(:articles) }
   it { should respond_to(:publisher) }
+
+
+  it { should validate_presence_of(:publisher) }
 
   it { should be_valid }
   
   context "defined reference" do
-    let(:reference) { create(:defined_chapter_reference) }
+    let(:journal) { build(:defined_journal) }
     
     it { should be_valid }
-
-    it { should_not be_a_collection}
     
-    it { should have(2).authors }
-    it { should have(3).sessions } 
-    it { should have(4).site_articles }
+    it { should have(5).articles }
   end
 end

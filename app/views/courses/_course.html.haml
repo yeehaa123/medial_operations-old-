@@ -7,7 +7,9 @@
 
 %section.course_program
   %h1 Program
-  - if course.sections.size > 0 
+  - if course.sessions.size > 0
+    = render course.sessions.first
+  - if course.sections.size > 0
     = render course.sections
   - else
     = render course.sessions

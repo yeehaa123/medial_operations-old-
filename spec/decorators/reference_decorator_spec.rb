@@ -77,18 +77,12 @@ describe ReferenceDecorator do
         end
       end
 
-      describe "if reference is a journal" do
-        let(:reference) { build(:journal_reference) }
-
-        its(:title) { should == "<em>#{ reference.title.titleize }</em>. " }
-      end
-      
       describe "if reference is an article" do
         let(:reference) { build(:journal_article_reference) }
         
         it "should include journal in reference" do
           article_title = "\"#{ reference.title.titleize }.\" "
-          journal_title = "<em>#{reference.journal.title }</em>. "
+          journal_title = "<em>#{reference.journal.name }</em>. "
           dec_ref.title.should == article_title + journal_title
         end
       end
@@ -133,15 +127,13 @@ describe ReferenceDecorator do
     end
     
     context "publisher" do
-      its(:publisher)   { should == "#{ reference.publisher }, " }
-
       describe "if reference is a chapter" do
         let(:reference) { build(:chapter_reference) }
 
         its(:publisher) { should == "#{ reference.monograph.publisher }, " }
       end
 
-      describe "if reference is an article" do
+      describe "if reference is an journal article" do
         let(:reference) { build(:journal_article_reference) }
 
         its(:publisher) { should == "#{ reference.journal.publisher }, " }

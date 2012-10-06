@@ -20,28 +20,14 @@
 #  periodical_id :integer
 #
 
-require 'spec_helper'
+class Journal < Periodical
+  attr_accessible :articles
 
-describe ChapterReference do
-  let(:reference) { build(:chapter_reference) }
+  has_many :articles, class_name: 'JournalArticleReference', foreign_key: :type_id
 
-  subject { reference }
+  # # after_initialize { self.collection = true }
+  # # before_save { self.collection = true }
+  # # # before_validation { self.authors = [] }
 
-  it { should be_kind_of(Reference) }
-  it { should respond_to(:monograph) }
-  it { should respond_to(:publisher) }
-
-  it { should be_valid }
-  
-  context "defined reference" do
-    let(:reference) { create(:defined_chapter_reference) }
-    
-    it { should be_valid }
-
-    it { should_not be_a_collection}
-    
-    it { should have(2).authors }
-    it { should have(3).sessions } 
-    it { should have(4).site_articles }
-  end
+  validates_presence_of :publisher
 end
