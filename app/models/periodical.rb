@@ -8,6 +8,7 @@
 #  type         :string(255)
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
+#  medium       :string(255)
 #
 
 class Periodical < ActiveRecord::Base

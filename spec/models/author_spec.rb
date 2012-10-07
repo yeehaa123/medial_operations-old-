@@ -8,6 +8,7 @@
 #  middle_name :string(255)
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  particle    :string(255)
 #
 
 require 'spec_helper'
@@ -30,16 +31,41 @@ describe Author do
 
   it { should be_valid } 
 
-  its(:to_s) do
-    last_name = author.last_name
-    first_name = author.first_name
-    should == "#{ last_name }, #{ first_name }"
+  context(:to_s) do
+
+    its(:to_s) do
+      last_name = author.last_name
+      first_name = author.first_name
+      should == "#{ last_name }, #{ first_name }"
+    end
+
+    describe "author with particle" do
+      before { author.particle = "de"}
+
+      its(:to_s) do
+        last_name = author.last_name
+        first_name = author.first_name
+        should == "#{ last_name }, #{ first_name } de"
+      end
+    end
   end
-  
-  its(:full_name) do
-    last_name = author.last_name
-    first_name = author.first_name
-    should == "#{ first_name } #{ last_name }"
+  context(:full_name) do
+
+    its(:full_name) do
+      last_name = author.last_name
+      first_name = author.first_name
+      should == "#{ first_name } #{ last_name }"
+    end
+
+    describe "author with particle" do
+      before { author.particle = "de"}
+
+      its(:full_name) do
+        last_name = author.last_name
+        first_name = author.first_name
+        should == "#{ first_name } de #{ last_name }"
+      end    
+    end
   end
 
   context "author with references" do

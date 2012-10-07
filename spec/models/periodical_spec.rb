@@ -8,10 +8,19 @@
 #  type         :string(255)
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
+#  medium       :string(255)
 #
 
 require 'spec_helper'
 
 describe Periodical do
-  pending "add some examples to (or delete) #{__FILE__}"
+  let(:periodical) { build(:periodical) }
+
+  subject { periodical }
+  
+  it { should respond_to(:name) }
+  it { should respond_to(:medium) }
+  it { should respond_to(:publisher) }
+
+  it { should be_valid } 
 end

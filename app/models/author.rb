@@ -8,11 +8,12 @@
 #  middle_name :string(255)
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  particle    :string(255)
 #
 
 class Author < ActiveRecord::Base
   attr_accessible :first_name, :last_name, :middle_name, :references,
-                  :translations, :volumes
+                  :translations, :volumes, :particle
   before_validation :format_name
   after_initialize :format_name
 
@@ -33,10 +34,16 @@ class Author < ActiveRecord::Base
   end
 
   def to_s
-    "#{ last_name }, #{ first_name }"
+    s = "#{ last_name }, #{ first_name }"
+    s += " #{ particle }" if particle
+    s
   end
 
   def full_name
-    "#{ first_name } #{ last_name }"
+    if particle
+      "#{ first_name } #{ particle } #{ last_name }"
+    else
+      "#{ first_name } #{ last_name }"
+    end  
   end
 end

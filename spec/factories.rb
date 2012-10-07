@@ -103,6 +103,12 @@ FactoryGirl.define do
     end
   end
 
+  factory :periodical do
+    name  "New Periodical"
+    publisher
+    medium "print"
+  end
+
   factory :journal do
     name   "New Journal"
     publisher

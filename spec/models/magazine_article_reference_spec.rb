@@ -30,7 +30,7 @@ describe MagazineArticleReference do
   it { should be_kind_of(Reference) }
   it { should respond_to(:magazine) }
 
-  it { should validate_presence_of(:authors) }
+  it { should_not validate_presence_of(:authors) }
 
   it { should be_valid }
   

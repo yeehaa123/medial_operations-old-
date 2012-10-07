@@ -46,14 +46,14 @@ class Reference < ActiveRecord::Base
   has_many    :sessions, through: :readings
   has_many    :courses, through: :sessions
 
-  validates_presence_of  :authors, if: :no_collection?
+  validates_presence_of  :authors, if: :author_needed?
   validates_presence_of  :title
 
   def to_s
     "#{ authors.first } - #{ title }"
   end
 
-  def no_collection?
-    collection == false
+  def author_needed?
+    self.respond_to?(:magazine) == false
   end
 end
