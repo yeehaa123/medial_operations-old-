@@ -1,6 +1,6 @@
 class SectionDecorator < ApplicationDecorator
   decorates :section
-  decorates_association :sessions
+  decorates_association :meetings
 
   def heading
     "#{ roman_numeral(model.number) }. #{ model.title }"

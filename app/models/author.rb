@@ -44,6 +44,6 @@ class Author < ActiveRecord::Base
       "#{ first_name } #{ particle } #{ last_name }"
     else
       "#{ first_name } #{ last_name }"
-    end  
+    end
   end
 end

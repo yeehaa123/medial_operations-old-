@@ -1,5 +1,5 @@
-class SessionDecorator < ApplicationDecorator
-  decorates :session
+class MeetingDecorator < ApplicationDecorator
+  decorates :meeting
   decorates_association :references
 
   def date

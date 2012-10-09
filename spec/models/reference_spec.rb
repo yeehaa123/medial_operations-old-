@@ -35,7 +35,7 @@ describe Reference do
   it { should respond_to(:medium) }
   it { should respond_to(:site_articles) }
   it { should respond_to(:courses) }
-  it { should respond_to(:sessions) }
+  it { should respond_to(:meetings) }
   it { should respond_to(:pages) }
 
   it { should validate_presence_of(:authors) }
@@ -46,7 +46,7 @@ describe Reference do
   it { should have(1).authors }
   it { should have(2).translators }
   it { should have(2).editors }
-  it { should have(3).sessions }  
+  it { should have(3).meetings }  
   it { should have(4).site_articles }
 
   its(:to_s) do

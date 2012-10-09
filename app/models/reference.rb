@@ -25,7 +25,7 @@ class Reference < ActiveRecord::Base
   scope :collections, where(collection: true)
   scope :year, order('date')
   scope :auth, includes(:authors).order('authors.last_name')
-
+  scope :all_includes, includes(:translators).includes(:editors)
   default_scope auth.year
 
   after_initialize { self.medium = "Print" }
@@ -43,7 +43,7 @@ class Reference < ActiveRecord::Base
   has_many    :cited_works
   has_many    :site_articles, through: :cited_works, source: :article
   has_many    :readings
-  has_many    :sessions, through: :readings
+  has_many    :meetings, through: :readings
   has_many    :courses, through: :sessions
 
   validates_presence_of  :authors, if: :author_needed?

@@ -21,10 +21,14 @@
 #
 
 class ChapterReference < Reference
+  default_scope includes(:monograph)
+
   attr_accessible :monograph, :pages
 
   belongs_to  :monograph, class_name: 'MonographReference', foreign_key: :type_id
   has_one     :publisher, through: :monograph
+  
+  delegate :title, :publisher, :to => :monograph, :prefix => true
 
   validates_presence_of :monograph
 end

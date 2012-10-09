@@ -44,7 +44,7 @@ describe MonographReference do
     it { should be_a_collection}
     
     it { should have(2).authors }
-    it { should have(3).sessions } 
+    it { should have(3).meetings } 
     it { should have(4).site_articles }
     it { should have(5).chapters }
   end

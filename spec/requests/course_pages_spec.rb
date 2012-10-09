@@ -15,7 +15,7 @@ describe "CoursePages" do
     it { should have_selector('hgroup.course_title') }
     it { should have_selector('section.course_description') }
     it { should_not have_selector('section.sections') }
-    it { should_not have_selector('section.sessions') }
+    it { should_not have_selector('section.meetings') }
 
 
     describe "course with sections" do
@@ -25,16 +25,16 @@ describe "CoursePages" do
     end
 
     describe "course with sessions" do
-      let(:course)  { create(:course_with_sessions) }
+      let(:course)  { create(:course_with_meetings) }
       
-      it { should have_selector('section.sessions', count: 10) }
+      it { should have_selector('section.meetings', count: 10) }
     end
 
-    describe "course with sessions and sections" do
-      let(:course)  { create(:course_with_sessions_and_sections) }
+    describe "course with meetings and sections" do
+      let(:course)  { create(:course_with_meetings_and_sections) }
 
       it { should have_selector('section.sections', count: 3) }      
-      it { should have_selector('section.sessions', count: 9) }
+      it { should have_selector('section.meetings', count: 9) }
     end
   end
 end

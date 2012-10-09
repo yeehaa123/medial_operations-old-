@@ -6,7 +6,7 @@ describe SectionDecorator do
   subject { section }
 
   it { should respond_to(:section) }
-  it { should respond_to(:sessions) }
+  it { should respond_to(:meetings) }
   
   context "undefined section" do
     its(:heading) do

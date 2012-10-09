@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: sessions
+# Table name: meetings
 #
 #  id          :integer          not null, primary key
 #  title       :string(255)
@@ -15,7 +15,7 @@
 #  end_time    :datetime
 #
 
-class Session < ActiveRecord::Base
+class Meeting < ActiveRecord::Base
   attr_accessible :description, :title, :number, :section_id, :course_id, :course,
                 :section, :location, :date, :start_time, :end_time, :references
 

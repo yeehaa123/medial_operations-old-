@@ -19,7 +19,7 @@ describe ReferenceDecorator do
   it { should respond_to(:collection) }
   it { should respond_to(:publisher) }
   it { should respond_to(:site_articles) }
-  it { should respond_to(:sessions) }
+  it { should respond_to(:meetings) }
   it { should respond_to(:courses) }
 
   context "mla formatted references" do

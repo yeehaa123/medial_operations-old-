@@ -15,13 +15,13 @@
 class Section < ActiveRecord::Base
   include FriendlyId
 
-  default_scope order(:number)
+  default_scope includes(:meetings).order(:number)
 
-  attr_accessible :description, :title, :course_id, :number, :course
+  attr_accessible :description, :title, :course_id, :number, :course, :meetings
 
   belongs_to :course
-  has_many :sessions
-  has_many :references, through: :sessions
+  has_many :meetings
+  has_many :references, through: :meetings
 
   validates_presence_of :title
 

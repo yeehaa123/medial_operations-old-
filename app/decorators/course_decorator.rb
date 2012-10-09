@@ -1,7 +1,7 @@
 class CourseDecorator < ApplicationDecorator
   decorates :course
   decorates_association :sections
-  decorates_association :sessions
+  decorates_association :meetings
 
   def title_prefix
     if model.title_prefix

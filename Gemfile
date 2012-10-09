@@ -19,7 +19,8 @@ gem 'decent_exposure'
 
 group :development do
   gem 'rails_best_practices'
-#   gem "rails-erd"
+  # gem "rails-erd"
+  gem 'bullet'
 end
 
 group :development, :test do
@@ -45,6 +46,7 @@ group :test do
   gem 'deadweight'
   gem 'database_cleaner'
   gem "launchy"
+  gem 'spork', '~> 1.0rc'
 end
 
 # To use ActiveModel has_secure_password

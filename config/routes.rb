@@ -4,7 +4,7 @@ MedialOperations::Application.routes.draw do
   devise_for :courses, ActiveAdmin::Devise.config
 
   resources :courses,       only: [:show, :index] do
-    resources :sessions,    only: [:show, :index]
+    resources :meetings,    only: [:show, :index]
     resources :sections,    only: [:show, :index]
   end
 

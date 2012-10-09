@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: sessions
+# Table name: meetings
 #
 #  id          :integer          not null, primary key
 #  title       :string(255)
@@ -17,10 +17,10 @@
 
 require 'spec_helper'
 
-describe Session do
-  let(:session) { build(:session) }
+describe Meeting do
+  let(:meeting) { build(:meeting) }
 
-  subject { session }
+  subject { meeting }
 
   it { should respond_to(:title) }
   it { should respond_to(:description) }
@@ -35,12 +35,12 @@ describe Session do
     let(:other_course) { Course.new }
     
     before do 
-      session.course = other_course
+      meeting.course = other_course
     end
 
     it { should_not be_valid }
     it { should have(1).error_on(:section) }
   end
 
-  its(:to_s) { should == "#{ session.number } - #{ session.title }" }
+  its(:to_s) { should == "#{ meeting.number } - #{ meeting.title.titleize }" }
 end

@@ -11,7 +11,7 @@
 
 class Publisher < ActiveRecord::Base
   attr_accessible :location, :name, :magazines, :publications, :references
-  
+
   has_many :magazines
   has_many :magazine_articles, through: :magazines
   has_many :monographs

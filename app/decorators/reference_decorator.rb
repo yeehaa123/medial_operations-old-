@@ -28,7 +28,7 @@ class ReferenceDecorator < ApplicationDecorator
     elsif model.title
       t = "\"#{ model.title.titleize }.\" "
       if model.respond_to?(:monograph)
-        t += content_tag :em, "#{ model.monograph.title.titleize }"
+        t += content_tag :em, "#{ model.monograph_title.titleize }"
       elsif model.respond_to?(:journal)
         t += content_tag :em, "#{ model.journal.name.titleize }"
       elsif model.respond_to?(:magazine)
@@ -82,7 +82,7 @@ class ReferenceDecorator < ApplicationDecorator
 
   def publisher
     if model.respond_to?(:monograph)
-      "#{ model.monograph.publisher }, " if model.monograph.publisher
+      "#{ model.monograph_publisher }, " if model.monograph.publisher
     elsif model.respond_to?(:journal)
       "#{ model.journal.publisher }, " if model.journal.publisher
     else

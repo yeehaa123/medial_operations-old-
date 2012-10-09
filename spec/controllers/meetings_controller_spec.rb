@@ -1,11 +1,11 @@
 require 'spec_helper'
 
-describe SessionsController do
-  let(:session) { FactoryGirl.create(:session) }
+describe MeetingsController do
+  let(:meeting) { FactoryGirl.create(:meeting) }
 
   describe "making an index request" do
     
-    before { get :index, course_id: session.course_id }   
+    before { get :index, course_id: meeting.course_id }   
 
     it { should respond_with(:success) }
     it { should render_template(:index) }
@@ -14,7 +14,7 @@ describe SessionsController do
 
   describe "making a show request" do
 
-    before  { get :show, course_id: session.course_id, id: session }   
+    before  { get :show, course_id: meeting.course_id, id: meeting }   
 
     it { should respond_with(:success) }
     it { should render_template(:show) }

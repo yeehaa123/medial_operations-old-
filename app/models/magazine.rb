@@ -13,6 +13,6 @@
 
 class Magazine < Periodical
   attr_accessible :name, :articles
-  
+
   has_many :articles, class_name: 'MagazineArticleReference', source: :references
 end

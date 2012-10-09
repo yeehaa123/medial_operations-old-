@@ -16,19 +16,19 @@ FactoryGirl.define do
         end
       end
 
-      factory :course_with_sessions_and_sections do
+      factory :course_with_meetings_and_sections do
         after(:build) do |course|
           3.times { course.sections << create(:section, course_id: course) }
           course.sections.each do |section|
-            3.times { course.sessions << create(:session, course_id: course, 
+            3.times { course.meetings << create(:meeting, course_id: course, 
                                                section_id: section.id) }
           end
         end          
       end
 
-      factory :course_with_sessions do      
+      factory :course_with_meetings do      
         after(:build) do |course|
-          9.times { course.sessions << build(:session, section_id: nil, 
+          9.times { course.meetings << build(:meeting, section_id: nil, 
                                              course_id: course) }
         end
       end
@@ -45,13 +45,13 @@ FactoryGirl.define do
     end
   end  
 
-  factory :session do
-    title   "New Session"
+  factory :meeting do
+    title   "New meeting"
     sequence(:number) { |n| n }
     section
     course { section.course }
 
-    factory :defined_session do    
+    factory :defined_meeting do    
       description "Hello *World*"
       location    "Bungehuis 4.01"
       start_time  Time.new
@@ -80,7 +80,7 @@ FactoryGirl.define do
       reference.authors = build_list(:author, 1)
       reference.translators = build_list(:author, 2)
       reference.editors = build_list(:author, 2)
-      reference.sessions = build_list(:session, 3)
+      reference.meetings = build_list(:meeting, 3)
       reference.site_articles << build_list(:article, 4)
     end
   end
@@ -96,7 +96,7 @@ FactoryGirl.define do
     
     factory :defined_monograph_reference do
       after(:build) do |reference|
-        reference.sessions = build_list(:session, 3)
+        reference.meetings = build_list(:meeting, 3)
         4.times { reference.site_articles << build(:article) }
         5.times { reference.chapters << build(:chapter_reference) }
       end
@@ -143,7 +143,7 @@ FactoryGirl.define do
 
     factory :defined_chapter_reference do
       after(:build) do |reference|
-        3.times { reference.sessions << build(:session) }
+        3.times { reference.meetings << build(:meeting) }
         4.times { reference.site_articles << build(:article) }
       end
     end
@@ -160,7 +160,7 @@ FactoryGirl.define do
 
     factory :defined_journal_article_reference do
       after(:build) do |reference|
-        3.times { reference.sessions << build(:session) }
+        3.times { reference.meetings << build(:meeting) }
         4.times { reference.site_articles << build(:article) }
       end
     end
@@ -177,7 +177,7 @@ FactoryGirl.define do
 
     factory :defined_magazine_article_reference do
       after(:build) do |reference|
-        3.times { reference.sessions << build(:session) }
+        3.times { reference.meetings << build(:meeting) }
         4.times { reference.site_articles << build(:article) }
       end
     end

@@ -41,7 +41,7 @@ describe ChapterReference do
     it { should_not be_a_collection}
     
     it { should have(2).authors }
-    it { should have(3).sessions } 
+    it { should have(3).meetings } 
     it { should have(4).site_articles }
   end
 end

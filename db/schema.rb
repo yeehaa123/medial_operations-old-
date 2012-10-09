@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121007164741) do
+ActiveRecord::Schema.define(:version => 20121009210606) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -109,6 +109,22 @@ ActiveRecord::Schema.define(:version => 20121007164741) do
   add_index "editorships", ["author_id"], :name => "index_editorships_on_author_id"
   add_index "editorships", ["reference_id"], :name => "index_editorships_on_reference_id"
 
+  create_table "meetings", :force => true do |t|
+    t.string   "title"
+    t.integer  "number"
+    t.text     "description"
+    t.integer  "course_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.integer  "section_id"
+    t.string   "location"
+    t.datetime "start_time"
+    t.datetime "end_time"
+  end
+
+  add_index "meetings", ["course_id"], :name => "index_meetings_on_course_id"
+  add_index "meetings", ["section_id"], :name => "index_meetings_on_section_id"
+
   create_table "periodicals", :force => true do |t|
     t.string   "name"
     t.integer  "publisher_id"
@@ -129,14 +145,14 @@ ActiveRecord::Schema.define(:version => 20121007164741) do
 
   create_table "readings", :force => true do |t|
     t.integer  "reference_id"
-    t.integer  "session_id"
+    t.integer  "meeting_id"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
   end
 
-  add_index "readings", ["reference_id", "session_id"], :name => "index_readings_on_reference_id_and_session_id", :unique => true
+  add_index "readings", ["meeting_id"], :name => "index_readings_on_session_id"
+  add_index "readings", ["reference_id", "meeting_id"], :name => "index_readings_on_reference_id_and_session_id", :unique => true
   add_index "readings", ["reference_id"], :name => "index_readings_on_reference_id"
-  add_index "readings", ["session_id"], :name => "index_readings_on_session_id"
 
   create_table "references", :force => true do |t|
     t.string   "title"
@@ -173,22 +189,6 @@ ActiveRecord::Schema.define(:version => 20121007164741) do
 
   add_index "sections", ["course_id"], :name => "index_sections_on_course_id"
   add_index "sections", ["slug"], :name => "index_sections_on_slug"
-
-  create_table "sessions", :force => true do |t|
-    t.string   "title"
-    t.integer  "number"
-    t.text     "description"
-    t.integer  "course_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-    t.integer  "section_id"
-    t.string   "location"
-    t.datetime "start_time"
-    t.datetime "end_time"
-  end
-
-  add_index "sessions", ["course_id"], :name => "index_sessions_on_course_id"
-  add_index "sessions", ["section_id"], :name => "index_sessions_on_section_id"
 
   create_table "translatorships", :force => true do |t|
     t.integer  "author_id"

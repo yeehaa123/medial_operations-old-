@@ -1,0 +1,10 @@
+%section.meetings
+  %h1= link_to meeting.heading, course_meeting_path(meeting.course, meeting)
+  %ul.info
+    %li.date= meeting.date
+    %li.time= meeting.time
+    %li.location= meeting.location
+
+  = meeting.description
+
+  - works_cited(meeting.references, "Readings")

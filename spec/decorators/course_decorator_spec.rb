@@ -7,7 +7,7 @@ describe CourseDecorator do
 
   it { should respond_to(:course) }
   it { should respond_to(:sections) }
-  it { should respond_to(:sessions) }
+  it { should respond_to(:meetings) }
   it { should respond_to(:description) }
   it { should respond_to(:title_prefix) }
   it { should respond_to(:heading) }
